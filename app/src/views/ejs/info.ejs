@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function editInfo(id) {
+        let table = document
+          .getElementById(`tr_${id}`)
+          .getElementsByTagName('input');
+        //console.log(table[0].value);
+        axios({
+          method: 'patch',
+          url: 'http://localhost:8000/userInfo/edit',
+          data: {
+            id: table[0].value,
+            pw: table[1].value,
+            name: table[2].value,
+            email: table[3].value,
+            gender: table[4].value,
+            nickname: table[5].value,
+          },
+        })
+          .then((rep) => {
+            console.log('rep : ', rep);
+            return rep.data; // 수정성공
+          })
+          .then((data) => {
+            alert(data);
+            $(table[0]).text(table[0].value);
+            $(table[1]).text(table[1].value);
+            $(table[2]).text(table[2].value);
+            $(table[3]).text(table[3].value);
+            $(table[4]).text(table[4].value);
+            $(table[5]).text(table[5].value);
+          });
+      }
+      function deleteInfo(id) {
+        axios({
+          method: 'delete',
+          url: 'http://localhost:8000/userInfo/delete',
+          data: { id: id },
+        })
+          .then((rep) => {
+            return rep.data;
+          })
+          .then((data) => {
+            alert(data);
+            let tr = document.getElementById('tr_' + id);
+            $(tr).remove();
+
+            // $( "#tr_" + id ).remove();
+          });
+      }
+      console.log('<%=data.id%>');
+    </script>
+    <!-- <script>
+      function editInfo(id) {
+        let table = document
+          .getElementById(`tr_${id}`)
+          .getElementsByTagName('td');
+        axios({
+          method: 'patch',
+          url: 'http://localhost:8000/userInfo/edit',
+          data: {
+            id: table[0].firstChild.data,
+            pw: table[1].firstChild.data,
+            name: table[2].firstChild.data,
+            gender: table[3].firstChild.data,
+            birthday: table[4].firstChild.data,
+            age: table[5].firstChild.data,
+          },
+        })
+          .then((rep) => {
+            return rep.data;
+          })
+          .then((data) => {
+            alert(data);
+          });
+      }
+
+  
+    </script> -->
+    <title>회원정보</title>
+  </head>
+  <body>
+    <table id="info" border="1" cellspacing="0" cellpadding="5">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>PW</td>
+          <td>이름</td>
+          <td>이메일</td>
+          <td>성별</td>
+          <td>별명</td>
+          <td>수정</td>
+          <td>삭제</td>
+        </tr>
+      </thead>
+      <tbody id="info_list">
+        <tr>
+          <td>
+            <input
+              id="ID"
+              class="card__input"
+              type="text"
+              name="id"
+              value="<%=data.id%>"
+            />
+          </td>
+          <td>
+            <input
+              id="PW"
+              class="card__input"
+              type="text"
+              name="pw"
+              value="<%=data.pw%>"
+            />
+          </td>
+          <td>
+            <input
+              id="NAME"
+              class="card__input"
+              type="text"
+              name="name"
+              value="<%=data.name%>"
+            />
+          </td>
+          <td>
+            <input
+              id="EMAIL"
+              class="card__input"
+              type="text"
+              name="gender"
+              value="<%=data.email%>"
+            />
+          </td>
+          <td>
+            <input
+              id="GENDER"
+              class="card__input"
+              type="text"
+              name="gender"
+              value="<%=data.gender%>"
+            />
+          </td>
+          <td>
+            <input
+              id="NICKNAME"
+              class="card__input"
+              type="text"
+              name="nickname"
+              value="<%=data.nickname%>"
+            />
+          </td>
+          <td>
+            <button type="button" onclick="editInfo('<%=data.id%>');">
+              수정
+            </button>
+          </td>
+          <td>
+            <button type="button" onclick="deleteInfo('<%=data.id%>');">
+              삭제
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
