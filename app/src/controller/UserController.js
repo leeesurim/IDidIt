@@ -1,4 +1,6 @@
 const models = require('../model/index');
+const bcrypt = require('bcrypt');
+const salt = 10;
 
 exports.get_home =  (req, res) => {
   res.render('home.ejs')
@@ -12,14 +14,15 @@ exports.get_login =  (req, res) => {
   res.render('login.ejs')
 }
 
-exports.post_signup =  (req, res) => {
+exports.post_signup =  async (req, res) => {
   let object = {
         id : req.body.id,
-        password : req.body.pw,
+        password : await bcrypt.hash(req.body.password, salt),
         name: req.body.name,
         email: req.body.email,
         gender: req.body.gender,
-        nickname: req.body.nickname
+        nickname: req.body.nickname,
+        phone_number: req.body.phone_number
     }
   models.User.create(object)
   .then((result) => {
@@ -27,19 +30,22 @@ exports.post_signup =  (req, res) => {
     //res.render({result: result});
   })
 }
-exports.post_login =  (req, res) => {
+exports.post_login =  async (req, res) => {
   models.User.findOne({
-    where:{id: req.body.id, pw: req.body.pw}
+    where:{id: req.body.id}
   }).then((result) => {
-    console.log(result);
     if (result){
-      res.send(true);
-    } else {
-      res.send(false);
-    }
-  })
-  //res.render('login.ejs')
+      const password = bcrypt.compare(req.body.password, result.password)
+      if (password) res.send(true);
+    } 
+    else res.send(false);
+  }) 
 }
+    
+  //res.render('login.ejs')
+
+
+
 exports.post_userinfo = (req, res) => {
   models.User.findOne({
     where:{id: req.body.id}
@@ -61,11 +67,12 @@ exports.patch_userinfo = (req, res) => {
   console.log('req.body :', req.body);
   let info = {
     id : req.body.id,
-    password : req.body.pw,
+    password : req.body.password,
     name: req.body.name,
     email: req.body.email,
     gender: req.body.gender,
-    nickname: req.body.nickname
+    nickname: req.body.nickname,
+    phone_number: req.body.phone_number
   }
   models.User.update(info, {where: {id: req.body.id}})
     .then((result) => {

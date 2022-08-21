@@ -1,9 +1,12 @@
+// const bcrypt = require('bcrypt');
+
 const User = (Sequelize, DataTypes) => {
   // Sequelize는 model/index,js에서의 sequelize
   // DataTypes는 model/index.js에서의 Sequelize
 
   const model = Sequelize.define(
     'user',
+
     {
       // create ~~ (id int not null auto_increment primary key)
       id: {
@@ -11,8 +14,8 @@ const User = (Sequelize, DataTypes) => {
         allowNull: false,
         primaryKey: true,
       },
-      pw: {
-        type: DataTypes.STRING(20),
+      password: {
+        type: DataTypes.STRING(64),
         allowNull: false,
       },
       
@@ -34,14 +37,19 @@ const User = (Sequelize, DataTypes) => {
       nickname: {
         type: DataTypes.STRING(10),
         allowNull: false
+      },
+      
+      phone_number: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false
       }
     },
     {
       timestamps: false, // true로 지정하게 되면 등록된 시간과 수정된 시간을 갖는 컬럼이 만들어진다.
       tableName: 'user',
-      freezeTableName: true // table 이름을 바꾸지마..ㅜㅜ
-    }
-  );
+      freezeTableName: true, // table 이름을 바꾸지마..ㅜㅜ
+
+    });
   return model;
 }
 

@@ -15,17 +15,18 @@
         let table = document
           .getElementById(`tr_${id}`)
           .getElementsByTagName('input');
-        //console.log(table[0].value);
+        console.log(table[0].value);
         axios({
           method: 'patch',
           url: 'http://localhost:8000/userInfo/edit',
           data: {
             id: table[0].value,
-            pw: table[1].value,
+            password: table[1].value,
             name: table[2].value,
             email: table[3].value,
             gender: table[4].value,
             nickname: table[5].value,
+            phone_number: table[6].value,
           },
         })
           .then((rep) => {
@@ -40,6 +41,7 @@
             $(table[3]).text(table[3].value);
             $(table[4]).text(table[4].value);
             $(table[5]).text(table[5].value);
+            $(table[6]).text(table[6].value);
           });
       }
       function deleteInfo(id) {
@@ -55,39 +57,14 @@
             alert(data);
             let tr = document.getElementById('tr_' + id);
             $(tr).remove();
+            document.location.href = 'http://localhost:8000/';
 
             // $( "#tr_" + id ).remove();
           });
       }
       console.log('<%=data.id%>');
     </script>
-    <!-- <script>
-      function editInfo(id) {
-        let table = document
-          .getElementById(`tr_${id}`)
-          .getElementsByTagName('td');
-        axios({
-          method: 'patch',
-          url: 'http://localhost:8000/userInfo/edit',
-          data: {
-            id: table[0].firstChild.data,
-            pw: table[1].firstChild.data,
-            name: table[2].firstChild.data,
-            gender: table[3].firstChild.data,
-            birthday: table[4].firstChild.data,
-            age: table[5].firstChild.data,
-          },
-        })
-          .then((rep) => {
-            return rep.data;
-          })
-          .then((data) => {
-            alert(data);
-          });
-      }
 
-  
-    </script> -->
     <title>회원정보</title>
   </head>
   <body>
@@ -100,12 +77,13 @@
           <td>이메일</td>
           <td>성별</td>
           <td>별명</td>
+          <td>핸드폰 번호</td>
           <td>수정</td>
           <td>삭제</td>
         </tr>
       </thead>
       <tbody id="info_list">
-        <tr>
+        <tr id="tr_<%=data.id%>">
           <td>
             <input
               id="ID"
@@ -121,7 +99,7 @@
               class="card__input"
               type="text"
               name="pw"
-              value="<%=data.pw%>"
+              value="<%=data.password%>"
             />
           </td>
           <td>
@@ -158,6 +136,15 @@
               type="text"
               name="nickname"
               value="<%=data.nickname%>"
+            />
+          </td>
+          <td>
+            <input
+              id="PHONE_NUMBER"
+              class="card__input"
+              type="text"
+              name="phone_number"
+              value="<%=data.phone_number%>"
             />
           </td>
           <td>

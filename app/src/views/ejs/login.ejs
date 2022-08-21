@@ -18,7 +18,7 @@
       <fieldset style="width: 300px">
         <legend>로그인</legend>
         아이디 : <input type="text" name="id" /><br />
-        비밀번호 : <input type="password" name="pw" /><br />
+        비밀번호 : <input type="password" name="password" /><br />
       </fieldset>
       <button type="button" onclick="login();">로그인</button>
     </form>
@@ -30,7 +30,7 @@
           url: 'http://localhost:8000/login',
           data: {
             id: form.id.value,
-            pw: form.pw.value,
+            password: form.password.value,
           },
         })
           .then((rep) => {
