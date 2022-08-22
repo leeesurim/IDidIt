@@ -2,56 +2,56 @@ const models = require('../model/index');
 const bcrypt = require('bcrypt');
 const salt = 10;
 
-exports.get_home =  (req, res) => {
+exports.get_home = (req, res) => {
   res.render('home.ejs')
 }
 
-exports.get_signup =  (req, res) => {
+exports.get_signup = (req, res) => {
   res.render('signup.ejs')
 }
 
-exports.get_login =  (req, res) => {
+exports.get_login = (req, res) => {
   res.render('login.ejs')
 }
 
-exports.post_signup =  async (req, res) => {
+exports.post_signup = async (req, res) => {
   let object = {
-        id : req.body.id,
-        password : await bcrypt.hash(req.body.password, salt),
-        name: req.body.name,
-        email: req.body.email,
-        gender: req.body.gender,
-        nickname: req.body.nickname,
-        phone_number: req.body.phone_number
-    }
+    id: req.body.id,
+    password: await bcrypt.hash(req.body.password, salt),
+    name: req.body.name,
+    email: req.body.email,
+    gender: req.body.gender,
+    nickname: req.body.nickname,
+    phone_number: req.body.phone_number
+  }
   models.User.create(object)
-  .then((result) => {
-    console.log(result);
-    //res.render({result: result});
-  })
+    .then((result) => {
+      console.log(result);
+      //res.render({result: result});
+    })
 }
-exports.post_login =  async (req, res) => {
+exports.post_login = (req, res) => {
   models.User.findOne({
-    where:{id: req.body.id}
-  }).then((result) => {
-    if (result){
-      const password = bcrypt.compare(req.body.password, result.password)
-      if (password) res.send(true);
-    } 
+    where: { id: req.body.id }
+  }).then(async (id) => {
+    console.log(id);
+    if (!id) return res.send(false);
+    const password = await bcrypt.compare(req.body.password, id.password)
+    if (password) res.send(true);
     else res.send(false);
-  }) 
+  });
 }
-    
-  //res.render('login.ejs')
+
+//res.render('login.ejs')
 
 
 
 exports.post_userinfo = (req, res) => {
   models.User.findOne({
-    where:{id: req.body.id}
+    where: { id: req.body.id }
   }).then((result) => {
     console.log('a : ', result)
-    res.render('info.ejs',{data: result});
+    res.render('info.ejs', { data: result });
   })
 }
 // exports.post_userinfo = (req, res) => {
@@ -66,18 +66,18 @@ exports.post_userinfo = (req, res) => {
 exports.patch_userinfo = (req, res) => {
   console.log('req.body :', req.body);
   let info = {
-    id : req.body.id,
-    password : req.body.password,
+    id: req.body.id,
+    password: req.body.password,
     name: req.body.name,
     email: req.body.email,
     gender: req.body.gender,
     nickname: req.body.nickname,
     phone_number: req.body.phone_number
   }
-  models.User.update(info, {where: {id: req.body.id}})
+  models.User.update(info, { where: { id: req.body.id } })
     .then((result) => {
-        console.log(result);
-        res.send('수정성공');
+      console.log(result);
+      res.send('수정성공');
     })
 }
 
@@ -86,9 +86,9 @@ exports.get_userinfo = (req, res) => {
 }
 
 exports.delete_userinfo = (req, res) => {
-  models.User.destroy({where: {id: req.body.id}})
+  models.User.destroy({ where: { id: req.body.id } })
     .then((result) => {
-        console.log(result);
-        res.send('삭제 성공');
+      console.log(result);
+      res.send('삭제 성공');
     })
 }
