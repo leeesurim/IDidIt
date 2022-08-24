@@ -75,7 +75,7 @@ exports.post_login = (req, res) => {
 
 // 회원 정보 수정
 exports.get_userinfo = (req, res) => {
-  res.render("info.ejs");
+  res.render("modify.ejs");
 };
 
 exports.post_userinfo = (req, res) => {
@@ -127,8 +127,9 @@ exports.get_memo = (req, res) => {
 exports.post_memo = (req, res) => {
   // res.render('memo.ejs');
 };
-exports.post_login = (req, res) => {
-  //   로그인
-  const result = models.Memo.findAll();
-  res.render("main.ejs", { data: result });
-};
+
+// exports.post_login = (req, res) => {
+//   //   로그인
+//   const result = models.Memo.findAll();
+//   res.render("main.ejs", { data: result });
+// };

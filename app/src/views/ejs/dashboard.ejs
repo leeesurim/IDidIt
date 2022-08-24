@@ -31,10 +31,10 @@
         <nav class="nav-container">
             <div class="logo-container">내가 해냄</div>
             <ul>
-                <li><a href="#"><i class="icon fa-solid fa-house"></i>홈</a></li>
-                <li><a href="#"><i class="icon fa-solid fa-calendar"></i>달력</a></li>
-                <li><a href="#"><i class="icon fa-solid fa-book"></i>가계부</a></li>
-                <li><a href="#"><i class="icon fa-solid fa-file-pen"></i></i>메모</a></li>
+                <li><a href="/dashboard"><i class="icon fa-solid fa-house"></i>홈</a></li>
+                <li><a href="/calendar"><i class="icon fa-solid fa-calendar"></i>달력</a></li>
+                <li><a href="/accountbook"><i class="icon fa-solid fa-book"></i>가계부</a></li>
+                <li><a href="/memo"><i class="icon fa-solid fa-file-pen"></i></i>메모</a></li>
             </ul>
         </nav>
         <div class="dashboard-container">
@@ -84,8 +84,8 @@
                 <div>
                     <div class="dashboard-member-button">
                         <ul>
-                            <li><button class="dashboard-button"><i class="fa-solid fa-user-gear"></i>마이페이지</button></li>
-                            <li><button class="dashboard-button"><i class="fa-solid fa-right-from-bracket"></i>로그아웃</button></li>
+                            <li><button class="dashboard-button" onclick="location.href = '/userinfo'"><i class="fa-solid fa-user-gear"></i>마이페이지</button></li>
+                            <li><button class="dashboard-button" onclick="location.href = '/'"><i class="fa-solid fa-right-from-bracket"></i>로그아웃</button></li>
                         </ul>
                     </div>
                 </div>

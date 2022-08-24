@@ -11,6 +11,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- include summernote css/js -->
+    <link rel="stylesheet" href="/css/reset.css">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     
@@ -69,9 +70,16 @@
     </script>
 </head>
 <body>
-    <header class="sidebar">
-        sidebar
-    </header>
+    <div class="grid-wrapper">
+    <nav class="nav-container">
+        <div class="logo-container">내가 해냄</div>
+        <ul>
+            <li><a href="/dashboard"><i class="icon fa-solid fa-house"></i>홈</a></li>
+            <li><a href="/calendar"><i class="icon fa-solid fa-calendar"></i>달력</a></li>
+            <li><a href="/accountbook"><i class="icon fa-solid fa-book"></i>가계부</a></li>
+            <li><a href="/memo"><i class="icon fa-solid fa-file-pen"></i></i>메모</a></li>
+        </ul>
+    </nav>
     <main>
         <section class="left">
             <div class="memo_list">
@@ -93,7 +101,6 @@
             </form>
         </section>
     </main>
-
-    
+    </div>
 </body>
 </html>

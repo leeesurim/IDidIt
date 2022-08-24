@@ -120,8 +120,8 @@
               </div>
             </div> -->
             <ul class="find_txt">
-              <a href="#">비밀번호 찾기 </a>
-              <a href="#">아이디 찾기</a>
+              <!-- <a href="#">비밀번호 찾기 </a>
+              <a href="#">아이디 찾기</a> -->
               <a href="/signup">회원가입</a>
             </ul>
             <!-- 로그인페이지 로그인버튼-->
@@ -139,30 +139,32 @@
 
     <script>
       function sendGet() {
+        document.location.href = "http://localhost:8000/dashboard";
+
         var form = document.getElementById("form_login");
 
         // 근영님 작성 axios 코드
-        axios({
-          method: "post",
-          url: "http://localhost:8000/login",
-          data: {
-            id: form.id.value,
-            password: form.password.value,
-          },
-        })
-          .then((rep) => {
-            return rep.data;
-          })
-          .then((data) => {
-            if (data) {
-              alert("로그인 성공");
-              form.submit();
-              //document.location.href = 'http://localhost:8080/userInfo';
-            } else {
-              alert("로그인 실패");
-              form.reset();
-            }
-          });
+        // axios({
+        //   method: "post",
+        //   url: "http://localhost:8000/login",
+        //   data: {
+        //     id: form.id.value,
+        //     password: form.password.value,
+        //   },
+        // })
+        //   .then((rep) => {
+        //     return rep.data;
+        //   })
+        //   .then((data) => {
+        //     if (data) {
+        //       alert("로그인 성공");
+        //       form.submit();
+        //       //document.location.href = 'http://localhost:8080/userInfo';
+        //     } else {
+        //       alert("로그인 실패");
+        //       form.reset();
+        //     }
+        //   });
 
         // 진세님 작성 코드
         // axios({
