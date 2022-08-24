@@ -1,15 +1,15 @@
 const express = require("express");
-const user = require("../controller/UserController");
+const IDI = require("../controller/IDI_Controller");
 const router = express.Router();
 
-router.get('/', user.get_home);
-router.get('/signup', user.get_signup);
-router.get('/login', user.get_login);
-router.get('/userInfo', user.get_userinfo);
-router.post('/signup', user.post_signup);
-router.post('/login', user.post_login);
-router.post('/userInfo', user.post_userinfo);
-router.patch('/userInfo/edit', user.patch_userinfo);
-router.delete('/userInfo/delete', user.delete_userinfo);
+router.get('/', IDI.get_home);
+router.get('/signup', IDI.get_signup);
+router.get('/login', IDI.get_login);
+router.get('/userInfo', IDI.get_IDIinfo);
+router.post('/signup', IDI.post_signup);
+router.post('/login', IDI.post_login);
+router.post('/userInfo', IDI.post_userinfo);
+router.patch('/userInfo/edit', IDI.patch_userinfo);
+router.delete('/userInfo/delete', IDI.delete_userinfo);
 
 module.exports = router;
