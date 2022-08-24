@@ -6,7 +6,7 @@ const salt = 10;
 exports.get_home = (req, res) => {
   if (req.session.user == null) {
     // 세션의 정보가 없을 경우
-    res.render("login");
+    res.render("main");
     // this.get_login(req, res);
   } else {
     // 세션의 정보가 있을 경우 (로그인을 했을 경우)
