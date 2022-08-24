@@ -65,7 +65,7 @@ body {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 900px 1fr;
   margin: 0 auto;
 }
 .grid-item:nth-child(1n) {
@@ -79,6 +79,7 @@ body {
   grid-column-start: 2;
   grid-column-end: 3;
   height: 70vh;
+  position: relative;
 }
 .image-daily {
   width: 100%;
@@ -202,10 +203,10 @@ input:focus {
   width: auto;
   height: 600px;
 }
-.login_btn1 > button {
+button {
   position: absolute;
-  left: 1120px;
-  bottom: 50px;
+  left: 50%;
+  bottom: 0;
   transform: translate(-50%, -50%);
   width: 220px;
   height: 50px;
@@ -219,7 +220,7 @@ input:focus {
   border: none;
   font-family: "Pretendard-Medium";
 }
-.login_btn1 > button:before {
+button:before {
   content: attr(data-text);
   position: absolute;
   top: 0;
@@ -233,11 +234,11 @@ input:focus {
   transform-origin: bottom;
   transform: translatey(-100%) rotatex(90deg);
 }
-.login_btn1 > button:hover:before {
+button:hover:before {
   transform: translatey(0) rotatex(0deg);
 }
 
-.login_btn1 > button:after {
+button:after {
   content: attr(data-text);
   position: absolute;
   top: 0;
@@ -251,7 +252,7 @@ input:focus {
   transform-origin: top;
   transform: translatey(0) rotatex(0deg);
 }
-.login_btn1 > button:hover:after {
+button:hover:after {
   transform: translatey(100%) rotatex(90deg);
 }
 
@@ -272,13 +273,11 @@ input:focus {
 }
 
 .find_txt {
-  display: flex;
+  padding: 0;
+  margin: 75px auto;
   align-items: center;
-  justify-content: center;
   text-align: center;
   width: 600px;
-  position: absolute;
-  top: 480px;
 }
 
 .find_txt a {

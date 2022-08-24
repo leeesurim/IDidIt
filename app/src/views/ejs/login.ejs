@@ -52,13 +52,6 @@
           <!-- 최상위-->
           <div class="grid-item">
             <div class="login_btn1">
-              <!-- 로그인페이지 로그인버튼-->
-              <button
-                type="button"
-                onmouseenter="changeImg( null );"
-                onclick="sendGet()"
-                data-text="로그인"
-              ></button>
               <img alt="" class="image-daily1" src="/img/login_img_grey.png" />
               <!-- <img  alt="" class="image-daily2" src="../static/login_img_pink.png"> -->
             </div>
@@ -82,9 +75,20 @@
                 />
               </div>
             </div>
-            <div class="inputcss">
-              <!-- 로그인페이지 PW 입력창-->
-              <div class="input_pw2">
+            <div class="input_id1">
+              <!-- 로그인페이지 ID 입력창-->
+              <div class="input_id2">
+                <p>비밀번호</p>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="아이디를 입력하세요"
+                />
+              </div>
+            </div>
+            <!-- <div class="inputcss"> -->
+            <!-- 로그인페이지 PW 입력창-->
+            <!-- <div class="input_pw2">
                 <p>비밀번호</p>
               </div>
               <div class="input_pw2">
@@ -97,12 +101,20 @@
               <div class="input_pw2">
                 <p id="form_info"></p>
               </div>
-            </div>
+            </div> -->
             <ul class="find_txt">
               <a href="#">비밀번호 찾기 </a>
               <a href="#">아이디 찾기</a>
               <a href="/signup">회원가입</a>
             </ul>
+            <!-- 로그인페이지 로그인버튼-->
+            <button
+              class="login_btn"
+              type="button"
+              onmouseenter="changeImg( null );"
+              onclick="sendGet()"
+              data-text="로그인"
+            ></button>
           </div>
         </div>
       </section>
