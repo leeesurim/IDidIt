@@ -1,0 +1,265 @@
+@font-face {
+  font-family: 'Pretendard-Medium';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GangwonEduPowerExtraBoldA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100%;
+  background-color: #f8fafb;
+  font-family: 'Pretendard-Medium';
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+a:hover {
+  color: #FF725E;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #EAEAEA;
+  padding: 8px 12px;
+  opacity: 0.8;
+  
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  
+}
+
+.navbar_logo {
+  font-size: 1.8rem;
+  font-family: 'GangwonEduPowerExtraBoldA';
+}
+
+.navbar_menu {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+
+.navbar_menu li {
+  padding: 8px 12px;
+}
+
+.navbar_menu li:hover {
+  border-radius: 4px;
+  /* background-color: #FF725E; */
+  border:2px solid #FF725E;
+}
+
+main{
+  position: absolute;
+  top: 60px;
+  display: flex;
+  flex-direction: center;
+  /* justify-content: flex-start; */
+  /* align-items: center; */
+  width: 100vw;
+  height: calc(100vh - 60px);
+}
+
+
+.left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  /* background-color: #FF725E; */
+}
+
+img {
+  width: 100%;
+}
+
+
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  /* background-color: antiquewhite; */
+  
+}
+
+.titDep {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  font-weight: 900;
+  text-align: center;
+  /* margin-right: 3vh; */
+}
+
+.signform {
+  display: flex;
+  flex-direction: column;
+  padding-top: 5%;
+  
+}
+
+.titLab {
+  line-height: inherit;
+  margin-top: 1vh;
+  margin-bottom: 2px;
+  font-size: 1rem;
+}
+
+input {
+  max-width: 370px;
+  height: 48px;
+  line-height: 48px;
+  display: inline-block;
+  min-width: 100px;
+  padding: 0 15px;
+  color: #606060;
+  font-size: inherit;
+  font-family: inherit;
+  border-radius: 8px;
+  border: 1px solid #EAEAEA;
+  background: #fff;
+}
+
+input:focus {
+  outline: 1px solid #FF725E;
+}
+
+.inp_dup {
+  display: flex;
+  justify-content: row;
+}
+
+.inpL{
+  margin-bottom: 20px;
+}
+
+.btnDefault {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  flex: 0 0 110px;
+  margin-left: 10px;
+  min-width: auto;
+  padding: 0 10px;
+}
+
+.btnL {
+  /* min-width: 100px; */
+  height: 48px;
+  line-height: 48px;
+  padding: 0 10px;
+  color: #FF725E;
+  font-size: 1rem;
+  border-radius: 12px;
+  /* background: #FF725E; */
+}
+
+.btnLineP {
+  color: #FF725E;
+  border: 1px solid #FF725E;
+  background: #fff;
+}
+
+.btnLineP:hover {
+  color : #B0BEC5;
+  border: 1px solid #B0BEC5;
+  background: #fff;
+
+}
+
+.radFrm {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+[type=radio] + label {
+  display: inline-block;
+  cursor: pointer;
+  /* width: 200px; */
+  flex: 0 0 185px;
+  padding: 0;
+  margin: 0px 3px 5px 0;
+  font-weight: 600;
+  text-align: center;
+  line-height: 50px;
+  color: #263343;
+  border: 1px solid #EAEAEA;
+  border-radius: 5px;
+  transition: all 0.2s ;
+  background: #fff;
+  height: 45px;
+  line-height: 45px;
+}
+input[type=radio]:checked+label{
+  background-color: #FF725E;
+  color: #fff;
+  border: 1px solid #FF725E;
+}
+
+.button {
+  display: block;
+  position: relative;
+  float: left;
+  width: 375px;
+  padding: 0;
+  margin: 10px 20px 10px 0px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 50px;
+  color: #FFF;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.2s ;
+  /* background: #ff8964; */
+  /* background: #f97524; */
+  background: #FF725E;
+  
+}
+
+.btnLightBlue.btnPush {
+  box-shadow: 0px 5px 0px 0px #faccc1;
+}
+.btnPush:hover {
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.btnLightBlue.btnPush:hover {
+  box-shadow: 0px 0px 0px 0px #faccc1;
+}
+
+.btnMargin {
+  margin-top: 20px;
+}
+
+
+[type="radio"] {
+    display: none;
+}
