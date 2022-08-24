@@ -20,7 +20,13 @@ exports.get_home = (req, res) => {
 };
 
 exports.get_signup = (req, res) => {
+  // 회원가입 페이지 렌더링
   res.render("signup.ejs");
+};
+
+exports.get_IDIinfo = (req, res) => {
+  // 대시보드 페이지 렌더링
+  res.render("dashboard");
 };
 
 exports.post_signup = async (req, res) => {

@@ -35,8 +35,25 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
+    <!-- 네비게이션 -->
+    <div class="nav-container">
+      <div class="nav-logo">
+        <div class="navbar_logo">
+          <a href="/">내가해냄</a>
+        </div>
+      </div>
+      <div class="nav-button-container">
+        <div class="nav-button nav-login" onclick="location.href ='/login'">
+          로그인
+        </div>
+        <div class="nav-button nav-register" onclick="location.href ='/signup'">
+          회원가입
+        </div>
+      </div>
+    </div>
+
     <form id="form_login" action="/login" method="post">
-      <nav class="navbar">
+      <!-- <nav class="navbar">
         <div class="navbar_logo">
           <a href="/">내가해냄</a>
         </div>
@@ -45,7 +62,7 @@
           <li><a href="/login">로그인</a></li>
           <li><a href="/signup">회원가입</a></li>
         </ul>
-      </nav>
+      </nav> -->
 
       <section class="login_master">
         <div class="grid-container">
@@ -173,6 +190,7 @@
           changeImg(obj.target);
         });
       });
+      // 호버 시 함수 작성
       function changeImg(target, enter) {
         if (target == null) target = ".image-daily1";
         $(target).attr("src", "/img/login_img_pink.png");
