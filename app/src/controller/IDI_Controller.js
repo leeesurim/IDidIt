@@ -5,13 +5,17 @@ const salt = 10;
 // 회원 가입
 exports.get_home = (req, res) => {
   if (req.session.user == null) {
-    this.get_login(req, res);
+    // 세션의 정보가 없을 경우
+    res.render("login");
+    // this.get_login(req, res);
   } else {
+    // 세션의 정보가 있을 경우 (로그인을 했을 경우)
     const memo = models.Memo.findAll();
     res.render("main", { data: memo });
   }
+  // 로그인 페이지 함수 작성
   function get_login(req, res) {
-    res.render("home");
+    res.render("login");
   }
 };
 
@@ -27,9 +31,9 @@ exports.post_signup = async (req, res) => {
     email: req.body.email,
     gender: req.body.gender,
     nickname: req.body.nickname,
-    phone_number: req.body.phone_number
+    phone_number: req.body.phone_number,
   };
-  models.User.create(object).then(result => {
+  models.User.create(object).then((result) => {
     console.log(result);
     //res.render({result: result});
   });
@@ -37,28 +41,26 @@ exports.post_signup = async (req, res) => {
 
 // 로그인
 exports.get_login = (req, res) => {
-  res.render("dashboard.ejs");
+  res.render("login.ejs");
 };
 
 exports.post_login = (req, res) => {
-  models.User
-    .findOne({
-      where: { id: req.body.id }
-    })
-    .then(async id => {
-      if (!id) return res.send(false);
-      const password = await bcrypt.compare(req.body.password, id.password);
+  models.User.findOne({
+    where: { id: req.body.id },
+  }).then(async (id) => {
+    if (!id) return res.send(false);
+    const password = await bcrypt.compare(req.body.password, id.password);
 
-      if (password) {
-        req.session.userID = id;
-        // console.log( req );
-        console.log("--------");
-        console.log(req.session);
-        console.log(req.sessionID);
-        res.send(true);
-        res.render("main.ejs");
-      } else res.send(false);
-    });
+    if (password) {
+      req.session.userID = id;
+      // console.log( req );
+      console.log("--------");
+      console.log(req.session);
+      console.log(req.sessionID);
+      res.send(true);
+      res.render("main.ejs");
+    } else res.send(false);
+  });
 };
 
 //res.render('login.ejs')
@@ -69,14 +71,12 @@ exports.get_userinfo = (req, res) => {
 };
 
 exports.post_userinfo = (req, res) => {
-  models.User
-    .findOne({
-      where: { id: req.body.id }
-    })
-    .then(result => {
-      console.log("a : ", result);
-      res.render("info.ejs", { data: result });
-    });
+  models.User.findOne({
+    where: { id: req.body.id },
+  }).then((result) => {
+    console.log("a : ", result);
+    res.render("info.ejs", { data: result });
+  });
 };
 // exports.post_userinfo = (req, res) => {
 //   models.User.findOne({
@@ -96,9 +96,9 @@ exports.patch_userinfo = (req, res) => {
     email: req.body.email,
     gender: req.body.gender,
     nickname: req.body.nickname,
-    phone_number: req.body.phone_number
+    phone_number: req.body.phone_number,
   };
-  models.User.update(info, { where: { id: req.body.id } }).then(result => {
+  models.User.update(info, { where: { id: req.body.id } }).then((result) => {
     console.log(result);
     res.send("수정성공");
   });
@@ -106,7 +106,7 @@ exports.patch_userinfo = (req, res) => {
 
 // 삭제
 exports.delete_userinfo = (req, res) => {
-  models.User.destroy({ where: { id: req.body.id } }).then(result => {
+  models.User.destroy({ where: { id: req.body.id } }).then((result) => {
     console.log(result);
     res.send("삭제 성공");
   });
