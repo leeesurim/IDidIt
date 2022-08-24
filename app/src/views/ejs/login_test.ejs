@@ -24,10 +24,10 @@
     </form>
     <script>
       function login() {
-        let form = document.getElementById('form_login');
+        let form = document.getElementById("form_login");
         axios({
-          method: 'post',
-          url: 'http://localhost:8000/login',
+          method: "post",
+          url: "http://localhost:8000/login",
           data: {
             id: form.id.value,
             password: form.password.value,
@@ -38,11 +38,11 @@
           })
           .then((data) => {
             if (data) {
-              alert('로그인 성공');
+              alert("로그인 성공");
               form.submit();
               //document.location.href = 'http://localhost:8080/userInfo';
             } else {
-              alert('로그인 실패');
+              alert("로그인 실패");
               form.reset();
             }
           });

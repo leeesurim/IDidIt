@@ -45,6 +45,7 @@ exports.get_login = (req, res) => {
 };
 
 exports.post_login = (req, res) => {
+  console.log(req);
   models.User.findOne({
     where: { id: req.body.id },
   }).then(async (id) => {

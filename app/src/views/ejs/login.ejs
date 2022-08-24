@@ -23,7 +23,7 @@
     <!-- css파일 -->
     <link rel="stylesheet" href="/css/login.css" />
     <!-- js파일 -->
-    <script src="/src/"></script>
+    <!-- <script src="/js/login.js"></script> -->
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
     </style>
@@ -112,24 +112,48 @@
       function sendGet() {
         var form = document.getElementById("form_login");
 
+        // 근영님 작성 axios 코드
         axios({
           method: "post",
-          url: "http://localhost:8000/receive",
+          url: "http://localhost:8000/login",
           data: {
-            name: form.id.value,
-            pw: form.password.value,
+            id: form.id.value,
+            password: form.password.value,
           },
         })
-          .then((a) => {
-            return a.data;
+          .then((rep) => {
+            return rep.data;
           })
-          .then((d) => {
-            if (d) {
-              $("#form_info").text("로그인 성공").css("color", "blue");
+          .then((data) => {
+            if (data) {
+              alert("로그인 성공");
+              form.submit();
+              //document.location.href = 'http://localhost:8080/userInfo';
             } else {
-              $("#form_info").text("로그인 실패").css("color", "red");
+              alert("로그인 실패");
+              form.reset();
             }
           });
+
+        // 진세님 작성 코드
+        // axios({
+        //   method: "post",
+        //   url: "http://localhost:8000/login",
+        //   data: {
+        //     name: form.id.value,
+        //     pw: form.password.value,
+        //   },
+        // });
+        // .then((a) => {
+        //   return a.data;
+        // })
+        // .then((d) => {
+        //   if (d) {
+        //     $("#form_info").text("로그인 성공").css("color", "blue");
+        //   } else {
+        //     $("#form_info").text("로그인 실패").css("color", "red");
+        //   }
+        // });
       }
 
       $(document).ready(function () {
