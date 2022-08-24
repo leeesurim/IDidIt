@@ -2,16 +2,21 @@ const models = require('../model/index');
 const bcrypt = require('bcrypt');
 const salt = 10;
 
+
+// 회원 가입
 exports.get_home = (req, res) => {
-  res.render('home.ejs')
+  if ( req.session.user == null ) { this.get_login( req, res ) }
+  else {
+    const memo = models.Memo.findAll();
+    res.render('main',{data:memo});
+  }
+  function get_login(req,res) {
+    res.render('home');
+  }
 }
 
 exports.get_signup = (req, res) => {
   res.render('signup.ejs')
-}
-
-exports.get_login = (req, res) => {
-  res.render('login.ejs')
 }
 
 exports.post_signup = async (req, res) => {
@@ -30,21 +35,39 @@ exports.post_signup = async (req, res) => {
       //res.render({result: result});
     })
 }
+
+// 로그인
+exports.get_login = (req, res) => {
+  
+  res.render('login.ejs')
+}
+
 exports.post_login = (req, res) => {
   models.User.findOne({
     where: { id: req.body.id }
   }).then(async (id) => {
-    console.log(id);
     if (!id) return res.send(false);
     const password = await bcrypt.compare(req.body.password, id.password)
-    if (password) res.send(true);
-    else res.send(false);
+
+    if (password) {
+      req.session.userID = id;
+      // console.log( req );
+      console.log("--------");
+      console.log( req.session );
+      console.log( req.sessionID );
+      res.send(true);
+      res.render('main.ejs', )
+    } else res.send(false);
   });
 }
 
 //res.render('login.ejs')
 
 
+// 회원 정보 수정
+exports.get_userinfo = (req, res) => {
+  res.render('info.ejs');
+}
 
 exports.post_userinfo = (req, res) => {
   models.User.findOne({
@@ -81,10 +104,7 @@ exports.patch_userinfo = (req, res) => {
     })
 }
 
-exports.get_userinfo = (req, res) => {
-  res.render('info.ejs');
-}
-
+// 삭제
 exports.delete_userinfo = (req, res) => {
   models.User.destroy({ where: { id: req.body.id } })
     .then((result) => {
@@ -92,3 +112,19 @@ exports.delete_userinfo = (req, res) => {
       res.send('삭제 성공');
     })
 }
+
+
+// 메모 작성
+exports.get_memo = (req, res) => {
+  res.render('memo.ejs');
+}
+exports.post_memo = (req, res) => {
+  // res.render('memo.ejs');
+}
+exports.post_login = (req, res) => {
+
+  //   로그인
+  const result = models.Memo.findAll();
+  res.render('main.ejs', {data: result});
+}
+
