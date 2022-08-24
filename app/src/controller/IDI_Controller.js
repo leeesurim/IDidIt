@@ -26,6 +26,7 @@ exports.get_signup = (req, res) => {
 
 exports.get_IDIinfo = (req, res) => {
   // 대시보드 페이지 렌더링
+  // 로그인 시 회원의 정보 대시보드 페이지에 넣어줘야 함
   res.render("dashboard");
 };
 

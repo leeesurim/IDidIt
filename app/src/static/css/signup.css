@@ -284,8 +284,7 @@ input[type="radio"]:checked + label {
   height: 50px;
   text-align: center;
   line-height: 50px;
-  margin-top: 12px;
-  margin-right: 12px;
+  margin: 12px;
 }
 .nav-button-container {
   float: right;

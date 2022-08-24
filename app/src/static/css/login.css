@@ -48,12 +48,9 @@ body {
 
 .nav-logo {
   display: inline-block;
-  width: 100px;
-  height: 50px;
   text-align: center;
   line-height: 50px;
-  margin-top: 12px;
-  margin-right: 12px;
+  margin: 12px;
 }
 .nav-button-container {
   float: right;
