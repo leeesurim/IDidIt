@@ -77,8 +77,8 @@ body {
   /* position: relative; */
   overflow-x: hidden;
   overflow-y: auto;
-  /* width: 100vw; */
-  /* height: 100vh; */
+  width: 100vw;
+  height: 100vh;
   min-height: 100%;
   background-color: #f8fafb;
 }
@@ -126,24 +126,52 @@ main {
   flex: 1;
 }
 
+/* 메모 */
 .memo_list {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
+  padding: 30px;
 }
 
 .memo {
-  display: block;
-  width: 15vw;
-  height: 25vh;
+  display: inline-block;
+  width: 250px;
+  height: 250px;
   background-color: #ffffff;
   box-shadow: 2px 2px #cdcaca;
-  margin: 5%;
-  padding: 5%;
+  margin: 15px;
+  padding: 15px;
 }
 
+.memo-container {
+  width: 100%;
+}
+
+.memo-container-date {
+  font-size: 50px;
+  border-bottom: 4px dotted #ff725e;
+  padding-bottom: 15px;
+  color: #ff725e;
+  margin-bottom: 15px;
+}
+
+.memo-title {
+  font-size: 25px;
+  color: #ff725e;
+  padding-bottom: 10px;
+  border-bottom: 3px dotted #ff725e;
+  margin-bottom: 20px;
+}
+
+.memo-date {
+  font-size: 3px;
+  padding-top: 5px;
+}
+.memo-content {
+}
 .colorLogo {
   color: #ff725e;
 }
@@ -167,7 +195,6 @@ main {
 }
 
 #form_content {
-  display: none;
   justify-content: center;
   align-items: center;
   width: 35vw;
@@ -239,4 +266,75 @@ main {
 }
 .btn-14:active {
   top: 2px;
+}
+
+/* 모달 */
+.modal-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+.modal-background {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.3;
+  position: fixed;
+  cursor: pointer;
+}
+.modal-content-container {
+  position: fixed;
+  height: 100%;
+  width: 40%;
+  right: 0;
+  background: white;
+  display: grid;
+  grid-template-rows: 100px 1fr;
+  padding: 30px;
+  border-left: 3px solid #ff725e;
+}
+.modal-content-title {
+  line-height: 100px;
+  font-size: 45px;
+  border-bottom: 6px dotted #ff725e;
+  color: #ff725e;
+}
+.modal-content-content {
+  margin-top: 30px;
+}
+
+/* 모달 메모용 커스텀 */
+
+.form-title-container {
+  color: #ff725e;
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.form-title-container input {
+  border: none;
+  border-bottom: 1px solid #ff725e;
+  width: 100%;
+  color: black;
+}
+
+.form-title-container input:focus {
+  outline: none;
+}
+
+.form-date-container {
+  margin-bottom: 30px;
+  text-align: right;
+  color: #ff725e;
+  font-size: 20px;
+}
+
+.form-datepicker {
+  border: none;
+  color: black;
+}
+
+.form-datepicker:focus {
+  outline: none;
 }

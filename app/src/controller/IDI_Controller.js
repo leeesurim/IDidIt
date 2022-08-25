@@ -31,8 +31,8 @@ exports.get_IDIinfo = (req, res) => {
 };
 
 exports.get_dashboard_data = (req, res) => {
-  // 대시보드 페이지 렌더링시 보내지는 데이터들
-  // 임시 작성
+  // 대시보드 페이지 렌더링시 axios를 통해 보내지는 데이터들
+  // 임시 데이터 json 형태로 작성
   let data = {
     accountbook: [
       [2478, 5267, 734, 784, 433],
@@ -45,9 +45,8 @@ exports.get_dashboard_data = (req, res) => {
     ],
   };
   // 로그인 시 회원의 정보 대시보드 페이지에 넣어줘야 함
+  // 근영님 로직 작성 필요
 
-  console.log(1);
-  // res.send(1);
   res.send(data);
 };
 
@@ -96,6 +95,7 @@ exports.post_login = (req, res) => {
 
 // 회원 정보 수정
 exports.get_userinfo = (req, res) => {
+  // 회원 정보 불러오는 로직 필요
   res.render("modify.ejs");
 };
 
@@ -148,7 +148,16 @@ exports.get_memo = (req, res) => {
 exports.post_memo = (req, res) => {
   // res.render('memo.ejs');
 };
+exports.post_writememo = (req, res) => {
+  // 제목, 날짜, html화 된 내용,
+  let memo_title = req.body.title;
+  let memo_date = req.body.date;
+  let memo_content = req.body.content;
 
+  console.log("제목 : " + memo_title);
+  console.log("날짜 : " + memo_date);
+  console.log("내용 : " + memo_content);
+};
 // exports.post_login = (req, res) => {
 //   //   로그인
 //   const result = models.Memo.findAll();

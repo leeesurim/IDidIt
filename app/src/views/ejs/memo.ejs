@@ -18,53 +18,13 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
     <script src="https://kit.fontawesome.com/fbfe3f8f60.js" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="/css/memo.css">
+    <!-- 메모 css, script -->
+    <!-- <link rel="stylesheet" href="../../static/css/reset.css"> -->
+    <link rel="stylesheet" href="/css/reset.css">
+    <script src="/js/memo.js"></script>
+    <link rel="stylesheet" href="css/memo.css">
     <script>
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                height: 400,
-        toolbar: [
-            ['font', ['bold', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-        ]
-            });
-        });
-
-        function writeForm(){
-            $("form").css("display", "block");
-        }
-
-        function sendForm(){
-            if ($('#summernote').summernote('isEmpty')) {
-                $(".alert").text("메모를 입력하세요").css("color", "red").css("text-align", "center");
-
-                return false;
-            }
-
-            
-
-            var form = document.getElementById("form_content");
-            console.log(form);
-            axios({
-                method: "post",
-                url: "http://localhost:8000/write",
-                data: {
-                    content: form.content.value
-                }
-            })
-            .then((rep) => { return rep.data; })
-            .then((data) => {
-    
-                let html = "<div class='memo'>" + data.content + "</div>";
-                $(".memo_list").append(html);
-                $('#summernote').summernote('reset')
-                $(".alert").text("");
-                $("form").css("display", "none");
-                
-            });
-        }
+        
 
 
     </script>
@@ -80,27 +40,119 @@
             <li><a href="/memo"><i class="icon fa-solid fa-file-pen"></i></i>메모</a></li>
         </ul>
     </nav>
-    <main>
+    <div>
         <section class="left">
+            <!-- 메모 담는 컨테이너 -->
             <div class="memo_list">
-            </div>
-
-        </section>
-            
-        <section class="right">
-            <div class="writeBtn" onclick="writeForm()">
-                <i class="fa-solid fa-pen-to-square fa-xl fa-fade colorLogo"></i>
-            </div>
-
-            <form id="form_content">
-                <textarea id="summernote" name="content" ></textarea>
-                <span class="alert"></span>
-                <div class="alignBtn">
-                    <button type="button" class="sendBtn btn-14" onclick="sendForm();">저장</button>
+                <div class="memo-container">
+                    <div class="memo-container-date">
+                        2022.01.01
+                    </div>
+                    <div class="memo">
+                        <div class="memo-container">
+                        </div>
+                        <div class="memo-title">제목1
+                        </div>
+                        <div class="memo-content"><p>내용1</p></div>
+                    </div>
+                    <div class="memo">
+                        <div class="memo-container">
+                        </div>
+                        <div class="memo-title">제목1
+                        </div>
+                        <div class="memo-content"><p>내용1</p></div>
+                    </div>
+                    <div class="memo">
+                        <div class="memo-container">
+                        </div>
+                        <div class="memo-title">제목1
+                        </div>
+                        <div class="memo-content"><p>내용1</p></div>
+                    </div>
+                    <div class="memo">
+                        <div class="memo-container">
+                        </div>
+                        <div class="memo-title">제목1
+                        </div>
+                        <div class="memo-content"><p>내용1</p></div>
+                    </div>
+                    <div class="memo">
+                        <div class="memo-container">
+                        </div>
+                        <div class="memo-title">제목1
+                        </div>
+                        <div class="memo-content"><p>내용1</p></div>
+                    </div>
                 </div>
-            </form>
+                <div class="memo-container">
+                    <div class="memo-container-date">
+                        2022.01.01
+                    </div>
+                    <div class="memo">
+                        <div class="memo-container">
+                        </div>
+                        <div class="memo-title">제목1
+                        </div>
+                        <div class="memo-content"><p>내용1</p></div>
+                    </div>
+                </div>
+                <div class="memo-container">
+                    <div class="memo-container-date">
+                        2022.01.01
+                    </div>
+                    <div class="memo">
+                        <div class="memo-container">
+                        </div>
+                        <div class="memo-title">제목1
+                        </div>
+                        <div class="memo-content"><p>내용1</p></div>
+                    </div>
+                </div>
+                <div class="memo-container">
+                    <div class="memo-container-date">
+                        2022.01.01
+                    </div>
+                    <div class="memo">
+                        <div class="memo-container">
+                        </div>
+                        <div class="memo-title">제목1
+                        </div>
+                        <div class="memo-content"><p>내용1</p></div>
+                    </div>
+                </div>
+            </div>
         </section>
-    </main>
+        <section class="right">
+            <div class="writeBtn" onclick="openModal()">
+                <i class="fa-solid fa-pen-to-square fa-xl fa-fade colorLogo"></i>
+            </div>    
+        </section>
+    </div>
+    </div>
+    <div class="modal-container">
+        <div class="modal-background" onclick="closeModal();"></div>
+        <div class="modal-content-container">
+            <!-- 모달 제목 -->
+            <div class="modal-content-title">
+                메모 작성
+            </div>
+            <!-- 모달 내용 -->
+            <div class="modal-content-content">
+                <div class="form-title-container">
+                    제목 <input id="form-title" type="text">
+                </div>
+                <div class="form-date-container">
+                    날짜 <input class="form-datepicker" type="date" id="form-date" value="2022-01-01">
+                </div>
+                <form id="form_content">
+                    <textarea id="summernote" name="content" ></textarea>
+                    <span class="alert"></span>
+                    <div class="alignBtn">
+                        <button type="button" class="sendBtn btn-14" onclick="sendForm();">저장</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>

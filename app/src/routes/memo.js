@@ -4,5 +4,6 @@ const router = express.Router();
 
 router.get("/", IDI.get_memo);
 router.post("/", IDI.post_memo);
+router.post("/write", IDI.post_writememo);
 
 module.exports = router;

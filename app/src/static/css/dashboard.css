@@ -146,6 +146,22 @@ body {
 .dashboard-button i {
   margin-right: 8px;
 }
+
+/* 가이드 라인 */
+.guideline-container {
+  display: grid;
+  margin: 20px;
+}
+.guideline-content-container {
+  height: 50px;
+  color: #ff725e;
+  padding: 10px;
+  border-radius: 8px;
+  position: relative;
+  line-height: 30px;
+  font-size: 20px;
+}
+
 /* 캘린더 */
 #header {
   padding: 10px;
