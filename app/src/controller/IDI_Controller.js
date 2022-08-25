@@ -133,3 +133,13 @@ exports.post_memo = (req, res) => {
 //   const result = models.Memo.findAll();
 //   res.render("main.ejs", { data: result });
 // };
+
+// 달력
+exports.get_calendar = (req, res) => {
+  res.render("calendar.ejs");
+};
+
+// 가계부
+exports.get_accountbook = (req, res) => {
+  res.render("accountbook.ejs");
+};

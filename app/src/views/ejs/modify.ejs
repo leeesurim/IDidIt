@@ -7,6 +7,8 @@
     <title>Document</title>
     <!-- 합쳐지고 최소화된 최신 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/e13a984139.js" crossorigin="anonymous"></script>
     <!-- 부가적인 테마 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
@@ -20,83 +22,94 @@
     <script src="/js/modify.js"></script>
 </head>
 <body>
-    <div class="main-container">
-        <div class="title-container">
-            회원정보변경
-        </div>
-        <div class="line-doted"></div>
-        <div class="desc-container">
-            <div class="desc-box">
-                가입 시 입력한 회원정보를 다시 한번 확인해주세요.
+    <div class="grid-wrapper">
+        <nav class="nav-container">
+            <div class="logo-container">내가 해냄</div>
+            <ul>
+                <li><a href="/dashboard"><i class="icon fa-solid fa-house"></i>홈</a></li>
+                <li><a href="/calendar"><i class="icon fa-solid fa-calendar"></i>달력</a></li>
+                <li><a href="/accountbook"><i class="icon fa-solid fa-book"></i>가계부</a></li>
+                <li><a href="/memo"><i class="icon fa-solid fa-file-pen"></i></i>메모</a></li>
+            </ul>
+        </nav>
+        <div class="main-container">
+            <div class="title-container">
+                회원정보변경
             </div>
-        </div>
-        <div class="input-container">
-            <!-- 아이디 -->
-            <div class="input-box">
-                <div class="input-title">아이디</div>
-                <div class="input-text-container">
-                    <input class="input-text" value="duatldhs5555@gmail.com" disabled></input>
+            <div class="line-doted"></div>
+            <div class="desc-container">
+                <div class="desc-box">
+                    가입 시 입력한 회원정보를 다시 한번 확인해주세요.
                 </div>
             </div>
-            <div class="input-box">
-                <div class="input-title">이름</div>
-                <div class="input-text-container">
-                    <input class="input-text" value="염시온" disabled></input>
+            <div class="input-container">
+                <!-- 아이디 -->
+                <div class="input-box">
+                    <div class="input-title">아이디</div>
+                    <div class="input-text-container">
+                        <input class="input-text" value="duatldhs5555@gmail.com" disabled></input>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <div class="input-title">이름</div>
+                    <div class="input-text-container">
+                        <input class="input-text" value="염시온" disabled></input>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <div class="input-title">닉네임</div>
+                    <div class="input-text-container">
+                        <input class="input-text" value="염시온 별명"></input>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <div class="input-title">생년월일</div>
+                    <div class="input-text-container">
+                        <select class="input-selector form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                            <option selected>년도</option>
+                            <option value="1">1995</option>
+                            <option value="2">1996</option>
+                            <option value="3">1997</option>
+                            <option value="1">1995</option>
+                            <option value="2">1996</option>
+                            <option value="3">1997</option>
+                        </select>
+                        <select class="input-selector form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                            <option selected>월</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="1">4</option>
+                            <option value="2">5</option>
+                            <option value="3">6</option>
+                        </select>
+                        <select class="input-selector form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                            <option selected>일</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="1">4</option>
+                            <option value="2">5</option>
+                            <option value="3">6</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <div class="input-title">휴대전화</div>
+                    <div class="input-text-container">
+                        <input class="input-text" value="010-8936-3419"></input>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <div class="input-title">성별</div>
+                    <div class="input-text-container">
+                        <input class="input-text" value="duatldhs5555@gmail.com" disabled></input>
+                    </div>
                 </div>
             </div>
-            <div class="input-box">
-                <div class="input-title">닉네임</div>
-                <div class="input-text-container">
-                    <input class="input-text" value="염시온 별명"></input>
-                </div>
+            <div class="button-container">
+                <input type="button" class="button" value="변경">
             </div>
-            <div class="input-box">
-                <div class="input-title">생년월일</div>
-                <div class="input-text-container">
-                    <select class="input-selector form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option selected>년도</option>
-                        <option value="1">1995</option>
-                        <option value="2">1996</option>
-                        <option value="3">1997</option>
-                        <option value="1">1995</option>
-                        <option value="2">1996</option>
-                        <option value="3">1997</option>
-                      </select>
-                      <select class="input-selector form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option selected>월</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="1">4</option>
-                        <option value="2">5</option>
-                        <option value="3">6</option>
-                      </select>
-                      <select class="input-selector form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option selected>일</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="1">4</option>
-                        <option value="2">5</option>
-                        <option value="3">6</option>
-                      </select>
-                </div>
-            </div>
-            <div class="input-box">
-                <div class="input-title">휴대전화</div>
-                <div class="input-text-container">
-                    <input class="input-text" value="010-8936-3419"></input>
-                </div>
-            </div>
-            <div class="input-box">
-                <div class="input-title">성별</div>
-                <div class="input-text-container">
-                    <input class="input-text" value="duatldhs5555@gmail.com" disabled></input>
-                </div>
-            </div>
-        </div>
-        <div class="button-container">
-            <input type="button" class="button" value="변경">
         </div>
     </div>
 </body>

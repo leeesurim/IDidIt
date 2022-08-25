@@ -73,7 +73,6 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
   font-family: "Pretendard-Medium";
   /* position: relative; */
   overflow-x: hidden;
@@ -81,7 +80,7 @@ body {
   /* width: 100vw; */
   /* height: 100vh; */
   min-height: 100%;
-  background-color: #eaeaea;
+  background-color: #f8fafb;
 }
 
 a {
