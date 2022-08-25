@@ -145,9 +145,48 @@ exports.delete_userinfo = (req, res) => {
 exports.get_memo = (req, res) => {
   res.render("memo.ejs");
 };
+
+exports.get_memoes = (req, res) => {
+  // 회원 user_id에 따른 메모들 select 로직 작성 필요
+  // write here
+
+  // 임시 데이터
+  let data = {
+    memo: [
+      {
+        id: 1,
+        title: "임시 데이터 제목1",
+        content: "임시 데이터 내용1",
+        date: "2022-01-03",
+      },
+      {
+        id: 2,
+        title: "임시 데이터 제목2",
+        content: "임시 데이터 내용2",
+        date: "2022-01-04",
+      },
+      {
+        id: 3,
+        title: "임시 데이터 제목3",
+        content: "임시 데이터 내용3",
+        date: "2022-01-05",
+      },
+      {
+        id: 4,
+        title: "임시 데이터 제목4",
+        content: "임시 데이터 내용4",
+        date: "2022-01-03",
+      },
+    ],
+  };
+
+  res.send(data);
+};
+
 exports.post_memo = (req, res) => {
   // res.render('memo.ejs');
 };
+
 exports.post_writememo = (req, res) => {
   // 제목, 날짜, html화 된 내용,
   let memo_title = req.body.title;
@@ -158,11 +197,25 @@ exports.post_writememo = (req, res) => {
   console.log("날짜 : " + memo_date);
   console.log("내용 : " + memo_content);
 };
-// exports.post_login = (req, res) => {
-//   //   로그인
-//   const result = models.Memo.findAll();
-//   res.render("main.ejs", { data: result });
-// };
+
+// 메모 수정
+exports.post_modifymemo = (req, res) => {
+  // 제목, 날짜, html화 된 내용,
+  let memo_id = req.body.id;
+  let memo_title = req.body.title;
+  let memo_date = req.body.date;
+  let memo_content = req.body.content;
+
+  console.log("제목 : " + memo_title);
+  console.log("날짜 : " + memo_date);
+  console.log("내용 : " + memo_content);
+};
+
+// 메모 삭제 기능
+exports.post_deletememo = (req, res) => {
+  let memo_id = req.body.id;
+  res.send(true);
+};
 
 // 달력
 exports.get_calendar = (req, res) => {
