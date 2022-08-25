@@ -8,6 +8,8 @@ router.get("/signup", IDI.get_signup);
 router.get("/login", IDI.get_login);
 // 로그인 후 메인 페이지
 router.get("/dashboard", IDI.get_IDIinfo);
+router.get("/get_data", IDI.get_dashboard_data);
+
 // 개인정보변경
 router.get("/userinfo", IDI.get_userinfo);
 // 일정

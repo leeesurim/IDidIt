@@ -1,42 +1,71 @@
 $(document).ready(function () {
-  new Chart(document.getElementById("canvas"), {
-    type: "line",
-    data: {
-      labels: ["1월", "2월", "3월", "4월", "5월"],
-      datasets: [
-        {
-          label: "수입 (원)",
-          borderColor: "#ED6D86",
-          backgroundColor: "#ED6D86",
-          data: [2478, 5267, 734, 784, 433],
+  axios({
+    method: "get",
+    url: "http://localhost:8000/get_data",
+  })
+    .then((res) => {
+      return res.data;
+    })
+    .then((data) => {
+      // 데이터 변수로 선언
+      let accountbook_data = data.accountbook;
+      let memo_data = data.memo;
+
+      // 차트에 넣기
+      new Chart(document.getElementById("canvas"), {
+        type: "line",
+        data: {
+          labels: ["1월", "2월", "3월", "4월", "5월"],
+          datasets: [
+            {
+              label: "수입 (원)",
+              borderColor: "#ED6D86",
+              backgroundColor: "#ED6D86",
+              // data에 차트 수입 데이터 배열의 형태로 넣었습니다.
+              data: accountbook_data[0],
+            },
+            {
+              label: "지출 (원)",
+              borderColor: "#57A0E5",
+              backgroundColor: "#57A0E5",
+              // data에 차트 지출 데이터 배열의 형태로 넣었습니다.
+              data: accountbook_data[1],
+            },
+          ],
         },
-        {
-          label: "지출 (원)",
-          borderColor: "#57A0E5",
-          backgroundColor: "#57A0E5",
-          data: [4000, 2000, 3000, 1500, 5000],
-        },
-      ],
-    },
-  });
+      });
+
+      // 메모에 넣기
+      for (let i = 0; i < 3; i++) {
+        // 미리 만들어 놓은 메모 템플릿에 불러온 데이터를 3개만 넣을 수 있도록 했습니다.
+        $(".memo-container").append(
+          `<div class="memo-content-container">
+              <div class="memo-content-title">
+                <p style="font-size: 10px;">${memo_data[i].date}</p>
+                <p style="padding-top: 5px;padding-bottom: 5px;">${memo_data[i].title}</p>
+              </div>
+              <div class="memo-content-content" style="padding-top: 8px;">
+              ${memo_data[i].content}
+              </div>
+          </div>`
+        );
+      }
+    });
 
   // 클릭 시 링크 이동
   $(".dashboard-accountbook").click(() => {
-    console.log("가계부 이동");
     location.href = "/accountbook";
   });
   $(".dashboard-memo").click(() => {
-    console.log("메모 이동");
     location.href = "/memo";
   });
   $(".dashboard-calendar").click(() => {
-    console.log("달력 이동");
     location.href = "calendar";
   });
 
   // 커서 시 애니메이션 실행
 
-  // 캘린더
+  // 캘린더 함수
   let nav = 0;
   let clicked = null;
   let events = localStorage.getItem("events")

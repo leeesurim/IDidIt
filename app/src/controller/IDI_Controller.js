@@ -30,6 +30,27 @@ exports.get_IDIinfo = (req, res) => {
   res.render("dashboard");
 };
 
+exports.get_dashboard_data = (req, res) => {
+  // 대시보드 페이지 렌더링시 보내지는 데이터들
+  // 임시 작성
+  let data = {
+    accountbook: [
+      [2478, 5267, 734, 784, 433],
+      [4000, 2000, 3000, 1500, 5000],
+    ],
+    memo: [
+      { date: "2022-03-06", title: "제목 1", content: "내용 1" },
+      { date: "2022-03-07", title: "제목 2", content: "내용 2" },
+      { date: "2022-03-08", title: "제목 3", content: "내용 3" },
+    ],
+  };
+  // 로그인 시 회원의 정보 대시보드 페이지에 넣어줘야 함
+
+  console.log(1);
+  // res.send(1);
+  res.send(data);
+};
+
 exports.post_signup = async (req, res) => {
   let object = {
     id: req.body.id,
