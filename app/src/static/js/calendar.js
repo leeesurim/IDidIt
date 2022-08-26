@@ -1,33 +1,4 @@
 $(document).ready(function () {
-  axios({
-    method: "get",
-    url: "http://localhost:8000/get_data",
-  })
-    .then((res) => {
-      return res.data;
-    })
-    .then((data) => {
-      // 데이터 변수로 선언
-      let accountbook_data = data.accountbook;
-      let memo_data = data.memo;
-
-      // 메모에 넣기
-      for (let i = 0; i < 3; i++) {
-        // 미리 만들어 놓은 메모 템플릿에 불러온 데이터를 3개만 넣을 수 있도록 했습니다.
-        $(".memo-container").append(
-          `<div class="memo-content-container">
-              <div class="memo-content-title">
-                <p style="font-size: 10px;">${memo_data[i].date}</p>
-                <p style="padding-top: 5px;padding-bottom: 5px;">${memo_data[i].title}</p>
-              </div>
-              <div class="memo-content-content" style="padding-top: 8px;">
-              ${memo_data[i].content}
-              </div>
-          </div>`
-        );
-      }
-    });
-
   // 클릭 시 링크 이동
   $(".dashboard-accountbook").click(() => {
     location.href = "/accountbook";
