@@ -44,7 +44,7 @@ exports.get_dashboard_data = (req, res) => {
       { date: "2022-03-08", title: "제목 3", content: "내용 3" },
     ],
   };
-  // 로그인 시 회원의 정보 대시보드 페이지에 넣어줘야 함
+  // 로그인 시 회원의 정보 대시보드 페이지에 넣어줘야 함ss
   // 근영님 로직 작성 필요
 
   res.send(data);
