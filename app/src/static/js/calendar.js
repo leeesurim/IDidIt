@@ -11,30 +11,6 @@ $(document).ready(function () {
       let accountbook_data = data.accountbook;
       let memo_data = data.memo;
 
-      // 차트에 넣기
-      new Chart(document.getElementById("canvas"), {
-        type: "line",
-        data: {
-          labels: ["1월", "2월", "3월", "4월", "5월"],
-          datasets: [
-            {
-              label: "수입 (원)",
-              borderColor: "#ED6D86",
-              backgroundColor: "#ED6D86",
-              // data에 차트 수입 데이터 배열의 형태로 넣었습니다.
-              data: accountbook_data[0],
-            },
-            {
-              label: "지출 (원)",
-              borderColor: "#57A0E5",
-              backgroundColor: "#57A0E5",
-              // data에 차트 지출 데이터 배열의 형태로 넣었습니다.
-              data: accountbook_data[1],
-            },
-          ],
-        },
-      });
-
       // 메모에 넣기
       for (let i = 0; i < 3; i++) {
         // 미리 만들어 놓은 메모 템플릿에 불러온 데이터를 3개만 넣을 수 있도록 했습니다.
@@ -130,8 +106,6 @@ $(document).ready(function () {
       daySquare.classList.add("day");
 
       const dayString = `${year}-${month + 1}-${i - paddingDays}`;
-      // daySquare.classList.add(dayString);
-      console.log(dayString);
       if (i > paddingDays) {
         daySquare.innerText = i - paddingDays;
         const eventForDay = events.find((e) => e.date === dayString);
@@ -146,8 +120,8 @@ $(document).ready(function () {
           eventDiv.innerText = eventForDay.title;
           daySquare.appendChild(eventDiv);
         }
-
-        daySquare.addEventListener("click", () => openModal(dayString));
+        // 함수 추가
+        daySquare.addEventListener("click", () => openCalendarModal(dayString));
       } else {
         daySquare.classList.add("padding");
       }
@@ -216,9 +190,19 @@ $(document).ready(function () {
 });
 
 // 메모 작성 모달 출력
-function openModal() {
+function openCalendarModal(day) {
+  // 날짜 불러오기
+  // 날짜 yyyy-mm-dd 형태로 변경 로직
+  var date = new Date(day);
+  var year = date.getFullYear();
+  var month = ("0" + (date.getMonth() + 1)).slice(-2);
+  var day = ("0" + date.getDate()).slice(-2);
+  var dateString = year + "-" + month + "-" + day;
+
   // 모달 display 출력
-  $(".modal-content-container").css("display", "block");
+  $(".modal-container").css("display", "block");
+  // 모달 css 변경
+  $(".modal-content-title").text(dateString);
 }
 
 function closeModal() {
@@ -226,6 +210,7 @@ function closeModal() {
   $(".modal-content-container").addClass("modal-close");
   setTimeout(function () {
     $(".modal-container").css("display", "none");
+    $(".modal-content-container").removeClass("modal-close");
   }, 500);
   // 초기화
 }
