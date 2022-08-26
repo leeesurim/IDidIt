@@ -34,14 +34,6 @@ $(document).ready(function () {
     "Saturday",
   ];
 
-  function openModal(date) {
-    clicked = date;
-
-    const eventForDay = events.find((e) => e.date === clicked);
-
-    backDrop.style.display = "block";
-  }
-
   function load() {
     const dt = new Date();
 
@@ -77,6 +69,7 @@ $(document).ready(function () {
       daySquare.classList.add("day");
 
       const dayString = `${year}-${month + 1}-${i - paddingDays}`;
+      daySquare.classList.add(dayString);
       if (i > paddingDays) {
         daySquare.innerText = i - paddingDays;
         const eventForDay = events.find((e) => e.date === dayString);
@@ -99,6 +92,12 @@ $(document).ready(function () {
 
       calendar.appendChild(daySquare);
     }
+
+    // 날짜 yyyy-mm-dd 형태로 변경 로직
+
+    let startdateforCalendar = `${year}-${month + 1}-1`;
+    let lastdateforCalendar = `${year}-${month + 1}-${daysInMonth}`;
+    getCountforCalendar(startdateforCalendar, lastdateforCalendar);
   }
 
   function closeModal() {
@@ -174,6 +173,103 @@ function openCalendarModal(day) {
   $(".modal-container").css("display", "block");
   // 모달 css 변경
   $(".modal-content-title").text(dateString);
+
+  // 메모 데이터 불러오기
+  getDataforModal(dateString);
+}
+
+// 달력이 뜨면서 날짜마다 메모와 가계부의 데이터 갯수를 보여주는 함수
+function getCountforCalendar(start, end) {
+  // start와 end는 쿼리문을 위한 값들
+  // start : 달력이 로딩되면서 해당 월의 첫 날 (예시 : 2022-08-01)
+  // end : 달력이 로딩되면서 해당 월의 마지막 날 (예시 : 2022-08-31)
+
+  axios({
+    method: "post",
+    url: `http://localhost:8000/calendar/calendardata`,
+    data: {
+      user_id: "userid",
+      start_day: start,
+      end_day: end,
+    },
+  })
+    .then((res) => {
+      if (res.status == 200) {
+        return res.data;
+      }
+    })
+    .then((data) => {
+      let memoArr = data.memo;
+      let accountbookArr = data.accountbook;
+      for (let i = 0; i < memoArr.length; i++) {
+        $(`.day.${memoArr[i].date}`).append(
+          `
+          <div class="calendar-alert" id="memo">메모
+            <div class="calendar-alert-text">!</div>
+          </div>
+          `
+        );
+      }
+      for (let i = 0; i < accountbookArr.length; i++) {
+        $(`.day.${accountbookArr[i].date}`).append(
+          `
+          <div class="calendar-alert" id="accountbook-count">가계부
+            <div class="calendar-alert-text">!</div>
+          </div>
+          `
+        );
+      }
+    });
+  // <div class="calendar-alert" id="accountbook-count">가계부
+  //   <div class="calendar-alert-text">!</div>
+  // </div>
+
+  // $(".day").append(
+  //   `
+  //   <div class="calendar-alert" id="memo">메모
+  //     <div class="calendar-alert-text">!</div>
+  //   </div>
+  //   <div class="calendar-alert" id="accountbook-count">가계부
+  //     <div class="calendar-alert-text">!</div>
+  //   </div>
+  //   `
+  // );
+}
+
+function getDataforModal(day) {
+  // 달력 모달 띄울 때 데이터들 불러오기
+  axios({
+    method: "post",
+    url: `http://localhost:8000/calendar/modaldata`,
+    data: {
+      user_id: "userid",
+      day: day,
+    },
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+    })
+    .then((data) => {
+      // 메모들 불러오기
+      // 1. 해당 유저의 해당 날짜에 대한 메모들을 불러오기
+      // 메모.가계부 배열
+      let memoes = data.memo;
+      let accountbook = data.accountbook;
+
+      // 메모의 수만큼 반복문을 돌려서 메모 html을 삽입합니다.
+      for (let i = 0; i < memoes.length; i++) {
+        $(".memo-container").append(`
+        <div class="memo" id=${memoes[i].id}>
+          <div class="memo-title">${memoes[i].title}</div>
+          <div class="memo-content">${memoes[i].content}</div>
+        </div>
+        `);
+      }
+
+      // 가계부의 html을 삽입합니다.
+    });
 }
 
 function closeModal() {
@@ -182,6 +278,7 @@ function closeModal() {
   setTimeout(function () {
     $(".modal-container").css("display", "none");
     $(".modal-content-container").removeClass("modal-close");
+    $(".memo").remove();
   }, 500);
   // 초기화
 }

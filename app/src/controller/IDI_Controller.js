@@ -146,10 +146,11 @@ exports.get_memo = (req, res) => {
   res.render("memo.ejs");
 };
 
+// 메모 페이지 메모들 불러오기
 exports.get_memoes = (req, res) => {
   // 회원 user_id에 따른 메모들 select 로직 작성 필요
   // write here
-
+  console.log(req.body.day);
   // 임시 데이터
   let data = {
     memo: [
@@ -179,6 +180,104 @@ exports.get_memoes = (req, res) => {
       },
     ],
   };
+
+  res.send(data);
+};
+
+// 달력 페이지에서 모달을 띄울 때 메모들과 가계부를 불러오는 함수 입니다.
+exports.post_calendar_modal_data = (req, res) => {
+  // where절로 사용할 날짜
+  let day = req.body.day;
+  let user_id = req.body.user_id;
+  console.log(user_id);
+  // 임시 데이터
+  let data = {
+    memo: [
+      {
+        id: 1,
+        title: "임시 데이터 제목1",
+        content: "임시 데이터 내용1",
+        date: "2022-08-19",
+      },
+      {
+        id: 2,
+        title: "임시 데이터 제목2",
+        content: "임시 데이터 내용2",
+        date: "2022-08-19",
+      },
+      {
+        id: 3,
+        title: "임시 데이터 제목3",
+        content: "임시 데이터 내용3",
+        date: "2022-08-19",
+      },
+      {
+        id: 4,
+        title: "임시 데이터 제목4",
+        content: "임시 데이터 내용4",
+        date: "2022-08-19",
+      },
+    ],
+    accountbook: [{}],
+  };
+  // 데이터 불러 오는 모델 로직 작성
+
+  // models.Memo.findAll({ where: { date: day } }).then((result) => {
+  //   console.log(result);
+  //   res.render({ result: result });
+  // });
+
+  res.send(data);
+};
+
+exports.post_calendar_calendar_data = (req, res) => {
+  // where절로 사용할 데이터
+  let user_id = req.body.user_id;
+  let start_day = req.body.start_day;
+  let end_day = req.body.end_day;
+
+  // 임시 데이터
+  let data = {
+    memo: [
+      {
+        id: 1,
+        title: "임시 데이터 제목1",
+        content: "임시 데이터 내용1",
+        date: "2022-8-19",
+      },
+      {
+        id: 2,
+        title: "임시 데이터 제목2",
+        content: "임시 데이터 내용2",
+        date: "2022-8-19",
+      },
+      {
+        id: 3,
+        title: "임시 데이터 제목3",
+        content: "임시 데이터 내용3",
+        date: "2022-8-19",
+      },
+      {
+        id: 4,
+        title: "임시 데이터 제목4",
+        content: "임시 데이터 내용4",
+        date: "2022-8-27",
+      },
+    ],
+    accountbook: [
+      { id: 1, date: "2022-8-19" },
+      { id: 2, date: "2022-8-20" },
+      { id: 3, date: "2022-8-19" },
+      { id: 4, date: "2022-8-22" },
+      { id: 5, date: "2022-8-27" },
+    ],
+  };
+  // 데이터 불러 오는 모델 로직 작성
+
+  // models.Memo.findAll({ where: { date: day } }).then((result) => {
+  //   console.log(result);
+  //   res.render({ result: result });
+  // });
 
   res.send(data);
 };
