@@ -7,7 +7,7 @@ const Memo = (Sequelize, DataTypes) => {
     'memo',
 
     {
-      // create ~~ (id int not null auto_increment primary key)
+      // create ~~ (id int not null auto_increment primary key)ss
       id: {
         type: DataTypes.STRING(10),
         allowNull: false,
