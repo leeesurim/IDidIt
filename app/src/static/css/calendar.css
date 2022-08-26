@@ -92,6 +92,8 @@ body {
 #weekdays div {
   width: calc(900px / 7);
   padding-left: 1px;
+  color: #ff725e;
+  font-weight: bold;
 }
 #calendar {
   width: 100%;
@@ -119,6 +121,7 @@ body {
 
 .day + #currentDay {
   background-color: #ff725e;
+  color: white;
 }
 .event {
   font-size: 10px;
@@ -243,6 +246,9 @@ body {
 }
 .modal-content-content {
   margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: auto;
 }
 
 /* 모달 메모용 커스텀 */
@@ -260,4 +266,8 @@ body {
   color: white;
   font-weight: bold;
   cursor: pointer;
+}
+.modal-content-memo-container {
+}
+.modal-content-calendar-container {
 }
