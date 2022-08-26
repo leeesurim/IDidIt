@@ -271,3 +271,49 @@ body {
 }
 .modal-content-calendar-container {
 }
+
+.memo-container {
+  width: 100%;
+}
+
+.memo-container-date {
+  font-size: 50px;
+  border-bottom: 4px dotted #ff725e;
+  padding-bottom: 15px;
+  color: #ff725e;
+  margin-bottom: 15px;
+}
+.memo-title {
+  font-size: 25px;
+  color: #ff725e;
+  padding-bottom: 19px;
+  border-bottom: 3px dotted #ff725e;
+  margin-bottom: 20px;
+}
+.memo {
+  display: inline-block;
+  width: 250px;
+  height: 250px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px #cdcaca;
+  margin: 15px;
+  padding: 15px;
+  position: relative;
+}
+.memo-content {
+}
+.memo-button {
+  background: #ff725e;
+  color: white;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+  right: 13px;
+  bottom: 13px;
+  font-size: 12px;
+}
