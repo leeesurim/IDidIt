@@ -23,7 +23,8 @@
 .grid-wrapper {
   display: grid;
   grid-template-columns: 250px 1fr;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
 }
 
 /* 네비게이션 */
@@ -77,8 +78,8 @@ body {
   /* position: relative; */
   overflow-x: hidden;
   overflow-y: auto;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   min-height: 100%;
   background-color: #f8fafb;
 }
@@ -289,6 +290,27 @@ main {
 }
 
 /* 모달 */
+@keyframes moveToDown {
+  0% {
+    transform: translateX(900px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes moveToUp {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(900px);
+  }
+}
+.modal-close {
+  animation: moveToUp 0.5s ease-in-out !important;
+  animation-delay: 10ms !important;
+}
+
 .modal-container {
   position: absolute;
   width: 100%;
@@ -314,6 +336,8 @@ main {
   grid-template-rows: 100px 1fr;
   padding: 30px;
   border-left: 3px solid #ff725e;
+  animation: moveToDown 0.5s ease-in-out;
+  animation-delay: 1ms;
 }
 .modal-content-title {
   line-height: 100px;

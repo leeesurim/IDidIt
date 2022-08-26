@@ -64,11 +64,16 @@ function openModal() {
 
 function closeModal() {
   // 모달 display 감추기
-  $(".modal-container").css("display", "none");
+  // $(".modal-container").css("display", "none");
+  $(".modal-content-container").addClass("modal-close");
+  setTimeout(function () {
+    $("#summernote").summernote("reset");
+    $("#form-title").val("");
+    $(".modal-content-title").text("메모 작성");
+    $(".modal-container").css("display", "none");
+    $(".modal-content-container").removeClass("modal-close");
+  }, 500);
   // 초기화
-  $("#summernote").summernote("reset");
-  $("#form-title").val("");
-  $(".modal-content-title").text("메모 작성");
 }
 
 // 메모 수정 모달 출력
