@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/modify.css">
     <script src="/js/modify.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div class="grid-wrapper">
@@ -44,10 +46,11 @@
             </div>
             <div class="input-container">
                 <!-- 아이디 -->
+                <!-- data.name, id, nickname, phonenumber, gender -->
                 <div class="input-box">
                     <div class="input-title">아이디</div>
                     <div class="input-text-container">
-                        <input class="input-text" value="duatldhs5555@gmail.com" disabled></input>
+                        <input class="input-text" value="아이디" disabled></input>    
                     </div>
                 </div>
                 <div class="input-box">
@@ -63,38 +66,6 @@
                     </div>
                 </div>
                 <div class="input-box">
-                    <div class="input-title">생년월일</div>
-                    <div class="input-text-container">
-                        <select class="input-selector form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                            <option selected>년도</option>
-                            <option value="1">1995</option>
-                            <option value="2">1996</option>
-                            <option value="3">1997</option>
-                            <option value="1">1995</option>
-                            <option value="2">1996</option>
-                            <option value="3">1997</option>
-                        </select>
-                        <select class="input-selector form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                            <option selected>월</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="1">4</option>
-                            <option value="2">5</option>
-                            <option value="3">6</option>
-                        </select>
-                        <select class="input-selector form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                            <option selected>일</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="1">4</option>
-                            <option value="2">5</option>
-                            <option value="3">6</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="input-box">
                     <div class="input-title">휴대전화</div>
                     <div class="input-text-container">
                         <input class="input-text" value="010-8936-3419"></input>
@@ -103,12 +74,12 @@
                 <div class="input-box">
                     <div class="input-title">성별</div>
                     <div class="input-text-container">
-                        <input class="input-text" value="duatldhs5555@gmail.com" disabled></input>
+                        <input class="input-text" value="남자" disabled></input>
                     </div>
                 </div>
             </div>
             <div class="button-container">
-                <input type="button" class="button" value="변경">
+                <input type="button" class="button" value="변경" onclick="edit();">
             </div>
         </div>
     </div>
