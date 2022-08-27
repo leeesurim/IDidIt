@@ -20,11 +20,11 @@ app.use(logger("dev"));
 
 const routerUser = require("./src/routes/user");
 const routerMemo = require("./src/routes/memo");
-// const routerCalendar = require("./src/routes/calendar");
-// const routerAccountbook = require("./src/routes/accountbook");
+const routerCalendar = require("./src/routes/calendar");
+const routerAccountbook = require("./src/routes/accountbook");
 const { sequelize } = require("./src/model");
 
 app.use("/", routerUser);
 app.use("/memo", routerMemo);
-// app.use("/calendar", routerCalendar);
-// app.use("/accountbook", routerAccountbook);
+app.use("/calendar", routerCalendar);
+app.use("/accountbook", routerAccountbook);

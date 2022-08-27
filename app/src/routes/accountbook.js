@@ -1,11 +1,11 @@
-// const express = require("express");
-// const IDI = require("../controller/IDI_Controller_test");
-// const router = express.Router();
+const express = require("express");
+const IDI = require("../controller/IDI_Controller");
+const router = express.Router();
 
-// // get 처리 라우팅
-// // 가계부
-// router.get("/", IDI.get_accountbook);
+// get 처리 라우팅
+// 가계부
+router.get("/", IDI.get_accountbook);
 
-// // post 처리 라우팅
+// post 처리 라우팅
 
-// module.exports = router;
+module.exports = router;
