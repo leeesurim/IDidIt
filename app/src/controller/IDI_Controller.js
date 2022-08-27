@@ -129,9 +129,9 @@ exports.patch_userinfo = (req, res) => {
   let info = {
     id: req.body.id,
     name: req.body.name,
+    email: req.body.email,
     nickname: req.body.nickname,
     phone_number: req.body.phone_number,
-    gender: req.body.gender,
   };
   models.User.update(info, { where: { id: req.body.id } }).then((result) => {
     res.send("수정성공");

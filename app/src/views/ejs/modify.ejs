@@ -12,6 +12,7 @@
     <!-- 부가적인 테마 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css">
@@ -20,7 +21,6 @@
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/modify.css">
     <script src="/js/modify.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
@@ -60,6 +60,12 @@
                     </div>
                 </div>
                 <div class="input-box">
+                    <div class="input-title">이메일</div>
+                    <div class="input-text-container">
+                        <input class="input-text" value="<%=data.email%>"></input>
+                    </div>
+                </div>
+                <div class="input-box">
                     <div class="input-title">닉네임</div>
                     <div class="input-text-container">
                         <input class="input-text" value="<%=data.nickname%>"></input>
@@ -71,44 +77,12 @@
                         <input class="input-text" value="<%=data.phone_number%>"></input>
                     </div>
                 </div>
-                <div class="input-box">
-                    <div class="input-title">성별</div>
-                    <div class="input-text-container">
-                        <input class="input-text" value="<%=data.gender%>" disabled></input>
-                    </div>
-                </div>
             </div>
             <div class="button-container">
-                <input type="button" class="button" value="변경" onclick="edit();">
+                <input type="button" class="edit-btn" value="변경" onclick="edit();">
+                <input type="button" class="delete-btn" value="탈퇴" onclick="deleteUser();">
             </div>
         </div>
     </div>
-    <script>
-        function edit() {
-            let input = $('.input-text')
-            axios({
-                method: 'patch',
-                url: 'http://localhost:8000/userInfo/edit',
-                data: {
-                    id: input[0].value,
-                    name: input[1].value,
-                    nickname: input[2].value,
-                    phone_number: input[3].value,
-                    gender: input[4].value,
-                }
-            })
-            .then((rep) => {
-            return rep.data;
-            })
-            .then((data) => {
-                alert(data);
-                $(input[0]).text(input[0].value);
-                $(input[1]).text(input[1].value);
-                $(input[2]).text(input[2].value);
-                $(input[3]).text(input[3].value);
-                $(input[4]).text(input[4].value);
-            });
-        }
-    </script>
 </body>
 </html>
