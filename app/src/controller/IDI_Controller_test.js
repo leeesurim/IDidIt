@@ -5,7 +5,7 @@ const salt = 10;
 
 // 회원 가입
 exports.get_home = (req, res) => {
-  if (req.session.user == null){
+  if (!req.session.user){
     res.render('main');
   } else {
     res.redirect('dashboard');
@@ -77,7 +77,6 @@ exports.post_login = (req, res) => {
     if (!id) return res.send(false);
     const password = await bcrypt.compare(req.body.password, id.password)
     if (password) {
-      console.log(req.session);
       req.session.user = id.id
       req.session.save(function(){
         res.send(true);
@@ -100,13 +99,11 @@ exports.get_logout = (req, res) => {
 
 // 회원 정보 조회
 exports.get_userinfo = (req, res) => {
-  if (req.session.user == null) res.render('main');
+  if (!req.session.user) res.render('main');
   else{
-    console.log(req.session.user);
     models.User.findOne({
     where: { id: req.session.user},
     }).then((result) => {
-    console.log('-------', result)
     res.render("modify.ejs", { data: result });
     })
   }
@@ -114,7 +111,6 @@ exports.get_userinfo = (req, res) => {
 
 // 회원 정보 수정
 exports.patch_userinfo = (req, res) => {
-  console.log("req.body :", req.body);
   let info = {
     id: req.body.id,
     name: req.body.name,
@@ -123,16 +119,15 @@ exports.patch_userinfo = (req, res) => {
     gender: req.body.gender
   };
   models.User.update(info, { where: { id: req.body.id } }).then((result) => {
-    console.log(result);
     res.send("수정성공");
   });
 };
 
-// 회원 정보 삭제
+// 회원 탈퇴
 exports.delete_userinfo = (req, res) => {
   models.User.destroy({ where: { id: req.body.id } }).then((result) => {
     console.log(result);
-    res.send("삭제 성공");
+    res.send("탈퇴 성공");
   });
 };
 
@@ -140,11 +135,22 @@ exports.delete_userinfo = (req, res) => {
 
 // 메모 작성
 exports.get_memo = (req, res) => {
-  res.render("memo.ejs");
+  if (!req.session.user) res.render('main');
+  else res.render("memo.ejs");
 };
-// exports.post_memo = (req, res) => {
-//   // res.render('memo.ejs');
-// };
+
+exports.post_memo = (req, res) => {
+  let object = {
+    user_id : 1,
+    title: req.body.title,
+    date: req.body.date,
+    content: req.body.content,
+  }
+  models.Memo.create(object).then((result) => {
+    console.log(result);
+    res.send({result: result});
+  });
+};
 
 // exports.post_login = (req, res) => {
 //   //   로그인
@@ -153,31 +159,31 @@ exports.get_memo = (req, res) => {
 // };
 
 // 달력
-exports.get_calendar = (req, res) => {
-  res.render("calendar.ejs");
-};
+// exports.get_calendar = (req, res) => {
+//   res.render("calendar.ejs");
+// };
 
-exports.post_calendar = (req, res) => {
-  let object = {
-    id: req.body.id,
-    title: req.body.title,
-    date: req.body.date,
-    info: req.body.info,
-  };
-  models.User.create(object).then((result) => {
-    console.log(result);
-    res.render({result: result});
-  });
-}
+// exports.post_calendar = (req, res) => {
+//   let object = {
+//     id: req.body.id,
+//     title: req.body.title,
+//     date: req.body.date,
+//     info: req.body.info,
+//   };
+//   models.User.create(object).then((result) => {
+//     console.log(result);
+//     res.render({result: result});
+//   });
+// }
 
 // // 가계부
-exports.get_accountbook = (req, res) => {
-  res.render("accountbook.ejs");
-};
+// exports.get_accountbook = (req, res) => {
+//   res.render("accountbook.ejs");
+// };
 
-exports.post_accountbook = (req, res) => {
-  const memo = models.Memo.findOne({where: { id: req.body.id}});
-  const account = models.Account.findOne({where: { id: req.body.id}});
-//     res.render('main',{data:memo});
-  res.render("accountbook.ejs", {memo : memo, account : account});
-};
+// exports.post_accountbook = (req, res) => {
+//   const memo = models.Memo.findOne({where: { id: req.body.id}});
+//   const account = models.Account.findOne({where: { id: req.body.id}});
+// //     res.render('main',{data:memo});
+//   res.render("accountbook.ejs", {memo : memo, account : account});
+// };
