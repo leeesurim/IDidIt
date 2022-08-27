@@ -15,6 +15,10 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+    </style>
+    
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
@@ -22,11 +26,12 @@
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/main.css" />
     <script src="/js/main.js"></script>
+    
   </head>
   <body>
     <!-- 네비게이션 -->
     <div class="nav-container">
-      <div class="nav-logo">로고</div>
+      <div class="nav-logo"><img src="/img/logo_black.png" class="logo_1" onclick="location.href ='/'"></div>
       <div class="nav-button-container">
         <div class="nav-button nav-login" onclick="location.href ='/login'">
           로그인
@@ -40,17 +45,55 @@
     <div class="main-container">
       <div class="slider-container">
         <div class="slider-connect">
-          <div class="slider-items">가게부를 통한 자금 관리 서비스</div>
-          <div class="slider-items">메모장을 사용해요!</div>
-          <div class="slider-items">달력을 활용해요</div>
-          <div class="slider-items">todolist 작성해용</div>
+          <div class="slider-items">
+            <div class="img_container">
+              <img src="/img/main_img_green.png" class="img_main">
+              <p>"내가해냄과 함께 당신의 하루를 완성해 보세요"</p>
+            </div>
+          </div>
+          <div class="slider-items">
+            <div class="img_container">
+              <img src="/img/calendar_img_blue.png" class="img_main">
+              <p>"오늘의 일정을 기록하고 실천해 보세요"</p>
+            </div>
+          </div>
+          <div class="slider-items">
+            <div class="img_container">
+              <img src="/img/memo_img_puple.png" class="img_main">
+              <p>"메모 기능으로 중요한 순간을 기록해 보세요"</p>
+            </div>
+          </div>
+          <div class="slider-items">
+            <div class="img_container">
+              <img src="/img/account_img_pink.png" class="img_main">
+              <p>"미래를 위한 가계부를 작성해 보세요"</p> 
+            </div>
+          </div>
         </div>
       </div>
       <div class="start-button-container">
-        <div class="main-start-button" onclick="location.href ='/login'">
+        <button class="main-start-button" onclick="location.href ='/login'" data-text="시작하기">
           시작하기
-        </div>
+        
       </div>
     </div>
+
+    <div class="footer">
+      <ul class="footer_txt">
+          <div>
+              <img class="logo_1" src="../img/logo_black_black.png">
+          </div>
+          <div class="logo_2">
+              <a>이용약관 ｜</a>
+              <a>개인정보처리방침｜</a>
+              <a>주소 : (03925) 서울특별시 마포구 월드컵북로 400 (상암동) ｜</a>
+              <a>전화번호 : (영등포)02-3667-7304 (금천)02-6673-1804 ｜</a>
+              <a>Email : sesac@sba.seoul.kr</a><br>
+              <a>구성원 : 염시온,김예은,송진세,이수림,장근영 ｜</a>
+              <a>Copyright (c) "SeSSAC 4기 4조 내가해냄" All Rights Reserved.</a>
+          </div>
+      </ul>
+    </div>
+
   </body>
 </html>

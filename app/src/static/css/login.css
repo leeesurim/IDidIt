@@ -61,10 +61,13 @@ img{
 
 .nav-logo {
   display: inline-block;
+  width: 100px;
+  height: 50px;
   text-align: center;
   line-height: 50px;
-  margin: 12px;
+  margin-right: 12px;
 }
+
 .nav-button-container {
   float: right;
   margin-top: 12px;
@@ -84,8 +87,7 @@ img{
 }
 
 .navbar_logo {
-  font-size: 24px;
-  font-family: "GangwonEduPowerExtraBoldA";
+ 
 }
 
 .navbar_menu {
@@ -120,6 +122,10 @@ img{
 .login_right{
   width: 50%;
   height: 100%;
+}
+.login_img{
+  position:relative;
+  bottom: -50px;
 }
 
 .footer{
@@ -263,11 +269,19 @@ img{
   width: 70px;
   height: 70px;
   top: 5px;
+  cursor: pointer;
 }
 .logo_2{
   position: relative;
   bottom: 50px;
   text-align: center;
+}
+.logo_3{
+  position: relative;
+  width: 70px;
+  height: 70px;
+  top: 5px;
+  cursor: pointer;
 }
 @media only screen and (max-width:1000px){
   img{
