@@ -8,23 +8,30 @@ const Memo = (Sequelize, DataTypes) => {
     {
       // create ~~ (id int not null auto_increment primary key)ss
       id: {
-        type: DataTypes.STRING(10),
+        type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
       },
       user_id: {
         type: DataTypes.STRING(10),
         allowNull: false,
       },
-
+      title: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
+      date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+      },
+      writedate: {
+        type: "TIMESTAMP",
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      },
       content: {
         // name varchar(10) not null
         type: DataTypes.TEXT,
-        allowNull: false,
-      },
-
-      date: {
-        type: DataTypes.DATEONLY,
         allowNull: false,
       },
     },
