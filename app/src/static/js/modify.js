@@ -1,15 +1,14 @@
 function edit() {
   let input = $(".input-text");
-  console.log(input);
   axios({
     method: "patch",
     url: "http://localhost:8000/userInfo/edit",
     data: {
       id: input[0].value,
       name: input[1].value,
-      nickname: input[2].value,
-      phone_number: input[3].value,
-      gender: input[4].value,
+      email: input[2].value,
+      nickname: input[3].value,
+      phone_number: input[4].value,
     },
   })
     .then((rep) => {
@@ -23,4 +22,8 @@ function edit() {
       $(input[3]).text(input[3].value);
       $(input[4]).text(input[4].value);
     });
+}
+
+function deleteUser() {
+  // 로직 작성 필요
 }
