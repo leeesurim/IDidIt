@@ -8,7 +8,7 @@ router.get("/signup", IDI.get_signup);
 router.get("/login", IDI.get_login);
 // 로그인 후 메인 페이지
 router.get("/dashboard", IDI.get_dashboard);
-// router.get("/get_data", IDI.get_dashboard_data);
+router.get("/get_data", IDI.get_dashboard_data);
 
 // 로그아웃 후 메인페이지
 router.get("/logout", IDI.get_logout);
