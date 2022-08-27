@@ -152,3 +152,30 @@ function deleteMemo(id) {
     }
   });
 }
+
+// 근영님 코드
+
+// function sendForm(){
+//   let title = $('#form-title').val();
+//   let date = $('#form-date').val();
+//   let content = $('textarea').val();
+//   let memos = {
+//   title : title,
+//   date : date,
+//   content : content
+//   };
+//   axios({
+//       method: 'post',
+//       url: 'http://localhost:8000/memo',
+//       data: memos
+//   })
+//   .then((result) => {
+//       console.log(result)
+//       return result.data
+//   })
+//   .then((data) => {
+//       console.log(data);
+//       alert('작성 완료');
+//       //document.location.href = 'http://localhost:8000/memo';
+//   })
+// }
