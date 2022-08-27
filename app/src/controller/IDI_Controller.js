@@ -139,9 +139,9 @@ exports.patch_userinfo = (req, res) => {
 };
 
 // 회원 탈퇴
-exports.delete_userinfo = (req, res) => {
+exports.delete_user = (req, res) => {
+  req.session.destroy();
   models.User.destroy({ where: { id: req.body.id } }).then((result) => {
-    console.log(result);
     res.send("탈퇴 성공");
   });
 };
