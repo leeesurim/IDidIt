@@ -8,30 +8,123 @@
     
     <link rel="stylesheet" href="/css/signup.css">
     <!-- <script src="../js/signup.js" defer></script> -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <title>signup</title>
     <script>
+    
         function signup() {
-          let form = document.querySelector('.signform');
-          let user = {
-            id: form.id.value,
-            password: form.password.value,
-            name: form.name.value,
-            email: form.email.value,
-            gender: $("input[name='gender']:checked").val(),
-            nickname: form.nickname.value,
-            phone_number: form.phone_number.value,
-          };
-          axios({
-            method: 'post',
-            url: 'http://localhost:8000/signup',
-            data: user,
-          });
-          alert('회원가입 성공');
-          document.location.href = 'http://localhost:8000/login';
+            let form = document.getElementById('form_signup');
+            
+            if ( !form.checkValidity() ) {
+                    form.reportValidity();
+                    console.log( "reportValidity" );
+
+                    return false;
+            }
+
+            let user = {
+                id: form.id.value,
+                password: form.password.value,
+                name: form.name.value,
+                email: form.email.value,
+                gender: $("input[name='gender']:checked").val(),
+                nickname: form.nickname.value,
+                phone_number: form.phone_number.value,
+            };
+            axios({
+                method: 'post',
+                url: 'http://localhost:8000/signup',
+                data: user,
+            })
+            .then((rep) => {return rep.data;})
+            .then((data) => {
+                console.log(data);
+                document.location.href = 'http://localhost:8000/login';
+            })
         }
-      </script>
+
+        function checkID(){
+            if ( $("#id").val().length == 0 ) {
+                    $(".checkID").css("color", "red");
+                    $(".checkID").text("아이디를 입력하세요.");
+                    $("#id").focus();
+                    return false;
+            }
+
+            if ( $("#id").val() == "id" ) {
+                $(".checkID").css("color", "red");
+                $(".checkID").text("사용할 수 없는 아이디입니다. 다시 입력하세요.");
+                $("#id").focus();
+            } else {
+                $(".checkID").css("color", "blue");
+                $(".checkID").text("사용할 수 있는 아이디입니다.");
+            }
+      }
+        function checkPassword(obj){
+            if(  obj.value != $("#password").val() ) {
+                $(".checkPassword").css("color", "red");
+                $(".checkPassword").text("비밀번호가 일치하지 않습니다. 다시 입력하세요.");
+                $( "#password2" ).focus();
+            } else {
+                $(".checkPassword").css("color", "blue");
+                $(".checkPassword").text("비밀번호가 일치합니다.");
+            }
+        }
+
+        function checkEmail(){
+            if ( $("#email").val().length == 0 ) {
+                    $(".checkEmail").css("color", "red");
+                    $(".checkEmail").text("이메일을 입력하세요.");
+                    $("#email").focus();
+                    return false;
+            } else {
+                var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+                if(!reg_email.test($("#email").val())){
+                    $(".checkEmail").css("color", "red");
+                    $(".checkEmail").text("이메일 형식이 올바르지 않습니다. 다시 입력해 주세요.");
+                    $("#email").focus();
+                    return false;
+                }
+            }
+
+            if ( $("#email").val() == "abc@gmail.com" ) {
+                $(".checkEmail").css("color", "red");
+                $(".checkEmail").text("사용할 수 없는 이메일입니다. 다시 입력해 주세요.");
+                $("#email").focus();
+           
+            } else {
+                $(".checkEmail").css("color", "blue");
+                $(".checkEmail").text("사용할 수 있는 이메일입니다.");
+            }
+        }
+
+        function checkNickname (){
+            if ( $("#nickname").val().length == 0 ) {
+                    $(".checkNickname").css("color", "red");
+                    $(".checkNickname").text("닉네임을 입력하세요.");
+                    $("#nickname").focus();
+                    return false;
+            }
+
+            if ( $("#nickname").val() == "nickname" ) {
+                $(".checkNickname").css("color", "red");
+                $(".checkNickname").text("사용할 수 없는 닉네임입니다. 다시 입력해 주세요.");
+                $("#nickname").focus();
+            } else {
+                $(".checkNickname").css("color", "blue");
+                $(".checkNickname").text("사용할 수 있는 닉네임입니다.");
+                $( "#btnNickname" ).attr("disabled", "true");
+                }
+        }
+
+        $(document).ready(function(){
+                $("button").hover(function(){
+                    $(".sign_img").attr("src","/img/signup_img_orange.png")
+                },
+                function(){$(".sign_img").attr("src","/img/signup_img_gray.png")})
+            });
+    </script>
 
 </head>
 <body>
@@ -39,7 +132,7 @@
     <div class="nav-container">
         <div class="nav-logo">
           <div class="navbar_logo">
-            <a href="/">내가해냄</a>
+            <img src="/img/logo_500_black.png" class="logo_1" onclick="location.href ='/'">
           </div>
         </div>
         <div class="nav-button-container">
@@ -50,57 +143,49 @@
             회원가입
           </div>
         </div>
-      </div>
-  
-    <!-- <nav class="navbar">
-        <div class="navbar_logo">
-            <a href="#">내가해냄</a>
-        </div>
-
-        <ul class="navbar_menu">
-            <li><a href="#">로그인</a></li>
-            <li><a href="#">회원가입</a></li>
-        </ul>
-    </nav> -->
+    </div>
     
     <main>
         <section class="left">
-            <img src="/img/login_img_grey.png" class="img1">                
+            <img src="/img/signup_img_gray.png" class="sign_img">                
         </section>
         <section class="right">
             
-            <form class="signform">
+            <form id="form_signup">
                 <legend class="titDep">회원가입</legend>
                     <label for="id" class="titLab">아이디</label>
                     <div class="inp_dup">
-                        <input type="text" class="inpL" name="id" id="id" placeholder="아이디를 입력하세요">
-                        <a href="#" role="button" class="btnDefault btnL btnLineP" id="btnDubCheck" disabled="true">중복확인</a>
+                        <input type="text" class="inpL" name="id" id="id" placeholder="아이디를 입력하세요" required>
+                        <a href="javascript:;" role="button" class="btnDefault btnL btnLineP" id="btnID" onclick="checkID();">중복확인</a>
                     </div>
+                    <span class="checkID"></span>
 
                     <label for="password" class="titLab">비밀번호</label>
-                    <input type="password" class="inpL" name="password" id="password" placeholder="비밀번호를 입력하세요">
+                    <input type="password" class="inpL" name="password" id="password" placeholder="비밀번호를 입력하세요" required>
 
                     <label for="password2" class="titLab">비밀번호 확인</label>
-                    <input type="password" class="inpL" name="password2" id="password2" placeholder="확인을 위해 한번 더 입력하세요">
-                    
+                    <input type="password" class="inpL" name="password2" id="password2" placeholder="확인을 위해 한번 더 입력하세요" onkeyup="checkPassword( this );" required>
+                    <span class="checkPassword"></span>
                     
                     <label for="email" class="titLab">이메일</label>
                     <div class="inp_dup">
-                        <input type="email" class="inpL" name="email" id="email" placeholder="이메일을 입력하세요">
-                        <a href="#" role="button" class="btnDefault btnL btnLineP" id="btnDubCheck" disabled="true">중복확인</a>
+                        <input type="email" class="inpL" name="email" id="email" placeholder="이메일을 입력하세요" required>
+                        <a href="javascript:;" role="button" class="btnDefault btnL btnLineP" id="btnEmail" onclick="checkEmail();" disabled="true">중복확인</a>
                     </div>
+                    <span class="checkEmail"></span>
 
                     <label for="name" class="titLab">이름</label>
-                    <input type="text" class="inpL" name="name" id="name" placeholder="이름을 입력하세요">
+                    <input type="text" class="inpL" name="name" id="name" placeholder="이름을 입력하세요" required>
 
                     <label for="phone_number" class="titLab">전화번호</label>
-                    <input type="text" class="inpL" name="phone_number" id="phone_number" placeholder="- 없이 번호만 입력하세요">
+                    <input type="text" class="inpL" name="phone_number" id="phone_number" placeholder="- 없이 번호만 입력하세요" required>
 
                     <label for="nickname" class="titLab">닉네임</label>
                     <div class="inp_dup">
-                        <input type="text" class="inpL" name="nickname" id="nickname" placeholder="닉네임을 입력하세요">
-                        <a href="#" role="button" class="btnDefault btnL btnLineP" id="btnDubCheck" disabled="true">중복확인</a>
+                        <input type="text" class="inpL" name="nickname" id="nickname" placeholder="닉네임을 입력하세요" required>
+                        <a href="javascript:;" role="button" class="btnDefault btnL btnLineP" id="btnNickname" onclick="checkNickname();" disabled="true">중복확인</a>
                     </div>
+                    <span class="checkNickname"></span>
 
                     <span class="titLab">성별</span>
                     <div class="radFrm">
@@ -110,15 +195,30 @@
                         <input type="radio" id="female" name="gender">
                         <label for="female">여자</label>
                     </div>
-                    </ul>
+                   
 
-                    <div class="btnMargin">
-                        <button type="button" class="button btnLightBlue btnPush" onclick="signup()">회원가입</button>
+                    <!-- <div class="btnMargin">
+                        <button type="button" class="button btnLightBlue btnPush" onclick="signup();">회원가입</button>
+                    </div> -->
+                    <div class="signup_btn">
+                        <button type="button" onclick="signup()" data-text="회원가입"></button>
                     </div>
             </form>     
         </section>
-
     </main>
+    <div class="footer">     
+        <div class="footer_right">
+            <ul class="footer_txt">
+                <li>이용약관 ｜</li>
+                <li>개인정보처리방침｜</li>
+                <li>주소 : (03925) 서울특별시 마포구 월드컵북로 400 (상암동) ｜</li>
+                <li>전화번호 : (영등포)02-3667-7304 (금천)02-6673-1804 ｜</li>
+                <li>Email : sesac@sba.seoul.kr</li><br>
+                <li>구성원 : 염시온,김예은,송진세,이수림,장근영 ｜</li>
+                <li>Copyright (c) "SeSSAC 4기 4조 내가해냄" All Rights Reserved.</li>
+            </ul>
+        </div>
+      </div>
     
 </body>
 </html>
