@@ -24,6 +24,15 @@ function edit() {
     });
 }
 
-function deleteUser() {
-  // 로직 작성 필요
+function deleteUser(id) {
+  axios({
+    method: 'delete',
+    url: 'http://localhost:8000/userInfo/delete',
+    data: { id: id },
+  })
+  .then((result) => {return result.data})
+  .then((data) => {
+    alert(data);
+    document.location.href = "/";
+  });
 }
