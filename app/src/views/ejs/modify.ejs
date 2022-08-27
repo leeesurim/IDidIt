@@ -50,31 +50,31 @@
                 <div class="input-box">
                     <div class="input-title">아이디</div>
                     <div class="input-text-container">
-                        <input class="input-text" value="아이디" disabled></input>    
+                        <input class="input-text" value="<%=data.id%>" disabled></input>    
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="input-title">이름</div>
                     <div class="input-text-container">
-                        <input class="input-text" value="염시온" disabled></input>
+                        <input class="input-text" value="<%=data.name%>" disabled></input>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="input-title">닉네임</div>
                     <div class="input-text-container">
-                        <input class="input-text" value="염시온 별명"></input>
+                        <input class="input-text" value="<%=data.nickname%>"></input>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="input-title">휴대전화</div>
                     <div class="input-text-container">
-                        <input class="input-text" value="010-8936-3419"></input>
+                        <input class="input-text" value="<%=data.phone_number%>"></input>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="input-title">성별</div>
                     <div class="input-text-container">
-                        <input class="input-text" value="남자" disabled></input>
+                        <input class="input-text" value="<%=data.gender%>" disabled></input>
                     </div>
                 </div>
             </div>
@@ -83,5 +83,32 @@
             </div>
         </div>
     </div>
+    <script>
+        function edit() {
+            let input = $('.input-text')
+            axios({
+                method: 'patch',
+                url: 'http://localhost:8000/userInfo/edit',
+                data: {
+                    id: input[0].value,
+                    name: input[1].value,
+                    nickname: input[2].value,
+                    phone_number: input[3].value,
+                    gender: input[4].value,
+                }
+            })
+            .then((rep) => {
+            return rep.data;
+            })
+            .then((data) => {
+                alert(data);
+                $(input[0]).text(input[0].value);
+                $(input[1]).text(input[1].value);
+                $(input[2]).text(input[2].value);
+                $(input[3]).text(input[3].value);
+                $(input[4]).text(input[4].value);
+            });
+        }
+    </script>
 </body>
 </html>
