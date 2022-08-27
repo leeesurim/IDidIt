@@ -68,7 +68,7 @@ p {
 .slider-container {
   width: 50%;
   margin: 0 auto;
-  margin-top: 140px;
+  /* padding-top: 120px; */
 }
 .slick-prev:before,
 .slick-next:before {
