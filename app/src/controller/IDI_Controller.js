@@ -24,7 +24,7 @@ exports.get_signup = (req, res) => {
   res.render("signup.ejs");
 };
 
-exports.get_IDIinfo = (req, res) => {
+exports.get_dashboard = (req, res) => {
   // 대시보드 페이지 렌더링
   // 로그인 시 회원의 정보 대시보드 페이지에 넣어줘야 함
   res.render("dashboard");
@@ -90,6 +90,9 @@ exports.post_login = (req, res) => {
     } else res.send(false);
   });
 };
+
+// 로그아웃
+exports.get_logout = (req, res) => {};
 
 //res.render('login.ejs')
 
