@@ -21,9 +21,9 @@
     ></script>
 
     <!-- css파일 -->
-    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/pw_forgot.css" />
     <!-- js파일 -->
-    <!-- <script src="/js/login.js"></script> -->
+    <script src="/js/pw_forgot.js"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
     </style>
@@ -51,19 +51,6 @@
         </div>
       </div>
     </div>
-
-    
-      <!-- <nav class="navbar">
-        <div class="navbar_logo">
-          <a href="/">내가해냄</a>
-        </div>
-
-        <ul class="navbar_menu">
-          <li><a href="/login">로그인</a></li>
-          <li><a href="/signup">회원가입</a></li>
-        </ul>
-      </nav> -->
-
       <div class="login_main">
           <div class="login_left">
             <img class="login_img" src="../img/login_img_grey.png">
@@ -71,123 +58,39 @@
           <div class="login_right">
             <div class="login_text">
               <!-- 로그인페이지 글귀메인-->
-              <p>'내가해냄'에 오신걸 환영합니다!</p>
+              <p>비밀번호 재설정</p>
             </div>
             <form id="form_login" action="/" method="post">
               <!-- 로그인페이지 ID,PW 입력창-->
               <p>아이디</p>
-              <input type="text" name="id" placeholder="아이디를 입력해주세요.">  
-              <p>비밀번호</p>
-              <input type="password" name="password" placeholder="비밀번호를 입력해주세요.">
+              <input type="text" id="id" placeholder="아이디를 입력해주세요.">  
+              <p>이름</p>
+              <input type="text" id="name" placeholder="이름을 입력해주세요">
+              <p>이메일</p>
+              <input type="text" id="email" placeholder="이메일을 입력해주세요">
               <p id="form_info"></p>
               <div class="login_btn">
-                  <button type="button" onclick="sendPost()" data-text="로그인"></button>
+                  <button type="button" onclick="getPw()" data-text="비빌번호 재설정"></button>
               </div>
-              <ul class="find_txt">
-                  <a href="#">비밀번호 찾기 </a>｜
-                  <a href="#">아이디 찾기</a>｜
-                  <a href="#">회원가입</a>
-              </ul>
             </form>
           </div>
       </div>
     </div>
-    
-          <div class="footer">
-            <ul class="footer_txt">
-                <div>
-                    <img class="logo_3" src="../img/logo_black_black.png">
-                </div>
-                <div class="logo_2">
-                    <a>이용약관 ｜</a>
-                    <a>개인정보처리방침｜</a>
-                    <a>주소 : (03925) 서울특별시 마포구 월드컵북로 400 (상암동) ｜</a>
-                    <a>전화번호 : (영등포)02-3667-7304 (금천)02-6673-1804 ｜</a>
-                    <a>Email : sesac@sba.seoul.kr</a><br>
-                    <a>구성원 : 염시온,김예은,송진세,이수림,장근영 ｜</a>
-                    <a>Copyright (c) "SeSSAC 4기 4조 내가해냄" All Rights Reserved.</a>
-                </div>
-            </ul>
-          </div> 
-  
-
-    <script>
-      function sendPost() {
-        var form = document.getElementById('form_login');
-        // document.location.href = "http://localhost:8000/dashboard";
-
-        // 근영님 작성 axios 코드
-        axios({
-          method: 'post',
-          url: '/login',
-          data: {
-            id: form.id.value,
-            password: form.password.value,
-          },
-        })
-          .then((rep) => {
-            return rep.data;
-          })
-          .then((data) => {
-            if (data) {
-              alert('로그인 성공');
-              form.submit();
-            } else {
-              alert('로그인 실패');
-              form.reset();
-            }
-          });
-      }
-
-        // 근영님 작성 axios 코드
-        // axios({
-        //   method: "post",
-        //   url: "http://localhost:8000/login",
-        //   data: {
-        //     id: form.id.value,
-        //     password: form.password.value,
-        //   },
-        // })
-        //   .then((rep) => {
-        //     return rep.data;
-        //   })
-        //   .then((data) => {
-        //     if (data) {
-        //       alert("로그인 성공");
-        //       form.submit();
-        //       //document.location.href = 'http://localhost:8080/userInfo';
-        //     } else {
-        //       alert("로그인 실패");
-        //       form.reset();
-        //     }
-        //   });
-
-        // 진세님 작성 코드
-        // axios({
-        //   method: "post",
-        //   url: "http://localhost:8000/login",
-        //   data: {
-        //     name: form.id.value,
-        //     pw: form.password.value,
-        //   },
-        // });
-        // .then((a) => {
-        //   return a.data;
-        // })
-        // .then((d) => {
-        //   if (d) {
-        //     $("#form_info").text("로그인 성공").css("color", "blue");
-        //   } else {
-        //     $("#form_info").text("로그인 실패").css("color", "red");
-        //   }
-        // });
-
-      $(document).ready(function(){
-                $("button").hover(function(){
-                    $(".login_img").attr("src","/img/login_img_pink.png")
-                },
-                function(){$(".login_img").attr("src","/img/login_img_grey.png")})
-            });
-    </script>
+    <div class="footer">
+      <ul class="footer_txt">
+          <div>
+              <img class="logo_3" src="../img/logo_black_black.png">
+          </div>
+          <div class="logo_2">
+              <a>이용약관 ｜</a>
+              <a>개인정보처리방침｜</a>
+              <a>주소 : (03925) 서울특별시 마포구 월드컵북로 400 (상암동) ｜</a>
+              <a>전화번호 : (영등포)02-3667-7304 (금천)02-6673-1804 ｜</a>
+              <a>Email : sesac@sba.seoul.kr</a><br>
+              <a>구성원 : 염시온,김예은,송진세,이수림,장근영 ｜</a>
+              <a>Copyright (c) "SeSSAC 4기 4조 내가해냄" All Rights Reserved.</a>
+          </div>
+      </ul>
+    </div>      
   </body>
 </html>
