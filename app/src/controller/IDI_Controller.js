@@ -119,9 +119,31 @@ exports.post_id_forgot = (req, res) => {
   res.send("성공");
 };
 
-// 비밀번호 찾기 사이트
+// 비밀번호 변경 사이트
 exports.get_pw_forgot = (req, res) => {
   res.render("pw_forgot");
+};
+
+// 비밀번호 변경 전 유저 확인 로직
+exports.post_pw_forgot_certify = (req, res) => {
+  // 유저 확인 로직 작성 필요
+  let id = req.body.id;
+  let email = req.body.email;
+  let name = req.body.name;
+
+  console.log(id, email, name);
+  // res.send로 비밀번호를 보내주세요.
+  res.send("성공");
+};
+
+// 비밀번호 찾기 로직
+exports.post_pw_forgot_modify = (req, res) => {
+  // 비밀번호 찾기 로직 작성 필요
+  let id = req.body.id;
+  let email = req.body.email;
+
+  // res.send로 비밀번호를 보내주세요.
+  res.send("성공");
 };
 
 // 로그아웃
