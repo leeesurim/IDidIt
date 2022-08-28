@@ -109,6 +109,16 @@ exports.get_id_forgot = (req, res) => {
   res.render("id_forgot");
 };
 
+// 아이디 찾기 로직
+exports.post_id_forgot = (req, res) => {
+  // 아이디 찾기 로직 작성 필요
+  let id = req.body.id;
+  let email = req.body.email;
+
+  // res.send로 아이디를 보내주세요.
+  res.send("성공");
+};
+
 // 비밀번호 찾기 사이트
 exports.get_pw_forgot = (req, res) => {
   res.render("pw_forgot");

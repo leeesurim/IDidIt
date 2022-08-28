@@ -17,6 +17,7 @@ router.get("/logout", IDI.get_logout);
 router.get("/userinfo", IDI.get_userinfo);
 // 아이디 찾기 페이지
 router.get("/forgot/id", IDI.get_id_forgot);
+router.post("/forgot/get_id", IDI.post_id_forgot);
 // 비밀번호 찾기 페이지
 router.get("/forgot/pw", IDI.get_pw_forgot);
 
