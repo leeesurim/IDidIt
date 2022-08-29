@@ -166,21 +166,23 @@ p {
   transform: translatey(100%) rotatex(90deg);
 }
 
-.footer {
+.footer{
   width: 100%;
-  height: 60px;
+  height: 15%;
   position: relative;
-}
-.footer_txt {
+  background-color: #f0f4f5;
   padding-left: 10px;
   padding-right: 10px;
-  width: 100%;
-  /* height:100%; */
+
+}
+.footer_txt{
+  width:100%;
+  height:100%;
   background-color: #f0f4f5;
-  box-sizing: border-box;
+  padding: 10px;
 }
 .footer > ul > div > a {
-  color: grey;
+  color:grey;
   font-size: 13px;
   margin: 2px;
 }
@@ -203,3 +205,14 @@ p {
   top: 5px;
   cursor: pointer;
 }
+
+@media only screen and (max-width:500px){
+  img{
+    display:none;
+  }
+
+  .footer{
+    display:none;
+  }
+}
+
