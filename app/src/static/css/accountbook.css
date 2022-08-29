@@ -5,11 +5,7 @@ body {
 
 .grid-wrapper {
   display: grid;
-  grid-template-areas:
-    "nav container"
-    "footer footer";
   grid-template-columns: 250px 1fr;
-  grid-template-rows: 1fr;
   height: 100vh;
 }
 .cover {
@@ -31,7 +27,6 @@ body {
   height: 100%;
   font-size: 20px;
   background-color: #ff725e;
-  grid-area: nav;
 }
 
 .nav-container ul {
@@ -62,7 +57,6 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 30px;
-  grid-area: container;
 }
 
 /* dashboard left */
@@ -361,24 +355,23 @@ body {
   padding-left: 10%;
 }
 
-.footer {
-  /* display: grid; */
+.footer{
+  display: grid;
   width: 100%;
-  /* height: 10%; */
+  height: 10%;
   position: relative;
   background-color: #f0f4f5;
   padding-left: 10px;
   padding-right: 10px;
-  grid-area: footer;
 }
-.footer_txt {
-  width: 100%;
-  height: 100%;
+.footer_txt{
+  width:100%;
+  height:100%;
   background-color: #f0f4f5;
   padding: 10px;
 }
 .footer > ul > div > a {
-  color: grey;
+  color:grey;
   font-size: 13px;
   margin: 2px;
 }

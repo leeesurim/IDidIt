@@ -383,40 +383,38 @@ body {
   font-size: 12px;
 }
 
-.footer{
+.footer {
   width: 100%;
-  height: 15%;
   position: relative;
   background-color: #f0f4f5;
   padding-left: 10px;
   padding-right: 10px;
-
 }
-.footer_txt{
-  width:100%;
-  height:100%;
+.footer_txt {
+  width: 100%;
+  height: 100%;
   background-color: #f0f4f5;
   padding: 10px;
 }
 .footer > ul > div > a {
-  color:grey;
+  color: grey;
   font-size: 13px;
   margin: 2px;
 }
 
-.logo_1{
+.logo_1 {
   position: relative;
   width: 70px;
   height: 70px;
   top: 5px;
   cursor: pointer;
 }
-.logo_2{
+.logo_2 {
   position: relative;
   bottom: 50px;
   text-align: center;
 }
-.logo_3{
+.logo_3 {
   position: relative;
   width: 70px;
   height: 70px;
