@@ -1,6 +1,7 @@
 /* css 초기화 */
 body {
   background-color: #f8fafb;
+  height: 10vh;
 }
 
 .grid-wrapper {
@@ -380,4 +381,45 @@ body {
   right: 13px;
   bottom: 13px;
   font-size: 12px;
+}
+
+.footer{
+  width: 100%;
+  height: 15%;
+  position: relative;
+  background-color: #f0f4f5;
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+.footer_txt{
+  width:100%;
+  height:100%;
+  background-color: #f0f4f5;
+  padding: 10px;
+}
+.footer > ul > div > a {
+  color:grey;
+  font-size: 13px;
+  margin: 2px;
+}
+
+.logo_1{
+  position: relative;
+  width: 70px;
+  height: 70px;
+  top: 5px;
+  cursor: pointer;
+}
+.logo_2{
+  position: relative;
+  bottom: 50px;
+  text-align: center;
+}
+.logo_3{
+  position: relative;
+  width: 70px;
+  height: 70px;
+  top: 5px;
+  cursor: pointer;
 }
