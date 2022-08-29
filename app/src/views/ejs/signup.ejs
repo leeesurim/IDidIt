@@ -10,6 +10,7 @@
     <!-- <script src="../js/signup.js" defer></script> -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>signup</title>
     <script>
     
@@ -40,7 +41,17 @@
             .then((rep) => {return rep.data;})
             .then((data) => {
                 console.log(data);
-                document.location.href = 'http://localhost:8000/login';
+                swal({
+                    title: "회원가입 성공!",
+                    icon: "success",
+                    button: "확인",
+                })
+                .then((success) => {
+                    // form.action = "http://localhost:8000/login";
+                    // form.submit();
+                    document.location.href = 'http://localhost:8000/login';
+                })
+                
             })
         }
 
@@ -50,15 +61,33 @@
                     $(".checkID").text("아이디를 입력하세요.");
                     $("#id").focus();
                     return false;
+            } else {
+                $(".checkID").text("");
             }
 
             if ( $("#id").val() == "id" ) {
-                $(".checkID").css("color", "red");
-                $(".checkID").text("사용할 수 없는 아이디입니다. 다시 입력해 주세요.");
-                $("#id").focus();
+                swal({
+                    title: "실패!",
+                    text: "사용할 수 없는 아이디입니다. 다시 입력해 주세요.",
+                    icon: "error",
+                    button: "확인",
+                    // buttons: true,
+                    dangerMode: true,
+                })
+                .then((fail) => {$("#id").focus();})
+                
+                // $(".checkID").css("color", "red");
+                // $(".checkID").text("사용할 수 없는 아이디입니다. 다시 입력해 주세요.");
+                
             } else {
-                $(".checkID").css("color", "blue");
-                $(".checkID").text("사용할 수 있는 아이디입니다.");
+                swal({
+                    title: "성공!",
+                    text: "사용할 수 있는 아이디입니다.",
+                    icon: "success",
+                    button: "확인",
+                });
+                // $(".checkID").css("color", "blue");
+                // $(".checkID").text("사용할 수 있는 아이디입니다.");
             }
       }
         function checkPassword(obj){
@@ -89,13 +118,34 @@
             }
 
             if ( $("#email").val() == "abc@gmail.com" ) {
-                $(".checkEmail").css("color", "red");
-                $(".checkEmail").text("사용할 수 없는 이메일입니다. 다시 입력해 주세요.");
-                $("#email").focus();
+                swal({
+                    title: "실패!",
+                    text: "사용할 수 없는 이메일입니다. 다시 입력해 주세요.",
+                    icon: "error",
+                    button: "확인",
+                    // buttons: true,
+                    dangerMode: true,
+                })
+                .then((fail) => {
+                    $(".checkEmail").text("");
+                    $("#email").focus();
+                })
+                // $(".checkEmail").css("color", "red");
+                // $(".checkEmail").text("사용할 수 없는 이메일입니다. 다시 입력해 주세요.");
+                
            
             } else {
-                $(".checkEmail").css("color", "blue");
-                $(".checkEmail").text("사용할 수 있는 이메일입니다.");
+                swal({
+                    title: "성공!",
+                    text: "사용할 수 있는 이메일입니다.",
+                    icon: "success",
+                    button: "확인",
+                })
+                .then((success) => {
+                    $(".checkEmail").text("");
+                })
+                // $(".checkEmail").css("color", "blue");
+                // $(".checkEmail").text("사용할 수 있는 이메일입니다.");
             }
         }
 
@@ -105,16 +155,31 @@
                     $(".checkNickname").text("닉네임을 입력하세요.");
                     $("#nickname").focus();
                     return false;
+            } else {
+                $(".checkNickname").text("");
             }
 
             if ( $("#nickname").val() == "nickname" ) {
-                $(".checkNickname").css("color", "red");
-                $(".checkNickname").text("사용할 수 없는 닉네임입니다. 다시 입력해 주세요.");
-                $("#nickname").focus();
+                swal({
+                    title: "실패!",
+                    text: "사용할 수 없는 닉네임입니다. 다시 입력해 주세요.",
+                    icon: "error",
+                    button: "확인",
+                    dangerMode: true,
+                })
+                .then((fail) => {$("#nickname").focus();})
+                // $(".checkNickname").css("color", "red");
+                // $(".checkNickname").text("사용할 수 없는 닉네임입니다. 다시 입력해 주세요.");
+                
             } else {
-                $(".checkNickname").css("color", "blue");
-                $(".checkNickname").text("사용할 수 있는 닉네임입니다.");
-                $( "#btnNickname" ).attr("disabled", "true");
+                swal({
+                    title: "성공!",
+                    text: "사용할 수 있는 닉네임입니다.",
+                    icon: "success",
+                    button: "확인",
+                });
+                // $(".checkNickname").css("color", "blue");
+                // $(".checkNickname").text("사용할 수 있는 닉네임입니다.");
                 }
         }
 
@@ -178,7 +243,7 @@
                     <input type="text" class="inpL" name="name" id="name" placeholder="이름을 입력하세요" required>
 
                     <label for="phone_number" class="titLab">전화번호</label>
-                    <input type="text" class="inpL" name="phone_number" id="phone_number" placeholder="- 없이 번호만 입력하세요" required>
+                    <input type="text" class="inpL" name="phone_number" id="phone_number" placeholder="- 없이 번호만 입력하세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
 
                     <label for="nickname" class="titLab">닉네임</label>
                     <div class="inp_dup">
@@ -206,8 +271,9 @@
             </form>     
         </section>
     </main>
-    <div class="footer">     
-        <div class="footer_right">
+    <%- include('footer.ejs')%>
+    <!-- <div class="footer">
+        <img class="logo_3" src="../img/logo_500_gray.png">     
             <ul class="footer_txt">
                 <li>이용약관 ｜</li>
                 <li>개인정보처리방침｜</li>
@@ -217,8 +283,7 @@
                 <li>구성원 : 염시온,김예은,송진세,이수림,장근영 ｜</li>
                 <li>Copyright (c) "SeSSAC 4기 4조 내가해냄" All Rights Reserved.</li>
             </ul>
-        </div>
-      </div>
+    </div> -->
     
 </body>
 </html>
