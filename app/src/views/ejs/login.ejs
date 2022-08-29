@@ -87,9 +87,9 @@
                   <button id="login_btn1" type="button" onclick="sendPost()" data-text="로그인"></button>
               </div>
               <ul class="find_txt">
-                  <a href="/forgot/pw">비밀번호 찾기 </a>｜
+                  <a href="/signup">회원가입</a>｜
                   <a href="/forgot/id">아이디 찾기</a>｜
-                  <a href="/signup">회원가입</a>
+                  <a href="/forgot/pw">비밀번호 찾기 </a>
               </ul>
             </form>
           </div>
@@ -120,14 +120,26 @@
           })
           .then((data) => {
             if (data) {
-              swal('로그인 성공','환영합니다!','success')
+              swal({
+                  title: "성공!",
+                  text: "환영합니다!",
+                  icon: "success",
+                  button: "확인",
+              })
               .then((success)=> {
               form.action = "http://localhost:8000/dashboard";
               form.submit();
             });
               
             } else {
-              swal('로그인 실패','아이디 및 비밀번호를 확인하세요.','warning');
+              swal({
+                  title: "실패!",
+                  text: "아이디 및 비밀번호를 확인하세요!",
+                  icon: "error",
+                  button: "확인",
+                  dangerMode : true,
+
+              })
               form.reset();
             }
           });
