@@ -111,13 +111,13 @@ exports.get_id_forgot = (req, res) => {
 
 // 아이디 찾기 로직
 exports.post_id_forgot = (req, res) => {
-  // 아이디 찾기 로직 작성 필요
-  let id = req.body.id;
+  let name = req.body.name;
   let email = req.body.email;
-
-  // res.send로 아이디를 보내주세요.
-  res.send("성공");
+  models.User.findOne({where: {name: name, email: email}}).then((result) =>{
+    res.send(result);
+  })
 };
+    
 
 // 비밀번호 변경 사이트
 exports.get_pw_forgot = (req, res) => {
@@ -133,17 +133,24 @@ exports.post_pw_forgot_certify = (req, res) => {
 
   console.log(id, email, name);
   // res.send로 비밀번호를 보내주세요.
-  res.send("성공");
+  models.User.findOne({where: {id: id, name: name, email: email}}).then((result) =>{
+    req.session.user = id
+    res.send(result);
+    })
+  };
+
+// 비밀번호 재설정 페이지
+exports.get_pw_forgot_modify = (req, res) => {
+  res.render("pw_forgot_modify");
 };
 
-// 비밀번호 찾기 로직
-exports.post_pw_forgot_modify = (req, res) => {
-  // 비밀번호 찾기 로직 작성 필요
-  let id = req.body.id;
-  let email = req.body.email;
-
-  // res.send로 비밀번호를 보내주세요.
-  res.send("성공");
+// 비밀번호 재설정 로직
+exports.post_pw_forgot_modify = async(req, res) => {
+  const password = await bcrypt.hash(req.body.password, salt)
+  models.User.update({password : password}, { where: { id: req.session.user}}).then((result) => {
+    req.session.destroy();
+    res.send("수정성공");
+  });
 };
 
 // 로그아웃
@@ -373,9 +380,9 @@ exports.post_calendar_calendar_data = (req, res) => {
   res.send(data);
 };
 
-exports.post_memo = (req, res) => {
-  // res.render('memo.ejs');
-};
+// exports.post_memo = (req, res) => {
+//   // res.render('memo.ejs');
+// };
 
 exports.post_writememo = (req, res) => {
   // 제목, 날짜, html화 된 내용,

@@ -13,6 +13,8 @@ const sequelize = new Sequelize(
 );
 const sessionStore = new SequelizeStore({
   db: sequelize,
+  checkExpirationInterval: 15 * 60 * 1000,
+  expiration: 24 * 60 * 60 * 60 * 1000
 });
 
 app.use(

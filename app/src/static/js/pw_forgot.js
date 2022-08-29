@@ -1,7 +1,7 @@
 const getPw = () => {
   // 아이디와 이메일 변수로 저장
   let id = $("#id").val();
-  let name = $("#email").val();
+  let name = $("#name").val();
   let email = $("#email").val();
 
   // 아이디 찾기 axios 함수 작성
@@ -19,7 +19,8 @@ const getPw = () => {
       if (res.data.id === undefined) {
         alert(`입력한 정보가 일치하지 않습니다.`);
       } else {
-        alert(`회원님의 아이디는 ${res.data.id} 입니다.`);
+        alert(`비밀번호 재설정 페이지로 이동합니다.`);
+        document.location.href = '/forgot/pw/modify';
       }
     }
   });
