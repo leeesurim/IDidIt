@@ -40,7 +40,7 @@ const User = (Sequelize, DataTypes) => {
       },
       
       phone_number: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.STRING(15),
         allowNull: false
       }
     },
