@@ -1,10 +1,10 @@
 // const bcrypt = require('bcrypt');
 
-const User = (Sequelize, DataTypes) => {
+module.exports = (Sequelize, DataTypes) => {
   // Sequelize는 model/index,js에서의 sequelize
   // DataTypes는 model/index.js에서의 Sequelize
 
-  const model = Sequelize.define(
+  const User = Sequelize.define(
     'user',
 
     {
@@ -48,12 +48,16 @@ const User = (Sequelize, DataTypes) => {
       timestamps: false, // true로 지정하게 되면 등록된 시간과 수정된 시간을 갖는 컬럼이 만들어진다.
       tableName: 'user',
       freezeTableName: true, // table 이름을 바꾸지마..ㅜㅜ
-
     });
-  return model;
+
+  //   User.associate = models => {
+  //   User.hasMany(models.Memo, {foreignKey: 'user_id', sourceKey: 'id', onDelete: "cascade",
+  //   onUpdate: "cascade"})
+  // }
+
+  return User;
 }
 
-module.exports = User;
 
 
 
