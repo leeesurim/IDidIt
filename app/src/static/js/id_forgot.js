@@ -15,12 +15,32 @@ const getId = () => {
     if (res.status == 200) {
       //
       if (res.data.id === undefined) {
-        alert(`이름과 이메일을 다시 한번 확인해주세요.`);
+        swal({
+          title: "실패!",
+          text: "이름과 이메일을 다시 한번 확인해주세요.",
+          icon: "error",
+          button: "확인",
+          dangerMode: true,
+        })
+
       } else {
-        alert(`회원님의 아이디는 ${res.data.id} 입니다.`);
+        swal({
+          title: "성공!",
+          text: `회원님의 아이디는 ${res.data.id} 입니다.`,
+          icon: "success",
+          button: "확인",
+          })
+          .then((success)=>{
         document.location.href = "/login";
+          })
       }
     }
   });
 };
 
+$(document).ready(function(){
+  $("button").hover(function(){
+      $(".login_img").attr("src","/img/id_forgot_pink.png")
+  },
+  function(){$(".login_img").attr("src","/img/id_forgot_grey.png")})
+});

@@ -17,11 +17,31 @@ const getPw = () => {
   }).then((res) => {
     if (res.status == 200) {
       if (res.data.id === undefined) {
-        alert(`입력한 정보가 일치하지 않습니다.`);
+        swal({
+          title: "실패!",
+          text: "입력하신 정보가 일치하지 않습니다.",
+          icon: "error",
+          button: "확인",
+          dangerMode: true,
+        })
       } else {
-        alert(`비밀번호 재설정 페이지로 이동합니다.`);
-        document.location.href = '/forgot/pw/modify';
+        swal({
+        title: "성공!",
+        text: "비밀번호 재설정 페이지로 이동합니다.",
+        icon: "success",
+        button: "확인",
+        })
+        .then((success)=>{
+          document.location.href = '/forgot/pw/modify';
+        })
       }
     }
   });
 };
+
+$(document).ready(function(){
+  $("button").hover(function(){
+      $(".login_img").attr("src","/img/pw_forgot_pink.png")
+  },
+  function(){$(".login_img").attr("src","/img/pw_forgot_grey.png")})
+});
