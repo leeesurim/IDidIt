@@ -15,8 +15,14 @@ router.get("/logout", IDI.get_logout);
 
 // 마이페이지
 router.get("/userinfo", IDI.get_userinfo);
-
-
+// 아이디 찾기 페이지
+router.get("/forgot/id", IDI.get_id_forgot);
+router.post("/forgot/get_id", IDI.post_id_forgot);
+// 비밀번호 찾기 페이지
+router.get("/forgot/pw", IDI.get_pw_forgot);
+router.post("/forgot/pw/certify_post", IDI.post_pw_forgot_certify);
+router.get("/forgot/pw/modify", IDI.get_pw_forgot);
+router.post("/forgot/pw/modify_post", IDI.post_pw_forgot_modify);
 
 // 일정
 
@@ -29,6 +35,5 @@ router.post("/login", IDI.post_login);
 router.patch("/userInfo/edit", IDI.patch_userinfo);
 // 회원 탈퇴
 router.delete("/userInfo/delete", IDI.delete_user);
-
 
 module.exports = router;
