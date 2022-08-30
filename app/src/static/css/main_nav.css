@@ -35,9 +35,11 @@ body {
 }
 
 .nav-container ul {
+  padding: 0;
 }
 
 .nav-container ul li {
+  list-style: none;
 }
 
 .nav-container ul li a {
@@ -188,7 +190,7 @@ body {
 #weekdays {
   width: 100%;
   display: flex;
-  color: #ff725e;
+  color: #247ba0;
   font-size: 10px;
   text-align: center;
 }
@@ -220,8 +222,7 @@ body {
 }
 
 .day + #currentDay {
-  background-color: #ff725e;
-  color: #fff;
+  background-color: #e8f4fa;
 }
 .event {
   font-size: 10px;
