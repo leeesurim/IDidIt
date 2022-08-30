@@ -7,6 +7,7 @@ router.get("/", IDI.get_home);
 router.get("/signup", IDI.get_signup);
 router.get("/login", IDI.get_login);
 // 로그인 후 메인 페이지
+router.post("/dashboard", IDI.get_dashboard);
 router.get("/dashboard", IDI.get_dashboard);
 router.get("/get_data", IDI.get_dashboard_data);
 
@@ -23,8 +24,9 @@ router.get("/forgot/pw", IDI.get_pw_forgot);
 router.post("/forgot/pw/certify_post", IDI.post_pw_forgot_certify);
 router.get("/forgot/pw/modify", IDI.get_pw_forgot_modify);
 router.post("/forgot/pw/modify_post", IDI.post_pw_forgot_modify);
-
 // 일정
+// 404 페이지
+router.get("/404", IDI.get_404);
 
 // post 처리 라우팅
 router.post("/", IDI.get_home);
