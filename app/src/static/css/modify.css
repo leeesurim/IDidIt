@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "Pretendard-Medium";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff")
+    format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GangwonEduPowerExtraBoldA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* css 초기화 */
 @font-face {
   font-family: "Pretendard-Medium";
@@ -161,4 +177,73 @@ body {
 }
 .button-container {
   text-align: center;
+}
+
+.footer {
+  /* display: grid; */
+  width: 100%;
+  /* height: 10%; */
+  position: relative;
+  background-color: #f0f4f5;
+  padding-left: 10px;
+  padding-right: 10px;
+  grid-area: footer;
+}
+.footer_txt {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f4f5;
+  padding: 10px;
+}
+.footer > ul > div > a {
+  color: grey;
+  font-size: 13px;
+  margin: 2px;
+}
+
+.footer {
+  width: 100%;
+  position: relative;
+  background-color: #f8fafb;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.footer_txt {
+  width: 100%;
+  height: 100%;
+  background-color: #f8fafb;
+  padding: 10px;
+}
+.footer > ul > div > a {
+  color: grey;
+  font-size: 13px;
+  margin: 2px;
+}
+
+.logo_1 {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  top: 5px;
+  cursor: pointer;
+}
+.logo_2 {
+  position: relative;
+  bottom: 50px;
+  text-align: center;
+}
+.logo_3 {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.memo-no {
+  line-height: 50px;
+  color: #ff725e;
+  font-size: 25px;
+  text-align: center;
+  padding-top: 50px;
 }
