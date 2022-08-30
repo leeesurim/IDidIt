@@ -1,6 +1,23 @@
 /* css 초기화 */
+@font-face {
+  font-family: "Pretendard-Medium";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff")
+    format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GangwonEduPowerExtraBoldA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   background-color: #ffffff;
+  font-family: "Pretendard-Medium";
 }
 .grid-wrapper {
   display: grid;
@@ -11,7 +28,7 @@ body {
 /* 네비 */
 /* 네비게이션 */
 .logo-container {
-  margin: 20px 0 70px 20px;
+  margin: 13px 0 13px 13px;
 }
 
 .nav-container {
