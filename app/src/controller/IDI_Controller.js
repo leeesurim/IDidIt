@@ -73,7 +73,7 @@ exports.post_signup = async (req, res) => {
     phone_number: req.body.phone_number,
   };
   models.User.create(object).then((result) => {
-    console.log(result);
+    res.send(result);
   });
 };
 // 아이디 중복체크
