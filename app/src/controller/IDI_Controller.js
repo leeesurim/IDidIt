@@ -73,11 +73,50 @@ exports.post_signup = async (req, res) => {
     nickname: req.body.nickname,
     phone_number: req.body.phone_number,
   };
-  models.User.create(object).then((result) => {
-    console.log(result);
-    //res.render({result: result});
-  });
-};
+  models.User.create(object)
+  .then((result) => {
+    console.log(result)
+  })  
+}
+// 아이디 중복체크
+exports.post_checkID = (req, res) => {
+  models.User.findOne({
+    where: {id: req.body.id}
+  }).then((result) => {
+    console.log(result)
+    if (result == null) {
+      return res.send(true)
+    } else{
+      return res.send(false); 
+    }
+  })
+}
+// 이메일 중복체크
+exports.post_checkEmail = (req, res) => {
+  models.User.findOne({
+    where: {email: req.body.email}
+  }).then((result) => {
+    console.log(result)
+    if (result == null) {
+      return res.send(true)
+    } else{
+      return res.send(false); 
+    }
+  })
+}
+// 닉네임 중복체크
+exports.post_checkNickname = (req, res) => {
+  models.User.findOne({
+    where: {id: req.body.nickname}
+  }).then((result) => {
+    console.log(result)
+    if (result == null) {
+      return res.send(true)
+    } else{
+      return res.send(false); 
+    }
+  })
+}
 
 // 로그인 페이지
 exports.get_login = (req, res) => {
