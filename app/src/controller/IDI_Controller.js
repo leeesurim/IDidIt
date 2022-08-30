@@ -46,10 +46,6 @@ exports.get_dashboard_data = (req, res) => {
   // 대시보드 페이지 렌더링시 axios를 통해 보내지는 데이터들
   // 임시 데이터 json 형태로 작성
   let data = {
-    accountbook: [
-      [2478, 5267, 734, 784, 433],
-      [4000, 2000, 3000, 1500, 5000],
-    ],
     memo: [
       { date: "2022-03-06", title: "제목 1", content: "내용 1" },
       { date: "2022-03-07", title: "제목 2", content: "내용 2" },
