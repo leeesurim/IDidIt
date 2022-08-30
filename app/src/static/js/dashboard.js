@@ -36,7 +36,7 @@ $(document).ready(function () {
       });
 
       // 메모에 넣기
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 6; i++) {
         // 미리 만들어 놓은 메모 템플릿에 불러온 데이터를 3개만 넣을 수 있도록 했습니다.
         $(".memo-container").append(
           `<div class="memo-content-container">

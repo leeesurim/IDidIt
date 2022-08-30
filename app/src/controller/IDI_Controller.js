@@ -54,6 +54,9 @@ exports.get_dashboard_data = (req, res) => {
       { date: "2022-03-06", title: "제목 1", content: "내용 1" },
       { date: "2022-03-07", title: "제목 2", content: "내용 2" },
       { date: "2022-03-08", title: "제목 3", content: "내용 3" },
+      { date: "2022-03-08", title: "제목 3", content: "내용 3" },
+      { date: "2022-03-08", title: "제목 3", content: "내용 3" },
+      { date: "2022-03-08", title: "제목 3", content: "내용 3" },
     ],
   };
   // 로그인 시 회원의 정보 대시보드 페이지에 넣어줘야 함ss
@@ -73,50 +76,49 @@ exports.post_signup = async (req, res) => {
     nickname: req.body.nickname,
     phone_number: req.body.phone_number,
   };
-  models.User.create(object)
-  .then((result) => {
-    console.log(result)
-  })  
-}
+  models.User.create(object).then((result) => {
+    console.log(result);
+  });
+};
 // 아이디 중복체크
 exports.post_checkID = (req, res) => {
   models.User.findOne({
-    where: {id: req.body.id}
+    where: { id: req.body.id },
   }).then((result) => {
-    console.log(result)
+    console.log(result);
     if (result == null) {
-      return res.send(true)
-    } else{
-      return res.send(false); 
+      return res.send(true);
+    } else {
+      return res.send(false);
     }
-  })
-}
+  });
+};
 // 이메일 중복체크
 exports.post_checkEmail = (req, res) => {
   models.User.findOne({
-    where: {email: req.body.email}
+    where: { email: req.body.email },
   }).then((result) => {
-    console.log(result)
+    console.log(result);
     if (result == null) {
-      return res.send(true)
-    } else{
-      return res.send(false); 
+      return res.send(true);
+    } else {
+      return res.send(false);
     }
-  })
-}
+  });
+};
 // 닉네임 중복체크
 exports.post_checkNickname = (req, res) => {
   models.User.findOne({
-    where: {id: req.body.nickname}
+    where: { id: req.body.nickname },
   }).then((result) => {
-    console.log(result)
+    console.log(result);
     if (result == null) {
-      return res.send(true)
-    } else{
-      return res.send(false); 
+      return res.send(true);
+    } else {
+      return res.send(false);
     }
-  })
-}
+  });
+};
 
 // 로그인 페이지
 exports.get_login = (req, res) => {
@@ -152,11 +154,12 @@ exports.get_id_forgot = (req, res) => {
 exports.post_id_forgot = (req, res) => {
   let name = req.body.name;
   let email = req.body.email;
-  models.User.findOne({where: {name: name, email: email}}).then((result) =>{
-    res.send(result);
-  })
+  models.User.findOne({ where: { name: name, email: email } }).then(
+    (result) => {
+      res.send(result);
+    }
+  );
 };
-    
 
 // 비밀번호 변경 사이트
 exports.get_pw_forgot = (req, res) => {
@@ -172,10 +175,12 @@ exports.post_pw_forgot_certify = (req, res) => {
 
   console.log(id, email, name);
   // res.send로 비밀번호를 보내주세요.
-  models.User.findOne({where: {id: id, name: name, email: email}}).then((result) =>{
-    req.session.user = id
-    res.send(result);
-  })
+  models.User.findOne({ where: { id: id, name: name, email: email } }).then(
+    (result) => {
+      req.session.user = id;
+      res.send(result);
+    }
+  );
 };
 
 // 비밀번호 재설정 페이지
@@ -184,9 +189,12 @@ exports.get_pw_forgot_modify = (req, res) => {
 };
 
 // 비밀번호 재설정 로직
-exports.post_pw_forgot_modify = async(req, res) => {
-  const password = await bcrypt.hash(req.body.password, salt)
-  models.User.update({password : password}, { where: { id: req.session.user}}).then((result) => {
+exports.post_pw_forgot_modify = async (req, res) => {
+  const password = await bcrypt.hash(req.body.password, salt);
+  models.User.update(
+    { password: password },
+    { where: { id: req.session.user } }
+  ).then((result) => {
     req.session.destroy();
     res.send("수정 성공");
   });
@@ -228,7 +236,7 @@ exports.patch_userinfo = (req, res) => {
 // 회원 탈퇴
 exports.delete_user = (req, res) => {
   req.session.destroy();
-  models.User.destroy({where: { id: req.body.id } }).then((result) => {
+  models.User.destroy({ where: { id: req.body.id } }).then((result) => {
     res.send("탈퇴 성공");
   });
 };
@@ -240,26 +248,26 @@ exports.get_memo = (req, res) => {
 };
 // 메모 페이지 메모들 불러오기
 exports.get_memoes = (req, res) => {
-  models.Memo.findAll({where : {user_id : req.session.user}}).then((result) => {
-    res.send(result);
-  })
+  models.Memo.findAll({ where: { user_id: req.session.user } }).then(
+    (result) => {
+      res.send(result);
+    }
+  );
 };
 // 메모 저장
 exports.post_writememo = (req, res) => {
   // 제목, 날짜, html화 된 내용,
   let object = {
-    user_id : req.session.user,
-    title : req.body.title,
-    date : req.body.date,
-    content : req.body.content
-  }
+    user_id: req.session.user,
+    title: req.body.title,
+    date: req.body.date,
+    content: req.body.content,
+  };
   models.Memo.create(object).then((result) => {
     // console.log(result);
-    res.send('메모 작성');
+    res.send("메모 작성");
   });
 };
-
-
 
 // 메모 수정
 exports.post_modifymemo = (req, res) => {
@@ -270,22 +278,18 @@ exports.post_modifymemo = (req, res) => {
     date: req.body.email,
     content: req.body.content,
   };
-  models.Memo.update(info, { where: { id: req.body.id} }).then((result) => {
+  models.Memo.update(info, { where: { id: req.body.id } }).then((result) => {
     res.send("수정 성공");
   });
-
 };
 
 // 메모 삭제 기능
 exports.post_deletememo = (req, res) => {
   let id = req.body.id;
-  models.Memo.destroy({where: {id: id}}).then((result) => {
-    res.send('삭제 성공');
-  })
+  models.Memo.destroy({ where: { id: id } }).then((result) => {
+    res.send("삭제 성공");
+  });
 };
-
-
-
 
 // 달력
 exports.get_calendar = (req, res) => {
@@ -316,7 +320,6 @@ exports.post_accountbook = (req, res) => {
   //     res.render('main',{data:memo});
   res.render("accountbook.ejs", { memo: memo, account: account });
 };
-
 
 // 달력 페이지에서 모달을 띄울 때 메모들과 가계부를 불러오는 함수 입니다.
 exports.post_calendar_modal_data = (req, res) => {
