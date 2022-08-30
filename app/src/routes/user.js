@@ -36,4 +36,11 @@ router.patch("/userInfo/edit", IDI.patch_userinfo);
 // 회원 탈퇴
 router.delete("/userInfo/delete", IDI.delete_user);
 
+//아이디 중복 검사
+router.post("/signup/checkID", IDI.post_checkID);
+//이메일 중복 검사
+router.post("/signup/checkEmail", IDI.post_checkEmail);
+//닉네임 중복 검사
+router.post("/signup/checkNickname", IDI.post_checkNickname);
+
 module.exports = router;
