@@ -171,6 +171,7 @@ function openCalendarModal(day) {
 
   // 모달 display 출력
   $(".modal-container").css("display", "block");
+  $("body").css("overflow", "hidden");
   // 모달 css 변경
   $(".modal-content-title").text(dateString);
 
@@ -188,7 +189,6 @@ function getCountforCalendar(start, end) {
     method: "post",
     url: `http://localhost:8000/calendar/calendardata`,
     data: {
-      user_id: "userid",
       start_day: start,
       end_day: end,
     },
@@ -200,7 +200,6 @@ function getCountforCalendar(start, end) {
     })
     .then((data) => {
       let memoArr = data.memo;
-      let accountbookArr = data.accountbook;
       for (let i = 0; i < memoArr.length; i++) {
         $(`.day.${memoArr[i].date}`).append(
           `
@@ -210,30 +209,7 @@ function getCountforCalendar(start, end) {
           `
         );
       }
-      for (let i = 0; i < accountbookArr.length; i++) {
-        $(`.day.${accountbookArr[i].date}`).append(
-          `
-          <div class="calendar-alert" id="accountbook-count">가계부
-            <div class="calendar-alert-text">!</div>
-          </div>
-          `
-        );
-      }
     });
-  // <div class="calendar-alert" id="accountbook-count">가계부
-  //   <div class="calendar-alert-text">!</div>
-  // </div>
-
-  // $(".day").append(
-  //   `
-  //   <div class="calendar-alert" id="memo">메모
-  //     <div class="calendar-alert-text">!</div>
-  //   </div>
-  //   <div class="calendar-alert" id="accountbook-count">가계부
-  //     <div class="calendar-alert-text">!</div>
-  //   </div>
-  //   `
-  // );
 }
 
 function getDataforModal(day) {
@@ -242,7 +218,6 @@ function getDataforModal(day) {
     method: "post",
     url: `http://localhost:8000/calendar/modaldata`,
     data: {
-      user_id: "userid",
       day: day,
     },
   })
@@ -256,7 +231,6 @@ function getDataforModal(day) {
       // 1. 해당 유저의 해당 날짜에 대한 메모들을 불러오기
       // 메모.가계부 배열
       let memoes = data.memo;
-      let accountbook = data.accountbook;
 
       // 메모의 수만큼 반복문을 돌려서 메모 html을 삽입합니다.
       for (let i = 0; i < memoes.length; i++) {
@@ -279,6 +253,7 @@ function closeModal() {
     $(".modal-container").css("display", "none");
     $(".modal-content-container").removeClass("modal-close");
     $(".memo").remove();
+    $("body").css("overflow", "auto");
   }, 500);
   // 초기화
 }

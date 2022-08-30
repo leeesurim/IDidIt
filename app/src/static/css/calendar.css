@@ -189,7 +189,7 @@ body {
   /* border-radius: 50%; */
   position: absolute;
   right: 10px;
-  bottom: 33px;
+  bottom: 20px;
   color: white;
 }
 
@@ -304,6 +304,7 @@ body {
   opacity: 0.3;
   position: fixed;
   cursor: pointer;
+  z-index: 3;
 }
 .modal-content-container {
   position: fixed;
@@ -328,7 +329,7 @@ body {
 .modal-content-content {
   margin-top: 30px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 30px;
   overflow: auto;
 }
@@ -374,7 +375,7 @@ body {
 }
 .memo {
   display: inline-block;
-  width: 250px;
+  width: 245px;
   height: 250px;
   background-color: #ffffff;
   box-shadow: 2px 2px #cdcaca;

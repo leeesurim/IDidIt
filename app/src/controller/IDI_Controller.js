@@ -318,12 +318,12 @@ exports.post_accountbook = (req, res) => {
   res.render("accountbook.ejs", { memo: memo, account: account });
 };
 
-// 달력 페이지에서 모달을 띄울 때 메모들과 가계부를 불러오는 함수 입니다.
+// 달력 페이지에서 모달을 띄울 때 메모들을 불러오는 함수 입니다.
 exports.post_calendar_modal_data = (req, res) => {
   // where절로 사용할 날짜
   let day = req.body.day;
-  let user_id = req.body.user_id;
-  console.log(user_id);
+  // 세션에서 불러와야 할 듯
+  // let user_id = req.body.user_id;
   // 임시 데이터
   let data = {
     memo: [
@@ -349,10 +349,9 @@ exports.post_calendar_modal_data = (req, res) => {
         id: 4,
         title: "임시 데이터 제목4",
         content: "임시 데이터 내용4",
-        date: "2022-08-19",
+        date: "2022-08-30",
       },
     ],
-    accountbook: [{}],
   };
   // 데이터 불러 오는 모델 로직 작성
 
@@ -395,15 +394,8 @@ exports.post_calendar_calendar_data = (req, res) => {
         id: 4,
         title: "임시 데이터 제목4",
         content: "임시 데이터 내용4",
-        date: "2022-8-27",
+        date: "2022-8-30",
       },
-    ],
-    accountbook: [
-      { id: 1, date: "2022-8-19" },
-      { id: 2, date: "2022-8-20" },
-      { id: 3, date: "2022-8-19" },
-      { id: 4, date: "2022-8-22" },
-      { id: 5, date: "2022-8-27" },
     ],
   };
   // 데이터 불러 오는 모델 로직 작성
