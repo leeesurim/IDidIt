@@ -1,4 +1,11 @@
 const getId = () => {
+  
+  var form = document.getElementById('form_login');
+            if ( !form.checkValidity() ) {
+              form.reportValidity();
+              console.log( "reportValidity" );
+              return false;
+            }
   // 아이디와 이메일 변수로 저장
   let name = $("#name").val();
   let email = $("#email").val();
