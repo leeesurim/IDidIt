@@ -147,6 +147,11 @@ exports.post_login = (req, res) => {
   });
 };
 
+// 404 에러 사이트
+exports.get_404 = (req, res) => {
+  res.render("404");
+};
+
 // 아이디 찾기 사이트
 exports.get_id_forgot = (req, res) => {
   res.render("id_forgot");
