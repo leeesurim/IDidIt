@@ -37,7 +37,7 @@
   <body>
     <div class="grid-wrapper">
       <%- include('main_nav.ejs')%>
-      <div>
+      <div class="memo-calendar">
         <section class="left">
           <!-- 메모 담는 컨테이너 -->
           <div class="memo_list"></div>
@@ -48,8 +48,8 @@
           </div>
         </section>
       </div>
-      <%- include('footer.ejs')%>
     </div>
+    <%- include('footer.ejs')%>
 
     <div class="modal-container">
       <div class="modal-background" onclick="closeModal();"></div>
