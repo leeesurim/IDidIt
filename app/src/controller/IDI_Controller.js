@@ -78,6 +78,7 @@ exports.post_signup = async (req, res) => {
 };
 // 아이디 중복체크
 exports.post_checkID = (req, res) => {
+  console.log();
   models.User.findOne({
     where: { id: req.body.id },
   }).then((result) => {

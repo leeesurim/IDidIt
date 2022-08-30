@@ -21,7 +21,7 @@ $(document).ready(function () {
       }
     })
     .then((data) => {
-      let memoData = data.memo;
+      let memoData = data;
       // 메모 html 추가 로직
       for (let i = 0; i < memoData.length; i++) {
         console.log(memoData[i].date);
