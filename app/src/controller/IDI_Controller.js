@@ -111,7 +111,7 @@ exports.post_checkEmail = (req, res) => {
 // 닉네임 중복체크
 exports.post_checkNickname = (req, res) => {
   models.User.findOne({
-    where: { id: req.body.nickname },
+    where: { nickname: req.body.nickname },
   }).then((result) => {
     console.log(result);
     if (result == null) {
