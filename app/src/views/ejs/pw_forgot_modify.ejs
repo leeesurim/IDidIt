@@ -53,7 +53,7 @@
     </div>
       <div class="login_main">
           <div class="login_left">
-            <img class="login_img" src="../../img/login_img_grey.png">
+            <img class="login_img" src="../../img/pw_modify_grey.png">
           </div>
           <div class="login_right">
             <div class="login_text">
@@ -63,10 +63,10 @@
             <form id="form_login" action="/" method="post">
               <!-- 로그인페이지 ID,PW 입력창-->
               <p>새 비밀번호</p>
-              <input type="text" id="password" placeholder="새 비밀번호 입력" />
+              <input type="text" id="password" placeholder="새 비밀번호 입력" required >
               <p>새 비밀번호 확인</p>
-              <input type ="text" id="password_check" placeholder="새 비밀번호 다시 입력해주세요." />
-              <p id="form_info"></p>
+              <input type ="text" id="password_check" placeholder="새 비밀번호 다시 입력해주세요." onkeyup="checkPassword( this );" required >
+              <span class="checkPassword"></span>
               <div class="login_btn">
                   <button type="button" onclick="resetting()" data-text="비빌번호 재설정"></button>
               </div>

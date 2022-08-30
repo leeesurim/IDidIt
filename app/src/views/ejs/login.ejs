@@ -78,10 +78,10 @@
             <form id="form_login">
               <!-- 로그인페이지 ID,PW 입력창-->
               <p>아이디</p>
-              <input type="text" id="id" name="id" placeholder="아이디를 입력해주세요.">
+              <input type="text" id="id" name="id" placeholder="아이디를 입력해주세요." >
               <p class="checkID"></p>  
               <p>비밀번호</p>
-              <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요.">
+              <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요." >
               <p class="checkPW"></p>
               <div class="login_btn">
                   <button id="login_btn1" type="button" onclick="sendPost()" data-text="로그인"></button>
@@ -99,13 +99,12 @@
     <script>
       function sendPost() {
         var form = document.getElementById('form_login');
-        // document.location.href = "http://localhost:8000/dashboard";
-        if ( !form.checkValidity() ) {
-                    form.reportValidity();
-                    console.log( "reportValidity" );
-
-                    return false;
+            if ( !form.checkValidity() ) {
+              form.reportValidity();
+              console.log( "reportValidity" );
+              return false;
             }
+
         // 근영님 작성 axios 코드
         axios({
           method: 'post',
@@ -140,7 +139,6 @@
                   dangerMode : true,
 
               })
-              form.reset();
             }
           });
 
