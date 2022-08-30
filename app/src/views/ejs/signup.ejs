@@ -50,15 +50,14 @@
             return rep.data;
           })
           .then((data) => {
-            console.log(data);
             swal({
               title: "회원가입 성공!",
               icon: "success",
               button: "확인",
             }).then((success) => {
-              // form.action = "http://localhost:8000/login";
-              // form.submit();
-              document.location.href = "http://localhost:8000/login";
+                form.action = "http://localhost:8000/login";
+                form.submit();
+                // document.location.href = "http://localhost:8000/login";
             });
           });
       }
@@ -66,28 +65,14 @@
       function checkID() {
         let form = document.getElementById("form_signup");
         let user_id = form.id.value;
-        if (form.id.value.length === 0) {
-          // id를 하나도 입력하지 않을 경우
-          if ($("#id").val().length == 0) {
-            $(".checkID").css("color", "red");
-            $(".checkID").text("아이디를 입력하세요.");
-            $("#id").focus();
-            return false;
-          } else {
-            $(".checkID").text("");
-            swal({
-              title: "실패!",
-              text: "사용할 수 없는 아이디입니다. 다시 입력해 주세요.",
-              icon: "error",
-              button: "확인",
-              // buttons: true,
-              dangerMode: true,
-            }).then((fail) => {
-              $("#id").focus();
-            });
-          }
+        if (user_id.length === 0) {
+          // 아이디를 입력하지 않을 경우
+          $(".checkID").css("color", "red");
+          $(".checkID").text("아이디를 입력하세요.");
+          $("#id").focus();
+          return false;
         } else {
-          // id를 입력했을 경우
+          // 아이디를 입력했을 경우
           axios({
             method: "post",
             url: "http://localhost:8000/signup/checkID",
@@ -99,7 +84,8 @@
             .then((data) => {
               if (data === true) {
                 // 아이디가 없을 경우 true를 반환
-                // 성공 alert가 떠야함
+                // 성공 alert가 떠야 함
+                $(".checkID").text("");
                 swal({
                   title: "성공!",
                   text: "사용할 수 있는 아이디입니다.",
@@ -108,28 +94,19 @@
                 });
               } else {
                 // 아이디가 있을 경우 false를 반환
-                // 실패 alert가 떠야함
+                // 실패 alert가 떠야 함
+                $(".checkID").text("");
+                swal({
+                  title: "실패!",
+                  text: "사용할 수 없는 아이디입니다. 다시 입력해 주세요.",
+                  icon: "error",
+                  button: "확인",
+                  dangerMode: true,
+                  }).then((fail) => {
+                    $("#id").focus();
+                });
               }
             });
-
-          if ($("#id").val().length == 0) {
-            $(".checkID").css("color", "red");
-            $(".checkID").text("아이디를 입력하세요.");
-            $("#id").focus();
-            return false;
-          } else {
-            $(".checkID").text("");
-            swal({
-              title: "실패!",
-              text: "사용할 수 없는 아이디입니다. 다시 입력해 주세요.",
-              icon: "error",
-              button: "확인",
-              // buttons: true,
-              dangerMode: true,
-            }).then((fail) => {
-              $("#id").focus();
-            });
-          }
         }
       }
 
@@ -148,23 +125,15 @@
 
       function checkEmail() {
         let form = document.getElementById("form_signup");
-        let user_email = {
-          email: form.email.value,
-        };
-        axios({
-          method: "post",
-          url: "http://localhost:8000/signup/checkEmail",
-          data: {},
-        }).then((rep) => {
-          return rep.data;
-        });
-
-        if ($("#email").val().length == 0) {
+        let user_email = form.email.value;
+        if (user_email.length === 0){
+          // 이메일을 입력하지 않을 경우
           $(".checkEmail").css("color", "red");
           $(".checkEmail").text("이메일을 입력하세요.");
           $("#email").focus();
           return false;
         } else {
+          // 이메일을 입력했을 경우
           var reg_email =
             /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
           if (!reg_email.test($("#email").val())) {
@@ -175,79 +144,90 @@
             $("#email").focus();
             return false;
           }
-        }
-
-        if ($("#email").val() == user_email) {
-          swal({
-            title: "성공!",
-            text: "사용할 수 있는 이메일입니다.",
-            icon: "success",
-            button: "확인",
-          }).then((success) => {
-            $(".checkEmail").text("");
+          else {
+            axios({
+            method: "post",
+            url: "http://localhost:8000/signup/checkEmail",
+            data: {email: user_email},
+          })
+            .then((rep) => {
+                return rep.data;
+            })
+            .then((data) => {
+              if (data === true){
+                // 이메일 없을 경우 true를 반환
+                // 성공 alert가 떠야 함
+                $(".checkEmail").text("");
+                swal({
+                  title: "성공!",
+                  text: "사용할 수 있는 이메일입니다.",
+                  icon: "success",
+                  button: "확인",
+                });
+            } else {
+              // 이메일 있을 경우 false를 반환
+              // 실패 alert가 떠야 함
+              $(".checkEmail").text("");
+              swal({
+                title: "실패!",
+                text: "사용할 수 없는 이메일입니다. 다시 입력해 주세요.",
+                icon: "error",
+                button: "확인",
+                dangerMode: true,
+              }).then((fail) => {
+                $("#email").focus();
+              });
+            }
           });
-          // $(".checkEmail").css("color", "blue");
-          // $(".checkEmail").text("사용할 수 있는 이메일입니다.");
-        } else {
-          swal({
-            title: "실패!",
-            text: "사용할 수 없는 이메일입니다. 다시 입력해 주세요.",
-            icon: "error",
-            button: "확인",
-            // buttons: true,
-            dangerMode: true,
-          }).then((fail) => {
-            $(".checkEmail").text("");
-            $("#email").focus();
-          });
-          // $(".checkEmail").css("color", "red");
-          // $(".checkEmail").text("사용할 수 없는 이메일입니다. 다시 입력해 주세요.");
+          }
         }
       }
 
       function checkNickname() {
         let form = document.getElementById("form_signup");
-        let user_nickname = {
-          nickname: form.nickname.value,
-        };
-        axios({
-          method: "post",
-          url: "http://localhost:8000/signup/checkNickname",
-          data: user_nickname,
-        }).then((rep) => {
-          return rep.data;
-        });
-
-        if ($("#nickname").val().length == 0) {
+        let user_nickname = form.nickname.value;
+        if (user_nickname.length === 0){
+          // 닉네임을 입력하지 않을 경우
           $(".checkNickname").css("color", "red");
           $(".checkNickname").text("닉네임을 입력하세요.");
           $("#nickname").focus();
           return false;
         } else {
-          $(".checkNickname").text("");
-        }
-
-        if ($("#nickname").val() == user_nickname) {
-          swal({
-            title: "성공!",
-            text: "사용할 수 있는 닉네임입니다.",
-            icon: "success",
-            button: "확인",
-          });
-          // $(".checkNickname").css("color", "blue");
-          // $(".checkNickname").text("사용할 수 있는 닉네임입니다.");
-        } else {
-          swal({
-            title: "실패!",
-            text: "사용할 수 없는 닉네임입니다. 다시 입력해 주세요.",
-            icon: "error",
-            button: "확인",
-            dangerMode: true,
-          }).then((fail) => {
-            $("#nickname").focus();
-          });
-          // $(".checkNickname").css("color", "red");
-          // $(".checkNickname").text("사용할 수 없는 닉네임입니다. 다시 입력해 주세요.");
+          // 닉네임을 입력했을 경우
+          axios({
+            method: "post",
+            url: "http://localhost:8000/signup/checkNickname",
+            data: {nickname: user_nickname},
+          })
+            .then((rep) => {
+              return rep.data;
+            })
+            .then((data) => {
+              if (data === true){
+                // 닉네임이 없을 경우 true를 반환
+                // 성공 alert가 떠야 함
+                $(".checkNickname").text("");
+                swal({
+                  title: "성공!",
+                  text: "사용할 수 있는 닉네임입니다.",
+                  icon: "success",
+                  button: "확인",
+                });              
+              } else {
+                // 닉네임이 있을 경우 false를 반환
+                // 실패 alert가 떠야 함
+                $(".checkNickname").text("");
+                swal({
+                  title: "실패!",
+                  text: "사용할 수 없는 닉네임입니다. 다시 입력해 주세요.",
+                  icon: "error",
+                  button: "확인",
+                  dangerMode: true,
+                }).then((fail) => {
+                    $("#nickname").focus();
+                });
+              }
+            });
         }
       }
 
