@@ -40,7 +40,9 @@ body {
 .logo-container {
   margin: 13px 0 13px 13px;
 }
-
+.logo-container > img {
+  cursor: pointer;
+}
 .nav-container {
   display: inline-block;
   /* width: 25%; */
