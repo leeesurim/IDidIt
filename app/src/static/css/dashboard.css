@@ -132,6 +132,9 @@ body {
 
 .memo-content-content {
   background: none !important;
+  padding-top: 8px;
+  height: 41px;
+  overflow: hidden;
 }
 /* dashboard right */
 .dashboard-subgrid-container-right {

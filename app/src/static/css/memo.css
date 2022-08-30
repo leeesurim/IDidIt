@@ -184,6 +184,9 @@ main {
   height: 150px;
   overflow: auto;
 }
+.memo-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
 .colorLogo {
   color: #ff725e;
 }
