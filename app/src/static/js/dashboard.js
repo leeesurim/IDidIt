@@ -10,29 +10,6 @@ $(document).ready(function () {
       // 데이터 변수로 선언
       let memo_data = data.memo;
 
-      // 차트에 넣기
-      // new Chart(document.getElementById("canvas"), {
-      //   type: "line",
-      //   data: {
-      //     labels: ["1월", "2월", "3월", "4월", "5월"],
-      //     datasets: [
-      //       {
-      //         label: "수입 (원)",
-      //         borderColor: "#ED6D86",
-      //         backgroundColor: "#ED6D86",
-      //         // data에 차트 수입 데이터 배열의 형태로 넣었습니다.
-      //         data: accountbook_data[0],
-      //       },
-      //       {
-      //         label: "지출 (원)",
-      //         borderColor: "#57A0E5",
-      //         backgroundColor: "#57A0E5",
-      //         // data에 차트 지출 데이터 배열의 형태로 넣었습니다.
-      //         data: accountbook_data[1],
-      //       },
-      //     ],
-      //   },
-      // });
       if (memo_data.length > 0) {
         // 메모에 넣기
         for (let i = 0; i < 6; i++) {
