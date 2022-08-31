@@ -22,7 +22,7 @@ app.use(
     secret: process.env.SECRET_KEY,
     store: sessionStore,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: true
   })
 );
 
@@ -35,7 +35,7 @@ db.User = require("./User")(sequelize, Sequelize);
 db.Memo = require("./Memo")(sequelize, Sequelize);
 
 db.User.hasMany(db.Memo, {
-  foreignKey:'user_id',
+  foreignKey: "user_id",
   sourceKey: "id",
   onDelete: "cascade",
   onUpdate: "cascade"
@@ -43,7 +43,7 @@ db.User.hasMany(db.Memo, {
 
 db.Memo.belongsTo(db.User, {
   foreignKey: "user_id",
-  sourceKey: 'id',
+  sourceKey: "id",
   onDelete: "cascade",
   onUpdate: "cascade"
 });
