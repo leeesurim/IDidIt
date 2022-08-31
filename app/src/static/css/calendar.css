@@ -384,7 +384,13 @@ body {
   position: relative;
 }
 .memo-content {
+  height: 16vh;
+  overflow: auto;
 }
+.memo-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
 .memo-button {
   background: #ff725e;
   color: white;
