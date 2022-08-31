@@ -23,15 +23,20 @@ const routerMemo = require("./src/routes/memo");
 const routerCalendar = require("./src/routes/calendar");
 const { sequelize } = require("./src/model");
 
-sequelize.sync({ force: false })
-.then(() => {
-    console.log('데이터베이스 연결 성공');
-})
-.catch((err) => {
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log("데이터베이스 연결 성공");
+  })
+  .catch((err) => {
     console.error(err);
-});
+  });
 
 app.use("/", routerUser);
 app.use("/memo", routerMemo);
 app.use("/calendar", routerCalendar);
 
+// 404 예외처리
+app.use(function (req, res, next) {
+  res.status(404).render("404");
+});
