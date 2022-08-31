@@ -286,7 +286,7 @@ exports.get_calendar = (req, res) => {
 exports.post_calendar_modal_data = (req, res) => {
   // where절로 사용할 날짜
   let day = req.body.day;
-  models.Memo.findAll({ where: { date: day } }).then((memo) => {
+  models.Memo.findAll({ where: { user_id: req.session.user, date: day } }).then((memo) => {
     res.send({ memo });
   });
 };
@@ -297,7 +297,7 @@ exports.post_calendar_calendar_data = (req, res) => {
   let start_day = req.body.start_day;
   let end_day = req.body.end_day;
 
-  models.Memo.findAll({ where: {date: {[Op.between]: [start_day, end_day]} }}).then((memo) => {
+  models.Memo.findAll({ where: {user_id:user_id, date: {[Op.between]: [start_day, end_day]} }}).then((memo) => {
     console.log(memo);
     res.send({ memo });
   });
