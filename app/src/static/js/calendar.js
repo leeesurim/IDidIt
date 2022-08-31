@@ -1,6 +1,6 @@
 let nav = 0;
 
-$(document).ready(function() {
+$(document).ready(function () {
   // 클릭 시 링크 이동
   $(".dashboard-accountbook").click(() => {
     location.href = "/accountbook";
@@ -32,13 +32,11 @@ $(document).ready(function() {
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday"
+    "Saturday",
   ];
 
   function load() {
     const dt = new Date();
-    console.log("dt : ", dt);
-    console.log("nav : ", nav);
 
     // 매달마다 마지막 날은 다르므로 day까지 지정해줌
     dt.setMonth(dt.getMonth() + nav, 1);
@@ -52,14 +50,14 @@ $(document).ready(function() {
       weekday: "long",
       year: "numeric",
       month: "numeric",
-      day: "numeric"
+      day: "numeric",
     });
     const paddingDays = weekdays.indexOf(dateString.split(", ")[0]);
 
     document.getElementById(
       "monthDisplay"
     ).innerText = `${dt.toLocaleDateString("en-us", {
-      month: "long"
+      month: "long",
     })} ${year}`;
 
     calendar.innerHTML = "";
@@ -78,9 +76,9 @@ $(document).ready(function() {
       daySquare.classList.add(alert_dateString);
       if (i > paddingDays) {
         daySquare.innerText = i - paddingDays;
-        const eventForDay = events.find(e => e.date === dayString);
+        const eventForDay = events.find((e) => e.date === dayString);
 
-        if (i - paddingDays === day && nav === 0) {
+        if (i - paddingDays === new Date().getDate() && nav === 0) {
           daySquare.id = "currentDay";
         }
 
@@ -122,7 +120,7 @@ $(document).ready(function() {
 
       events.push({
         date: clicked,
-        title: eventTitleInput.value
+        title: eventTitleInput.value,
       });
 
       localStorage.setItem("events", JSON.stringify(events));
@@ -133,18 +131,18 @@ $(document).ready(function() {
   }
 
   function deleteEvent() {
-    events = events.filter(e => e.date !== clicked);
+    events = events.filter((e) => e.date !== clicked);
     localStorage.setItem("events", JSON.stringify(events));
     closeModal();
   }
 
   function initButtons(dt) {
-    document.getElementById("nextButton").addEventListener("click", dt => {
+    document.getElementById("nextButton").addEventListener("click", (dt) => {
       nav++;
       load();
     });
 
-    document.getElementById("backButton").addEventListener("click", dt => {
+    document.getElementById("backButton").addEventListener("click", (dt) => {
       nav--;
       load();
     });
@@ -196,23 +194,19 @@ function getCountforCalendar(start, end) {
     url: `http://localhost:8000/calendar/calendardata`,
     data: {
       start_day: start,
-      end_day: end
-    }
+      end_day: end,
+    },
   })
-    .then(res => {
+    .then((res) => {
       if (res.status == 200) {
         return res.data;
       }
     })
-    .then(data => {
+    .then((data) => {
       let memoArr = data.memo;
-      console.log(memoArr.length);
-      console.log(memoArr);
-      
+
       for (let i = 0; i < memoArr.length; i++) {
-        
-        console.log(memoArr[i].date.substr(0,10));
-        $(`.day.${memoArr[i].date.substr(0,10)}`).append(
+        $(`.day.${memoArr[i].date.substr(0, 10)}`).append(
           `
           <div class="calendar-alert" id="memo">메모
             <div class="calendar-alert-text">!</div>
@@ -229,15 +223,15 @@ function getDataforModal(day) {
     method: "post",
     url: `http://localhost:8000/calendar/modaldata`,
     data: {
-      day: day
-    }
+      day: day,
+    },
   })
-    .then(res => {
+    .then((res) => {
       if (res.status === 200) {
         return res.data;
       }
     })
-    .then(data => {
+    .then((data) => {
       // 메모들 불러오기
       // 1. 해당 유저의 해당 날짜에 대한 메모들을 불러오기
       // 메모.가계부 배열
@@ -260,7 +254,7 @@ function getDataforModal(day) {
 function closeModal() {
   // 모달 display 감추기
   $(".modal-content-container").addClass("modal-close");
-  setTimeout(function() {
+  setTimeout(function () {
     $(".modal-container").css("display", "none");
     $(".modal-content-container").removeClass("modal-close");
     $(".memo").remove();
