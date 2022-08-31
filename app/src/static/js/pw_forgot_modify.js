@@ -8,19 +8,21 @@ function resetting() {
 
         let password = $('#password').val();
         let password_check = $('#password_check').val();
-        if (password === password_check)
-        axios({
-          method: 'post',
-          url: '/forgot/pw/modify_post',
-          data: { password: password },
-        })
-          .then((rep) => {
-            return rep.data;
+        if (password === password_check){
+          axios({
+            method: 'post',
+            url: '/forgot/pw/modify_post',
+            data: { password: password },
           })
-          .then((data) => {
-            alert(data);
-            document.location.href = '/login';
-          });
+            .then((rep) => {
+              return rep.data;
+            })
+            .then((data) => {
+              alert(data);
+              document.location.href = '/login';
+            });
+          }
+        else alert('일치하지 않습니다.')
       }
 
       
