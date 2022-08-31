@@ -13,7 +13,7 @@ $(document).ready(function () {
   // 메모들 불러오기
   axios({
     method: "get",
-    url: `http://localhost:8000/memo/getmemoes`,
+    url: `/memo/getmemoes`,
   })
     .then((res) => {
       if (res.status === 200) {
@@ -131,7 +131,7 @@ function sendForm() {
 
     axios({
       method: "post",
-      url: `http://localhost:8000/memo/${url}`,
+      url: `/memo/${url}`,
       data: {
         id: memo_no,
         title: postTitle,
@@ -146,7 +146,7 @@ function sendForm() {
     url = "write";
     axios({
       method: "post",
-      url: `http://localhost:8000/memo/${url}`,
+      url: `/memo/${url}`,
       data: {
         title: postTitle,
         date: postDate,
@@ -167,7 +167,7 @@ function sendForm() {
 function deleteMemo(id) {
   axios({
     method: "delete",
-    url: "http://localhost:8000/memo/delete",
+    url: "/memo/delete",
     data: {
       id: id,
     },

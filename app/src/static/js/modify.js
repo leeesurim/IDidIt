@@ -2,7 +2,7 @@ function edit() {
   let input = $(".input-text");
   axios({
     method: "patch",
-    url: "http://localhost:8000/userInfo/edit",
+    url: "/userInfo/edit",
     data: {
       id: input[0].value,
       name: input[1].value,
@@ -20,11 +20,11 @@ function edit() {
         text: "정보가 변경되었습니다.",
         icon: "success",
         button: "확인",
-        })
-        
-        // .then((success)=>{
-        // document.location.href = "/login";
-        // })
+      });
+
+      // .then((success)=>{
+      // document.location.href = "/login";
+      // })
       // alert(data);
       $(input[0]).text(input[0].value);
       $(input[1]).text(input[1].value);
@@ -36,22 +36,23 @@ function edit() {
 
 function deleteUser(id) {
   axios({
-    method: 'delete',
-    url: 'http://localhost:8000/userInfo/delete',
+    method: "delete",
+    url: "/userInfo/delete",
     data: { id: id },
   })
-  .then((result) => {return result.data})
-  .then((data) => {
-    swal({
-      title: "성공!",
-      text: "회원탈퇴가 완료되었습니다.",
-      icon: "success",
-      button: "확인",
-      })
-      .then((success)=>{
+    .then((result) => {
+      return result.data;
+    })
+    .then((data) => {
+      swal({
+        title: "성공!",
+        text: "회원탈퇴가 완료되었습니다.",
+        icon: "success",
+        button: "확인",
+      }).then((success) => {
         document.location.href = "/";
-        })
-    // alert(data);
-    // document.location.href = "/";
-  });
+      });
+      // alert(data);
+      // document.location.href = "/";
+    });
 }

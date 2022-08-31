@@ -1,18 +1,17 @@
 const getId = () => {
-  
-  var form = document.getElementById('form_login');
-            if ( !form.checkValidity() ) {
-              form.reportValidity();
-              console.log( "reportValidity" );
-              return false;
-            }
+  var form = document.getElementById("form_login");
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    console.log("reportValidity");
+    return false;
+  }
   // 아이디와 이메일 변수로 저장
   let name = $("#name").val();
   let email = $("#email").val();
   // 아이디 찾기 axios 함수 작성
   axios({
     method: "post",
-    url: "http://localhost:8000/forgot/get_id",
+    url: "/forgot/get_id",
     data: {
       // 아이디와 이메일을 보냄
       name: name,
@@ -28,26 +27,28 @@ const getId = () => {
           icon: "error",
           button: "확인",
           dangerMode: true,
-        })
-
+        });
       } else {
         swal({
           title: "성공!",
           text: `회원님의 아이디는 ${res.data.id} 입니다.`,
           icon: "success",
           button: "확인",
-          })
-          .then((success)=>{
-        document.location.href = "/login";
-          })
+        }).then((success) => {
+          document.location.href = "/login";
+        });
       }
     }
   });
 };
 
-$(document).ready(function(){
-  $("button").hover(function(){
-      $(".login_img").attr("src","/img/id_forgot_pink.png")
-  },
-  function(){$(".login_img").attr("src","/img/id_forgot_grey.png")})
+$(document).ready(function () {
+  $("button").hover(
+    function () {
+      $(".login_img").attr("src", "/img/id_forgot_pink.png");
+    },
+    function () {
+      $(".login_img").attr("src", "/img/id_forgot_grey.png");
+    }
+  );
 });
