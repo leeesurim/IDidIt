@@ -1,7 +1,7 @@
 $(document).ready(function () {
   axios({
     method: "get",
-    url: "http://localhost:8000/get_data",
+    url: "/get_data",
   })
     .then((res) => {
       return res.data;

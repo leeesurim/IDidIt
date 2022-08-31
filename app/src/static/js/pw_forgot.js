@@ -1,10 +1,10 @@
 const getPw = () => {
-  var form = document.getElementById('form_login');
-            if ( !form.checkValidity() ) {
-              form.reportValidity();
-              console.log( "reportValidity" );
-              return false;
-            }
+  var form = document.getElementById("form_login");
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    console.log("reportValidity");
+    return false;
+  }
 
   // 아이디와 이메일 변수로 저장
   let id = $("#id").val();
@@ -14,7 +14,7 @@ const getPw = () => {
   // 아이디 찾기 axios 함수 작성
   axios({
     method: "post",
-    url: "http://localhost:8000/forgot/pw/certify_post",
+    url: "/forgot/pw/certify_post",
     data: {
       // 아이디와 이메일을 보냄
       id: id,
@@ -30,25 +30,28 @@ const getPw = () => {
           icon: "error",
           button: "확인",
           dangerMode: true,
-        })
+        });
       } else {
         swal({
-        title: "성공!",
-        text: "비밀번호 재설정 페이지로 이동합니다.",
-        icon: "success",
-        button: "확인",
-        })
-        .then((success)=>{
-          document.location.href = '/forgot/pw/modify';
-        })
+          title: "성공!",
+          text: "비밀번호 재설정 페이지로 이동합니다.",
+          icon: "success",
+          button: "확인",
+        }).then((success) => {
+          document.location.href = "/forgot/pw/modify";
+        });
       }
     }
   });
 };
 
-$(document).ready(function(){
-  $("button").hover(function(){
-      $(".login_img").attr("src","/img/pw_forgot_pink.png")
-  },
-  function(){$(".login_img").attr("src","/img/pw_forgot_grey.png")})
+$(document).ready(function () {
+  $("button").hover(
+    function () {
+      $(".login_img").attr("src", "/img/pw_forgot_pink.png");
+    },
+    function () {
+      $(".login_img").attr("src", "/img/pw_forgot_grey.png");
+    }
+  );
 });

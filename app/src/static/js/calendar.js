@@ -191,7 +191,7 @@ function getCountforCalendar(start, end) {
 
   axios({
     method: "post",
-    url: `http://localhost:8000/calendar/calendardata`,
+    url: `/calendar/calendardata`,
     data: {
       start_day: start,
       end_day: end,
