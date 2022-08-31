@@ -1,3 +1,5 @@
+let nav = 0;
+
 $(document).ready(function() {
   // 클릭 시 링크 이동
   $(".dashboard-accountbook").click(() => {
@@ -13,7 +15,6 @@ $(document).ready(function() {
   // 커서 시 애니메이션 실행
 
   // 캘린더 함수
-  let nav = 0;
   let clicked = null;
   let events = localStorage.getItem("events")
     ? JSON.parse(localStorage.getItem("events"))
@@ -36,15 +37,14 @@ $(document).ready(function() {
 
   function load() {
     const dt = new Date();
+    console.log("dt : ", dt);
+    console.log("nav : ", nav);
 
-    if (nav !== 0) {
-      dt.setMonth(new Date().getMonth() + nav);
-    }
-
+    // 매달마다 마지막 날은 다르므로 day까지 지정해줌
+    dt.setMonth(dt.getMonth() + nav, 1);
     const day = dt.getDate();
     const month = dt.getMonth();
     const year = dt.getFullYear();
-
     const firstDayOfMonth = new Date(year, month, 1);
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -138,13 +138,13 @@ $(document).ready(function() {
     closeModal();
   }
 
-  function initButtons() {
-    document.getElementById("nextButton").addEventListener("click", () => {
+  function initButtons(dt) {
+    document.getElementById("nextButton").addEventListener("click", dt => {
       nav++;
       load();
     });
 
-    document.getElementById("backButton").addEventListener("click", () => {
+    document.getElementById("backButton").addEventListener("click", dt => {
       nav--;
       load();
     });

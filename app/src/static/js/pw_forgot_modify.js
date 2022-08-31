@@ -15,14 +15,26 @@ function resetting() {
             data: { password: password },
           })
             .then((rep) => {
-              return rep.data;
+              
+              swal({
+                title: "성공!",
+                text: "비밀번호 재설정이 완료되었습니다.",
+                icon: "success",
+                button: "확인",
+                })
+                .then((success)=>{
+                document.location.href = "/login";
+                })
             })
-            .then((data) => {
-              alert(data);
-              document.location.href = '/login';
-            });
           }
-        else alert('일치하지 않습니다.')
+        
+        else swal({
+          title: "실패!",
+          text: "비밀번호가 일치하지 않습니다.",
+          icon: "error",
+          button: "확인",
+          dangerMode: true,
+        })
       }
 
       
