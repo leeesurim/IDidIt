@@ -7,6 +7,8 @@ function resetting() {
             }
 
         let password = $('#password').val();
+        let password_check = $('#password_check').val();
+        if (password === password_check)
         axios({
           method: 'post',
           url: '/forgot/pw/modify_post',
