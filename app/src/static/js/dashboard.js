@@ -9,6 +9,7 @@ $(document).ready(function () {
     .then((data) => {
       // 데이터 변수로 선언
       let memo_data = data.memo;
+      console.log(memo_data);
 
       if (memo_data.length > 0) {
         // 메모에 넣기

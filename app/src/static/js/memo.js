@@ -21,9 +21,9 @@ $(document).ready(function () {
       }
     })
     .then((data) => {
-      let memoData = data;
+      let memoData = data.memo;
+      console.log(memoData);
       // 메모 html 추가 로직
-      console.log(memoData.length);
       if (memoData.length === 0) {
         // 메모의 데이터가 없을 경우
         $(".memo_list").append(

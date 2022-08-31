@@ -2,6 +2,7 @@ const models = require("../model/index");
 const bcrypt = require("bcrypt");
 const { response } = require("../..");
 const salt = 10;
+const {Op} = require('sequelize');
 
 // 메인 화면
 exports.get_home = (req, res) => {
@@ -12,58 +13,13 @@ exports.get_home = (req, res) => {
   }
 };
 
-// exports.get_home = (req, res) => {
-//   if ( req.session.user == null ) { this.get_login( req, res ) }
-//   else {
-//     const memo = models.Memo.findAll();
-//     res.render('main',{data:memo});
-//   }
-//   function get_login(req,res) {
-//     res.render('home');
-//   }
-// }
-
+// 회원가입 페이지 렌더링
 exports.get_signup = (req, res) => {
-  // 회원가입 페이지 렌더링
   if (!req.session.user) {
     res.render("signup");
   } else {
     res.redirect("dashboard");
   }
-};
-
-exports.get_dashboard = (req, res) => {
-  // 대시보드 페이지 렌더링
-  // 로그인 시 회원의 정보 대시보드 페이지에 넣어줘야 함
-  if (!req.session.user) {
-    res.redirect("/");
-  } else {
-    res.render("dashboard");
-  }
-};
-
-exports.get_dashboard_data = (req, res) => {
-  // 대시보드 페이지 렌더링시 axios를 통해 보내지는 데이터들
-  // 임시 데이터 json 형태로 작성
-  let data = {
-    memo: [
-      {
-        date: "2022-03-06",
-        title: "제목 1",
-        content:
-          "<p>412412412412</p><p>412412412412</p><p>412412412412</p><p>412412412412</p><p>412412412412</p><p>412412412412</p><p>412412412412</p><p>412412412412</p><p>412412412412</p><p>412412412412</p><p>412412412412</p>",
-      },
-      { date: "2022-03-07", title: "제목 2", content: "내용 2" },
-      { date: "2022-03-08", title: "제목 3", content: "내용 3" },
-      { date: "2022-03-08", title: "제목 3", content: "내용 3" },
-      { date: "2022-03-08", title: "제목 3", content: "내용 3" },
-      { date: "2022-03-08", title: "제목 3", content: "내용 3" },
-    ],
-  };
-  // 로그인 시 회원의 정보 대시보드 페이지에 넣어줘야 함ss
-  // 근영님 로직 작성 필요
-
-  res.send(data);
 };
 
 // 회원 정보 저장
@@ -81,6 +37,7 @@ exports.post_signup = async (req, res) => {
     console.log(result);
   });
 };
+
 // 아이디 중복체크
 exports.post_checkID = (req, res) => {
   console.log();
@@ -95,6 +52,7 @@ exports.post_checkID = (req, res) => {
     }
   });
 };
+
 // 이메일 중복체크
 exports.post_checkEmail = (req, res) => {
   models.User.findOne({
@@ -108,6 +66,7 @@ exports.post_checkEmail = (req, res) => {
     }
   });
 };
+
 // 닉네임 중복체크
 exports.post_checkNickname = (req, res) => {
   models.User.findOne({
@@ -184,7 +143,7 @@ exports.post_pw_forgot_certify = (req, res) => {
   // res.send로 비밀번호를 보내주세요.
   models.User.findOne({ where: { id: id, name: name, email: email } }).then(
     (result) => {
-      req.session.user = id;
+      req.session.checkUser = id;
       res.send(result);
     }
   );
@@ -200,7 +159,7 @@ exports.post_pw_forgot_modify = async (req, res) => {
   const password = await bcrypt.hash(req.body.password, salt);
   models.User.update(
     { password: password },
-    { where: { id: req.session.user } }
+    { where: { id: req.session.checkUser } }
   ).then((result) => {
     req.session.destroy();
     res.send("수정 성공");
@@ -255,9 +214,9 @@ exports.get_memo = (req, res) => {
 };
 // 메모 페이지 메모들 불러오기
 exports.get_memoes = (req, res) => {
-  models.Memo.findAll({ where: { user_id: req.session.user } }).then(
-    (result) => {
-      res.send(result);
+  models.Memo.findAll({ where: { user_id: req.session.user }, order: [['date', 'ASC']]}).then(
+    (memo) => {
+      res.send({memo});
     }
   );
 };
@@ -298,136 +257,59 @@ exports.post_deletememo = (req, res) => {
   });
 };
 
+// 대시보드 페이지 렌더링
+// 로그인 시 회원의 정보 대시보드 페이지에 넣어줘야 함
+exports.get_dashboard = (req, res) => {
+  if (!req.session.user) {
+    res.redirect("/");
+  } else {
+    res.render("dashboard");
+  }
+};
+
+// 대시보드 페이지 렌더링시 axios를 통해 보내지는 데이터들
+// 임시 데이터 json 형태로 작성
+exports.get_dashboard_data = (req, res) => {
+  models.Memo.findAll({ where: { user_id: req.session.user }, order: [['date', 'ASC']] }).then(
+    (memo) => {
+      res.send({memo});
+    });
+};
+    
 // 달력
 exports.get_calendar = (req, res) => {
   res.render("calendar.ejs");
 };
 
-exports.post_calendar = (req, res) => {
-  let object = {
-    id: req.body.id,
-    title: req.body.title,
-    date: req.body.date,
-    info: req.body.info,
-  };
-  models.User.create(object).then((result) => {
-    console.log(result);
-    res.render({ result: result });
-  });
-};
-
-// 가계부
-exports.get_accountbook = (req, res) => {
-  res.render("accountbook.ejs");
-};
-
-exports.post_accountbook = (req, res) => {
-  const memo = models.Memo.findOne({ where: { id: req.body.id } });
-  const account = models.Account.findOne({ where: { id: req.body.id } });
-  //     res.render('main',{data:memo});
-  res.render("accountbook.ejs", { memo: memo, account: account });
-};
 
 // 달력 페이지에서 모달을 띄울 때 메모들을 불러오는 함수 입니다.
 exports.post_calendar_modal_data = (req, res) => {
   // where절로 사용할 날짜
   let day = req.body.day;
-  // 세션에서 불러와야 할 듯
-  // let user_id = req.body.user_id;
-  // 임시 데이터
-  let data = {
-    memo: [
-      {
-        id: 1,
-        title: "임시 데이터 제목1",
-        content: "임시 데이터 내용1",
-        date: "2022-08-19",
-      },
-      {
-        id: 2,
-        title: "임시 데이터 제목2",
-        content: "임시 데이터 내용2",
-        date: "2022-08-19",
-      },
-      {
-        id: 3,
-        title: "임시 데이터 제목3",
-        content: "임시 데이터 내용3",
-        date: "2022-08-19",
-      },
-      {
-        id: 4,
-        title: "임시 데이터 제목4",
-        content: "임시 데이터 내용4",
-        date: "2022-08-30",
-      },
-    ],
-  };
-  // 데이터 불러 오는 모델 로직 작성
-
-  // models.Memo.findAll({ where: { date: day } }).then((result) => {
-  //   console.log(result);
-  //   res.render({ result: result });
-  // });
-
-  res.send(data);
+  models.Memo.findAll({ where: { date: day } }).then((memo) => {
+    res.send({ memo });
+  });
 };
 
 exports.post_calendar_calendar_data = (req, res) => {
   // where절로 사용할 데이터
-  let user_id = req.body.user_id;
+  let user_id = req.session.user;
   let start_day = req.body.start_day;
   let end_day = req.body.end_day;
 
-  // 임시 데이터
-  let data = {
-    memo: [
-      {
-        id: 1,
-        title: "임시 데이터 제목1",
-        content: "임시 데이터 내용1",
-        date: "2022-8-19",
-      },
-      {
-        id: 2,
-        title: "임시 데이터 제목2",
-        content: "임시 데이터 내용2",
-        date: "2022-8-19",
-      },
-      {
-        id: 3,
-        title: "임시 데이터 제목3",
-        content: "임시 데이터 내용3",
-        date: "2022-8-19",
-      },
-      {
-        id: 4,
-        title: "임시 데이터 제목4",
-        content: "임시 데이터 내용4",
-        date: "2022-8-30",
-      },
-    ],
-  };
-  // 데이터 불러 오는 모델 로직 작성
-
-  // models.Memo.findAll({ where: { date: day } }).then((result) => {
-  //   console.log(result);
-  //   res.render({ result: result });
-  // });
-
-  res.send(data);
+  models.Memo.findAll({ where: {date: {[Op.between]: [start_day, end_day]} }}).then((memo) => {
+    console.log(memo);
+    res.send({ memo });
+  });
 };
 
-// exports.post_memo = (req, res) => {
-//   // res.render('memo.ejs');
-// };
-
-// 달력
-exports.get_calendar = (req, res) => {
-  res.render("calendar.ejs");
-};
-
-// 가계부
-exports.get_accountbook = (req, res) => {
-  res.render("accountbook.ejs");
-};
+// exports.get_home = (req, res) => {
+//   if ( req.session.user == null ) { this.get_login( req, res ) }
+//   else {
+//     const memo = models.Memo.findAll();
+//     res.render('main',{data:memo});
+//   }
+//   function get_login(req,res) {
+//     res.render('home');
+//   }
+// }
