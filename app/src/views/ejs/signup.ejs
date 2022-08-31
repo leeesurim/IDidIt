@@ -32,58 +32,58 @@
           return false;
         }
         // 아이디 중복 확인을 하지 않을 경우
-        if ($("input[name=hiddenID]").val() == ''){
+        if ($('input[name=hiddenID]').val() == '') {
           swal({
-                  title: "실패!",
-                  text: "아이디 중복 확인을 해주세요",
-                  icon: "warning",
-                  button: "확인",
-                  dangerMode: true,
-            });
-            return false;
+            title: '실패!',
+            text: '아이디 중복 확인을 해주세요',
+            icon: 'warning',
+            button: '확인',
+            dangerMode: true,
+          });
+          return false;
         }
 
         // 이메일 중복 확인을 하지 않을 경우
-        if ($("input[name=hiddenEmail]").val() == ''){
+        if ($('input[name=hiddenEmail]').val() == '') {
           swal({
-                  title: "실패!",
-                  text: "이메일 중복 확인을 해주세요",
-                  icon: "warning",
-                  button: "확인",
-                  dangerMode: true,
-            });
-            return false;
+            title: '실패!',
+            text: '이메일 중복 확인을 해주세요',
+            icon: 'warning',
+            button: '확인',
+            dangerMode: true,
+          });
+          return false;
         }
 
         // 닉네임 중복 확인을 하지 않을 경우
-        if ($("input[name=hiddenNickname]").val() == ''){
+        if ($('input[name=hiddenNickname]').val() == '') {
           swal({
-                  title: "실패!",
-                  text: "닉네임 중복 확인을 해주세요",
-                  icon: "warning",
-                  button: "확인",
-                  dangerMode: true,
-            });
-            return false;
+            title: '실패!',
+            text: '닉네임 중복 확인을 해주세요',
+            icon: 'warning',
+            button: '확인',
+            dangerMode: true,
+          });
+          return false;
         }
-
-        let user = {
-          id: form.id.value,
-          password: form.password.value,
-          name: form.name.value,
-          email: form.email.value,
-          gender: $("input[type='radio'][name='gender']:checked").val(),
-          nickname: form.nickname.value,
-          phone_number: form.phone_number.value,
-        };
-        axios({
-          method: "post",
-          url: "http://localhost:8000/signup",
-          data: user,
-        })
-          .then((rep) => {
-            return rep.data;
+        if (form.password.value === form.password2.value) {
+          let user = {
+            id: form.id.value,
+            password: form.password.value,
+            name: form.name.value,
+            email: form.email.value,
+            gender: $("input[type='radio'][name='gender']:checked").val(),
+            nickname: form.nickname.value,
+            phone_number: form.phone_number.value,
+          };
+          axios({
+            method: 'post',
+            url: 'http://localhost:8000/signup',
+            data: user,
           })
+            .then((rep) => {
+              return rep.data;
+            })
             .then((rep) => {
               return rep.data;
             })
@@ -128,12 +128,12 @@
                 // 성공 alert가 떠야 함
                 $('.checkID').text('');
                 swal({
-                  title: "성공!",
-                  text: "사용할 수 있는 아이디입니다.",
-                  icon: "success",
-                  button: "확인",
+                  title: '성공!',
+                  text: '사용할 수 있는 아이디입니다.',
+                  icon: 'success',
+                  button: '확인',
                 }).then((success) => {
-                  $("input[name=hiddenID]").val('y');
+                  $('input[name=hiddenID]').val('y');
                 });
               } else {
                 // 아이디가 있을 경우 false를 반환
@@ -191,86 +191,89 @@
               url: 'http://localhost:8000/signup/checkEmail',
               data: { email: user_email },
             })
-            .then((data) => {
-              if (data === true){
-                // 이메일 없을 경우 true를 반환
-                // 성공 alert가 떠야 함
-                $(".checkEmail").text("");
-                swal({
-                  title: "성공!",
-                  text: "사용할 수 있는 이메일입니다.",
-                  icon: "success",
-                  button: "확인",
-                }).then((success) => {
-                  $("input[name=hiddenEmail]").val('y');
-                });
-            } else {
-              // 이메일 있을 경우 false를 반환
-              // 실패 alert가 떠야 함
-              $(".checkEmail").text("");
-              swal({
-                title: "실패!",
-                text: "사용할 수 없는 이메일입니다. 다시 입력해 주세요.",
-                icon: "error",
-                button: "확인",
-                dangerMode: true,
-              }).then((fail) => {
-                $("#email").focus();
+              .then((rep) => {
+                return rep.data;
+              })
+              .then((data) => {
+                if (data === true) {
+                  // 이메일 없을 경우 true를 반환
+                  // 성공 alert가 떠야 함
+                  $('.checkEmail').text('');
+                  swal({
+                    title: '성공!',
+                    text: '사용할 수 있는 이메일입니다.',
+                    icon: 'success',
+                    button: '확인',
+                  }).then((success) => {
+                    $('input[name=hiddenEmail]').val('y');
+                  });
+                } else {
+                  // 이메일 있을 경우 false를 반환
+                  // 실패 alert가 떠야 함
+                  $('.checkEmail').text('');
+                  swal({
+                    title: '실패!',
+                    text: '사용할 수 없는 이메일입니다. 다시 입력해 주세요.',
+                    icon: 'error',
+                    button: '확인',
+                    dangerMode: true,
+                  }).then((fail) => {
+                    $('#email').focus();
+                  });
+                }
+              });
+          }
+        }
+        function checkNickname() {
+          let form = document.getElementById('form_signup');
+          let user_nickname = form.nickname.value;
+          if (user_nickname.length === 0) {
+            // 닉네임을 입력하지 않을 경우
+            $('.checkNickname').css('color', 'red');
+            $('.checkNickname').text('닉네임을 입력하세요.');
+            $('#nickname').focus();
+            return false;
+          } else {
+            // 닉네임을 입력했을 경우
+            axios({
+              method: 'post',
+              url: 'http://localhost:8000/signup/checkNickname',
+              data: { nickname: user_nickname },
+            })
+              .then((rep) => {
+                return rep.data;
+              })
+              .then((data) => {
+                if (data === true) {
+                  // 닉네임이 없을 경우 true를 반환
+                  // 성공 alert가 떠야 함
+                  $('.checkNickname').text('');
+                  swal({
+                    title: '성공!',
+                    text: '사용할 수 있는 닉네임입니다.',
+                    icon: 'success',
+                    button: '확인',
+                  }).then((success) => {
+                    $('input[name=hiddenNickname]').val('y');
+                  });
+                } else {
+                  // 닉네임이 있을 경우 false를 반환
+                  // 실패 alert가 떠야 함
+                  $('.checkNickname').text('');
+                  swal({
+                    title: '실패!',
+                    text: '사용할 수 없는 닉네임입니다. 다시 입력해 주세요.',
+                    icon: 'error',
+                    button: '확인',
+                    dangerMode: true,
+                  }).then((fail) => {
+                    $('#nickname').focus();
+                  });
+                }
               });
           }
         }
       }
-
-      function checkNickname() {
-        let form = document.getElementById('form_signup');
-        let user_nickname = form.nickname.value;
-        if (user_nickname.length === 0) {
-          // 닉네임을 입력하지 않을 경우
-          $('.checkNickname').css('color', 'red');
-          $('.checkNickname').text('닉네임을 입력하세요.');
-          $('#nickname').focus();
-          return false;
-        } else {
-          // 닉네임을 입력했을 경우
-          axios({
-            method: 'post',
-            url: 'http://localhost:8000/signup/checkNickname',
-            data: { nickname: user_nickname },
-          })
-            .then((rep) => {
-              return rep.data;
-            })
-            .then((data) => {
-              if (data === true) {
-                // 닉네임이 없을 경우 true를 반환
-                // 성공 alert가 떠야 함
-                $('.checkNickname').text('');
-                swal({
-                  title: "성공!",
-                  text: "사용할 수 있는 닉네임입니다.",
-                  icon: "success",
-                  button: "확인",
-                }).then((success) => {
-                  $("input[name=hiddenNickname]").val('y');
-                });              
-              } else {
-                // 닉네임이 있을 경우 false를 반환
-                // 실패 alert가 떠야 함
-                $('.checkNickname').text('');
-                swal({
-                  title: '실패!',
-                  text: '사용할 수 없는 닉네임입니다. 다시 입력해 주세요.',
-                  icon: 'error',
-                  button: '확인',
-                  dangerMode: true,
-                }).then((fail) => {
-                  $('#nickname').focus();
-                });
-              }
-            });
-        }
-      }
-
       $(document).ready(function () {
         $('button').hover(
           function () {
@@ -330,10 +333,7 @@
               onclick="checkID();"
               >중복확인</a
             >
-            <input
-              type="hidden"
-              name="hiddenID"
-            >
+            <input type="hidden" name="hiddenID" />
           </div>
           <span class="checkID"></span>
 
@@ -378,10 +378,7 @@
               disabled="true"
               >중복확인</a
             >
-            <input
-              type="hidden"
-              name="hiddenEmail"
-            >
+            <input type="hidden" name="hiddenEmail" />
           </div>
           <span class="checkEmail"></span>
 
@@ -425,10 +422,7 @@
               disabled="true"
               >중복확인</a
             >
-            <input
-              type="hidden"
-              name="hiddenNickname"
-            >
+            <input type="hidden" name="hiddenNickname" />
           </div>
           <span class="checkNickname"></span>
 
@@ -452,17 +446,5 @@
       </section>
     </main>
     <%- include('footer.ejs')%>
-    <!-- <div class="footer">
-        <img class="logo_3" src="../img/logo_500_gray.png">     
-            <ul class="footer_txt">
-                <li>이용약관 ｜</li>
-                <li>개인정보처리방침｜</li>
-                <li>주소 : (03925) 서울특별시 마포구 월드컵북로 400 (상암동) ｜</li>
-                <li>전화번호 : (영등포)02-3667-7304 (금천)02-6673-1804 ｜</li>
-                <li>Email : sesac@sba.seoul.kr</li><br>
-                <li>구성원 : 염시온,김예은,송진세,이수림,장근영 ｜</li>
-                <li>Copyright (c) "SeSSAC 4기 4조 내가해냄" All Rights Reserved.</li>
-            </ul>
-        </div> -->
   </body>
 </html>
