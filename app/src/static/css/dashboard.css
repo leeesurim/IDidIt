@@ -21,9 +21,7 @@ body {
 
 .grid-wrapper {
   display: grid;
-  grid-template-areas:
-    "nav container"
-    "footer footer";
+  grid-template-areas: "nav container" "footer footer";
   grid-template-columns: 250px 1fr;
   grid-template-rows: 1fr;
   height: 100vh;
@@ -108,6 +106,7 @@ body {
 
 .memo-container {
   display: grid;
+  grid-template-rows: 130px 130px 130px 130px 130px 130px;
   padding-top: 20px;
 }
 
