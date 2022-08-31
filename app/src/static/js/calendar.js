@@ -211,8 +211,8 @@ function getCountforCalendar(start, end) {
       
       for (let i = 0; i < memoArr.length; i++) {
         
-        console.log(memoArr[i].writedate.substr(0,10));
-        $(`.day.${memoArr[i].writedate.substr(0,10)}`).append(
+        console.log(memoArr[i].date.substr(0,10));
+        $(`.day.${memoArr[i].date.substr(0,10)}`).append(
           `
           <div class="calendar-alert" id="memo">메모
             <div class="calendar-alert-text">!</div>
