@@ -283,7 +283,7 @@ exports.get_dashboard_data = (req, res) => {
 exports.get_calendar = (req, res) => {
   if (!req.session.user) res.redirect("/");
   else res.render("calendar.ejs");
-  };
+};
 
 // 달력 페이지에서 모달을 띄울 때 메모들을 불러오는 함수 입니다.
 exports.post_calendar_modal_data = (req, res) => {

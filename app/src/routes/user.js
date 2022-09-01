@@ -5,6 +5,7 @@ const router = express.Router();
 // get 처리 라우팅
 router.get("/", IDI.get_home);
 router.get("/signup", IDI.get_signup);
+router.post("/login", IDI.get_login);
 router.get("/login", IDI.get_login);
 // 로그인 후 메인 페이지
 router.post("/dashboard", IDI.get_dashboard);
