@@ -351,6 +351,8 @@ main {
   border-left: 3px solid #ff725e;
   animation: moveToDown 0.5s ease-in-out;
   animation-delay: 1ms;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 .modal-content-title {
   line-height: 100px;

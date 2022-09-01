@@ -2,7 +2,7 @@ const models = require("../model/index");
 const bcrypt = require("bcrypt");
 const { response } = require("../..");
 const salt = 10;
-const {Op} = require('sequelize');
+const { Op } = require("sequelize");
 
 // 메인 화면
 exports.get_home = (req, res) => {
@@ -214,11 +214,12 @@ exports.get_memo = (req, res) => {
 };
 // 메모 페이지 메모들 불러오기
 exports.get_memoes = (req, res) => {
-  models.Memo.findAll({ where: { user_id: req.session.user }, order: [['date', 'ASC']]}).then(
-    (memo) => {
-      res.send({memo});
-    }
-  );
+  models.Memo.findAll({
+    where: { user_id: req.session.user },
+    order: [["date", "ASC"]],
+  }).then((memo) => {
+    res.send({ memo });
+  });
 };
 // 메모 저장
 exports.post_writememo = (req, res) => {
@@ -241,7 +242,7 @@ exports.post_modifymemo = (req, res) => {
   let info = {
     id: req.body.id,
     title: req.body.title,
-    date: req.body.email,
+    date: req.body.date,
     content: req.body.content,
   };
   models.Memo.update(info, { where: { id: req.body.id } }).then((result) => {
@@ -270,25 +271,28 @@ exports.get_dashboard = (req, res) => {
 // 대시보드 페이지 렌더링시 axios를 통해 보내지는 데이터들
 // 임시 데이터 json 형태로 작성
 exports.get_dashboard_data = (req, res) => {
-  models.Memo.findAll({ where: { user_id: req.session.user }, order: [['date', 'ASC']] }).then(
-    (memo) => {
-      res.send({memo});
-    });
+  models.Memo.findAll({
+    where: { user_id: req.session.user },
+    order: [["date", "ASC"]],
+  }).then((memo) => {
+    res.send({ memo });
+  });
 };
-    
+
 // 달력
 exports.get_calendar = (req, res) => {
   res.render("calendar.ejs");
 };
 
-
 // 달력 페이지에서 모달을 띄울 때 메모들을 불러오는 함수 입니다.
 exports.post_calendar_modal_data = (req, res) => {
   // where절로 사용할 날짜
   let day = req.body.day;
-  models.Memo.findAll({ where: { user_id: req.session.user, date: day } }).then((memo) => {
-    res.send({ memo });
-  });
+  models.Memo.findAll({ where: { user_id: req.session.user, date: day } }).then(
+    (memo) => {
+      res.send({ memo });
+    }
+  );
 };
 
 exports.post_calendar_calendar_data = (req, res) => {
@@ -297,7 +301,9 @@ exports.post_calendar_calendar_data = (req, res) => {
   let start_day = req.body.start_day;
   let end_day = req.body.end_day;
 
-  models.Memo.findAll({ where: {user_id:user_id, date: {[Op.between]: [start_day, end_day]} }}).then((memo) => {
+  models.Memo.findAll({
+    where: { user_id: user_id, date: { [Op.between]: [start_day, end_day] } },
+  }).then((memo) => {
     console.log(memo);
     res.send({ memo });
   });

@@ -32,8 +32,8 @@
 }
 
 body {
-  background-color: #ffffff;
   font-family: "Pretendard-Medium";
+  background: #f8fafb;
 }
 .grid-wrapper {
   display: grid;
