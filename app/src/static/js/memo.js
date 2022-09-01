@@ -4,9 +4,9 @@ $(document).ready(function () {
     height: 400,
     toolbar: [
       // 폰트, 색깔, 리스트 기능 활성화
-      ["font", ["bold", "underline", "clear"]],
-      ["color", ["color"]],
-      ["para", ["ul", "ol", "paragraph"]],
+      // ["font", ["bold", "underline", "clear"]],
+      // ["color", ["color"]],
+      // ["para", ["ul", "ol", "paragraph"]],
     ],
   });
 
