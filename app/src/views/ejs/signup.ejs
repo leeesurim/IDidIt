@@ -66,6 +66,20 @@
           });
           return false;
         }
+        // 성별 체크 안했을 경우
+        if (
+          $("input[type='radio'][name='gender']:checked").val() === undefined
+        ) {
+          swal({
+            title: "실패!",
+            text: "성별을 체크해주세요!",
+            icon: "warning",
+            button: "확인",
+            dangerMode: true,
+          });
+          return false;
+        }
+
         if (form.password.value === form.password2.value) {
           let user = {
             id: form.id.value,
@@ -320,7 +334,7 @@
         <img src="/img/signup_img_gray.png" class="sign_img" />
       </section>
       <section class="right">
-        <form id="form_signup">
+        <form id="form_signup" method="post">
           <legend class="titDep">회원가입</legend>
           <label for="id" class="titLab">아이디</label>
           <div class="inp_dup">
