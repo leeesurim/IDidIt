@@ -221,7 +221,7 @@ function getDataforModal(day) {
   // 달력 모달 띄울 때 데이터들 불러오기
   axios({
     method: "post",
-    url: `http://localhost:8000/calendar/modaldata`,
+    url: `/calendar/modaldata`,
     data: {
       day: day,
     },
