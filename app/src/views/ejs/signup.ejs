@@ -100,7 +100,14 @@
               });
             });
         } else {
-          alert("비번 일치 안함");
+          swal({
+            title: "실패!",
+            text: "비밀번호를 확인해주세요!",
+            icon: "warning",
+            button: "확인",
+            dangerMode: true,
+          });
+          return false;
         }
       }
 
