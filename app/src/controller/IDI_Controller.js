@@ -175,7 +175,7 @@ exports.get_logout = (req, res) => {
 
 // 회원 정보 조회
 exports.get_userinfo = (req, res) => {
-  if (!req.session.user) res.redirect("main");
+  if (!req.session.user) res.redirect("/");
   else {
     models.User.findOne({
       where: { id: req.session.user },
@@ -209,7 +209,7 @@ exports.delete_user = (req, res) => {
 
 // 메모 페이지
 exports.get_memo = (req, res) => {
-  if (!req.session.user) res.redirect("main");
+  if (!req.session.user) res.redirect("/");
   else res.render("memo.ejs");
 };
 // 메모 페이지 메모들 불러오기
@@ -281,7 +281,7 @@ exports.get_dashboard_data = (req, res) => {
 
 // 달력
 exports.get_calendar = (req, res) => {
-  if (!req.session.user) res.redirect("main");
+  if (!req.session.user) res.redirect("/");
   else res.render("calendar.ejs");
   };
 
